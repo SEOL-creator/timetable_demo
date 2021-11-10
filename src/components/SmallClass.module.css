@@ -6,7 +6,6 @@
     justify-content: space-between;
     align-items: center;
     color: white;
-    cursor: pointer;
     user-select: none;
     position: relative;
 }
@@ -46,7 +45,7 @@
 .attendRemote {
     font-size: 1.4rem;
     font-weight: 400;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--color-background-button-black-transparent);
     transition: var(--transition-background-color);
     padding: 0.6rem 1rem;
     border-radius: 1rem;
@@ -55,7 +54,7 @@
 }
 
 .attendRemote:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--color-background-button-black-transparent-hover);
 }
 
 .class--open {
@@ -93,7 +92,7 @@
 }
 
 .duration > a:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--color-background-button-white-transparent-hover);
 }
 
 .memoContainer {
@@ -109,7 +108,7 @@
 .memoButton {
     width: auto;
     background: none;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--color-background-button-white-transparent);
     color: white;
     padding: 0.4rem 1rem;
     border-radius: 1rem;
@@ -163,4 +162,9 @@
     animation: fadeIn 0.2s ease-in-out;
     animation-fill-mode: forwards;
     display: flex;
+}
+
+.replaced {
+    font-size: 12px;
+    font-weight: 400;
 }

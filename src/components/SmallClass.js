@@ -5,7 +5,7 @@ import formatTime from "../utils/formatTime";
 import { Link } from "react-router-dom";
 const cx = classNames.bind(styles);
 
-export default function SmallClass({ classObj, isRemote, remoteURL, startTime, endTime }) {
+export default function SmallClass({ classObj, isRemote, remoteURL, startTime, endTime, replaced = false }) {
     const [open, setOpen] = useState(false);
     const [blockClosed, setBlockClosed] = useState(false);
 
@@ -25,7 +25,10 @@ export default function SmallClass({ classObj, isRemote, remoteURL, startTime, e
                     <div>{formatTime(startTime, "hh mm")}</div>
                 </div>
                 <div className={styles.title}>
-                    <span>{classObj.name}</span>
+                    <span>
+                        {classObj.name}
+                        {replaced && <div className={styles.replaced}>변경됨</div>}
+                    </span>
                     {isRemote && remoteURL && (
                         <a className={styles.attendRemote} href={remoteURL}>
                             원격수업 참가

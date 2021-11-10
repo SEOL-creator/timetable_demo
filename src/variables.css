@@ -1,6 +1,7 @@
 :root {
     --box-shadow-separator: 0 0.2rem 0.5rem var(--color-shadow-separator);
     --transition-duration-base: 0.15s;
+    --transition-timing-function: cubic-bezier(0, 0, 0.15, 1);
     --transition-background-color: background-color var(--transition-duration-base);
     --size-header-height: 5rem;
     --size-sidebar-width: 24rem;
@@ -18,6 +19,10 @@
     --color-text-base: #222222;
     --color-text-secondary: #3f3f3f;
     --color-fill-button-icon: var(--color-text-base);
+    --color-background-button-white-transparent: rgba(255, 255, 255, 0.2);
+    --color-background-button-white-transparent-hover: rgba(255, 255, 255, 0.3);
+    --color-background-button-black-transparent: rgba(0, 0, 0, 0.05);
+    --color-background-button-black-transparent-hover: rgba(0, 0, 0, 0.1);
 }
 
 :root[data-theme="dark"] {
