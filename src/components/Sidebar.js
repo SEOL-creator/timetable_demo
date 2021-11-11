@@ -1,14 +1,11 @@
-import { useContext } from "react";
-import ClassroomContext from "../contexts/classroomContext";
 import styles from "./Sidebar.module.css";
 import SidebarButton from "./SidebarButton";
 import SidebarCategory from "./SidebarCategory";
+import SetCurrentClass from "./SetCurrentClass";
 
-export default function Sidebar() {
-    const { classroom, setClassroom } = useContext(ClassroomContext);
-
+export default function Sidebar({ display }) {
     return (
-        <aside className={styles.sidebar}>
+        <aside className={styles.sidebar} style={display ? { display: "flex" } : {}}>
             <div>
                 <SidebarCategory title=".">
                     <SidebarButton to="/">홈</SidebarButton>
@@ -18,11 +15,7 @@ export default function Sidebar() {
                     <SidebarButton to="/food">식단표</SidebarButton>
                 </SidebarCategory>
             </div>
-            <div>
-                <SidebarButton>
-                    {classroom.grade}학년 {classroom.room}반
-                </SidebarButton>
-            </div>
+            <SetCurrentClass />
         </aside>
     );
 }

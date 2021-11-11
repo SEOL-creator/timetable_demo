@@ -6,11 +6,12 @@ import styles from "./SmallTimetable.module.css";
 import SwipeableViews from "react-swipeable-views";
 import classNames from "classnames/bind";
 import isSameWeek from "../utils/isSameWeek";
+import UserContext from "../contexts/userContext";
 const cx = classNames.bind(styles);
 
 const weekString = { 0: "이번주", 1: "다음주" };
 const CLASSTIMESTRING = { 1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth", 7: "seventh" };
-const dayNameString = { 0: "월요일", 1: "화요일", 2: "수요일", 3: "목요일", 4: "금요일" };
+const dayNameString = ["월요일", "화요일", "수요일", "목요일", "금요일"];
 
 function getClassTime(timeTable, classTimeNum) {
     if (!timeTable) return { start: "", end: "" };
@@ -86,6 +87,7 @@ export default function Timetable() {
     const [classTimetable, setclassTimetable] = useState([]);
     const [tempClassTime, setTempClassTime] = useState([]);
     const { classroom } = useContext(ClassroomContext);
+    const { isLogin } = useContext(UserContext);
     const [week, setWeek] = useState(0);
 
     const [day, setDay] = useState(new Date().getDay() - 1);
@@ -123,9 +125,11 @@ export default function Timetable() {
                 console.error(e);
             }
         }
-        fetchClassTimetable(classroom);
-        fetchTempClassTime(classroom);
-    }, [classroom]);
+        if (isLogin) {
+            fetchClassTimetable(classroom);
+            fetchTempClassTime(classroom);
+        }
+    }, [classroom, isLogin]);
 
     const toggleWeek = () => {
         if (week === 0) setWeek(1);
@@ -145,60 +149,39 @@ export default function Timetable() {
                 </div>
             </div>
             <div className={styles.dayContainer}>
-                <button
-                    onClick={() => {
-                        setDay(0);
-                    }}
-                    className={cx(styles.day, day === 0 && styles.selectedDay)}
-                >
-                    월요일
-                </button>
-                <button
-                    onClick={() => {
-                        setDay(1);
-                    }}
-                    className={cx(styles.day, day === 1 && styles.selectedDay)}
-                >
-                    화요일
-                </button>
-                <button
-                    onClick={() => {
-                        setDay(2);
-                    }}
-                    className={cx(styles.day, day === 2 && styles.selectedDay)}
-                >
-                    수요일
-                </button>
-                <button
-                    onClick={() => {
-                        setDay(3);
-                    }}
-                    className={cx(styles.day, day === 3 && styles.selectedDay)}
-                >
-                    목요일
-                </button>
-                <button
-                    onClick={() => {
-                        setDay(4);
-                    }}
-                    className={cx(styles.day, day === 4 && styles.selectedDay)}
-                >
-                    금요일
-                </button>
-            </div>
-            <SwipeableViews
-                enableMouseEvents
-                hysteresis={0.4}
-                index={day}
-                resistance
-                onChangeIndex={(index) => {
-                    setDay(index);
-                }}
-            >
-                {timeTableList[week].map((timeTable, idx) => {
-                    return <div key={idx}>{drawClasstimesOfDay(classTimetable, idx + 1, timeTable["is_remote"], timeTable.timetable, tempClassTime, !week)}</div>;
+                {dayNameString.map((dayName, index) => {
+                    return (
+                        <button
+                            key={index}
+                            onClick={() => {
+                                setDay(index);
+                            }}
+                            className={cx(styles.day, day === index && styles.selectedDay)}
+                        >
+                            {dayName}
+                        </button>
+                    );
                 })}
-            </SwipeableViews>
+            </div>
+            {isLogin ? (
+                <>
+                    <SwipeableViews
+                        enableMouseEvents
+                        hysteresis={0.4}
+                        index={day}
+                        resistance
+                        onChangeIndex={(index) => {
+                            setDay(index);
+                        }}
+                    >
+                        {timeTableList[week]?.map((timeTable, idx) => {
+                            return <div key={idx}>{drawClasstimesOfDay(classTimetable, idx + 1, timeTable["is_remote"], timeTable.timetable, tempClassTime, !week)}</div>;
+                        })}
+                    </SwipeableViews>
+                </>
+            ) : (
+                <div className={styles.notLogin}>재학생 로그인 후 이용 가능합니다.</div>
+            )}
         </div>
     );
 }

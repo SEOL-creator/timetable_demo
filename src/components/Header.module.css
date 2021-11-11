@@ -44,6 +44,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    position: relative;
 }
 
 .button {
@@ -58,8 +59,21 @@
     font-size: 1.4rem;
     font-weight: bold;
     color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button:hover {
     background-color: var(--color-background-button-secondary-hover);
+}
+
+.menu {
+    display: none;
+    width: 10rem;
+    height: 10rem;
+    background-color: chartreuse;
+    position: absolute;
+    top: 5rem;
+    right: 0;
 }

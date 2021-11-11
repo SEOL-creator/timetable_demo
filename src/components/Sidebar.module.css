@@ -10,6 +10,22 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-right: var(--size-sidebar-width);
+}
+
+@media screen and (max-width: 675px) {
+    :root {
+        --size-sidebar-width: 0px;
+    }
+    .sidebar {
+        display: none;
+        position: fixed;
+        width: 100%;
+        top: var(--size-header-height);
+        left: 0;
+        padding-left: 25%;
+        padding-right: 25%;
+    }
 }
 
 .sidebar > div {
