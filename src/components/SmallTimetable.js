@@ -175,7 +175,7 @@ export default function Timetable() {
                         }}
                     >
                         {timeTableList[week]?.map((timeTable, idx) => {
-                            return <div key={idx}>{drawClasstimesOfDay(classTimetable, idx + 1, timeTable["is_remote"], timeTable.timetable, tempClassTime, !week)}</div>;
+                            return <div key={idx} className={styles.classDay}>{drawClasstimesOfDay(classTimetable, idx + 1, timeTable["is_remote"], timeTable.timetable, tempClassTime, !week)}</div>;
                         })}
                     </SwipeableViews>
                 </>

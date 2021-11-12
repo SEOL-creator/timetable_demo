@@ -1,6 +1,5 @@
 .timetable {
     width: 100%;
-    height: calc(max-content + 60px);
     background-color: white;
 }
 
@@ -49,14 +48,14 @@
 .day {
     background: none;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 700;
     transition: font-size 0.2s var(--transition-timing-function);
     color: rgba(0, 0, 0, 0.4);
 }
 
 .selectedDay {
-    font-size: 24px;
+    font-size: 2.4rem;
     color: #222222;
 }
 
@@ -67,4 +66,8 @@
     padding: 4rem 0;
     font-size: 1.6rem;
     font-weight: 700;
+}
+
+.classDay {
+    overflow-y: hidden;
 }
