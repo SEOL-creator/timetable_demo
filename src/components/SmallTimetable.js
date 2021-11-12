@@ -81,6 +81,12 @@ function makeWeekTimeTable(timeTable) {
     return [firstWeekTimeTable, secondWeekTimeTable];
 }
 
+function getDefaultDayNum() {
+    const day = new Date().getDay() - 1;
+    if (day > 4) return 0;
+    return day;
+}
+
 export default function Timetable() {
     const [isLoading, setIsLoading] = useState(true);
     const [timeTableList, setTimeTableList] = useState([]);
@@ -90,7 +96,7 @@ export default function Timetable() {
     const { isLogin } = useContext(UserContext);
     const [week, setWeek] = useState(0);
 
-    const [day, setDay] = useState(new Date().getDay() - 1);
+    const [day, setDay] = useState(getDefaultDayNum());
 
     useEffect(() => {
         async function fetchTimetable() {
@@ -175,7 +181,11 @@ export default function Timetable() {
                         }}
                     >
                         {timeTableList[week]?.map((timeTable, idx) => {
-                            return <div key={idx} className={styles.classDay}>{drawClasstimesOfDay(classTimetable, idx + 1, timeTable["is_remote"], timeTable.timetable, tempClassTime, !week)}</div>;
+                            return (
+                                <div key={idx} className={styles.classDay}>
+                                    {drawClasstimesOfDay(classTimetable, idx + 1, timeTable["is_remote"], timeTable.timetable, tempClassTime, !week)}
+                                </div>
+                            );
                         })}
                     </SwipeableViews>
                 </>
