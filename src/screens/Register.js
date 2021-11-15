@@ -53,7 +53,7 @@ export default function Register() {
             .post("/apis/register/", { email: email, nickname: nickname, password: password, password2: password })
             .then((response) => {
                 const data = response.data;
-                navigate("/register/complete", { state: { email: email } });
+                navigate("/register/complete", { state: { email: email, nickname: nickname } });
             })
             .catch((error) => {
                 setLoading(false);
