@@ -8,6 +8,8 @@ import Sidebar from "../components/Sidebar";
 import Home from "./Home";
 import Login from "./Login";
 import UserContext from "../contexts/userContext";
+import LoginRegister from "./LoginRegister";
+import RegisterComplete from "./RegisterComplete";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -51,10 +53,12 @@ export default function App() {
                     <BrowserRouter>
                         <Header title={<span>수업 진행중!</span>} subtitle="23:30 남음" toggleSidebar={toggleSidebar} />
                         <Sidebar display={isSidebarDisplay} />
-                        <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", marginLeft: "var(--size-sidebar-width)", overflowY: "auto", overflowX: "hidden" }}>
+                        <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden" }}>
                             <Routes>
                                 <Route path="/" element={<Home />} />
-                                <Route path="/login" element={<Login />} />
+                                <Route path="/login" element={<LoginRegister />} />
+                                <Route path="/register" element={<LoginRegister defaultTab={1} />} />
+                                <Route path="/register/complete" element={<RegisterComplete />} />
                             </Routes>
                         </div>
                     </BrowserRouter>

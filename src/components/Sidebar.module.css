@@ -1,16 +1,15 @@
 .sidebar {
     width: var(--size-sidebar-width);
-    height: calc(100% - var(--size-header-height));
+    height: 100%;
     background-color: var(--color-background-alt);
     box-sizing: border-box;
     padding: 3rem 2rem 2rem;
-    position: fixed;
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-right: var(--size-sidebar-width);
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 675px) {

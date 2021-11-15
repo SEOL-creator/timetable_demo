@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { useState } from "react";
 import formatTime from "../utils/formatTime";
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 const cx = classNames.bind(styles);
 
 export default function SmallClass({ classObj, isRemote, remoteURL, startTime, endTime, replaced = false }) {
@@ -29,8 +30,8 @@ export default function SmallClass({ classObj, isRemote, remoteURL, startTime, e
                         {classObj.name}
                         {replaced && <div className={styles.replaced}>변경됨</div>}
                     </span>
-                    {isRemote && remoteURL && (
-                        <a className={styles.attendRemote} href={remoteURL}>
+                    {isRemote && remoteURL?.pc && remoteURL?.mobile && (
+                        <a className={styles.attendRemote} href={isMobile ? remoteURL.mobile : remoteURL.pc}>
                             원격수업 참가
                         </a>
                     )}
