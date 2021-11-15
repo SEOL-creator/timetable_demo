@@ -1,0 +1,18 @@
+.button {
+    padding: 0.6rem 1rem;
+    border-radius: var(--border-radius-large);
+    font-size: 1.4rem;
+    color: var(--color-white);
+    transition: background-color var(--transition-duration-base);
+}
+
+.button-primary {
+    background-color: var(--color-background-button-primary);
+}
+.button-primary:hover {
+    background-color: var(--color-background-button-primary-hover);
+}
+
+.button--disabled {
+    cursor: progress;
+}

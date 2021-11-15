@@ -1,0 +1,36 @@
+.tab {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab__header {
+    display: flex;
+    justify-content: center;
+}
+
+.header__item {
+    background-color: var(--color-transparent);
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-text-base);
+    width: 100%;
+    height: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab__bar {
+    background-color: var(--color-background-body);
+    width: 100%;
+}
+
+.tab__bar > div {
+    height: 0.2rem;
+    background-color: var(--color-primary);
+    transition: margin-left var(--transition-duration-base) var(--transition-timing-function);
+}

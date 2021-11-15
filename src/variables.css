@@ -1,13 +1,4 @@
 :root {
-    --box-shadow-separator: 0 0.2rem 0.5rem var(--color-shadow-separator);
-    --transition-duration-base: 0.15s;
-    --transition-timing-function: cubic-bezier(0, 0, 0.15, 1);
-    --transition-background-color: background-color var(--transition-duration-base);
-    --size-header-height: 5rem;
-    --size-sidebar-width: 24rem;
-}
-
-:root {
     --color-background-body: var(--color-hinted-grey-15);
     --color-background-base: var(--color-white);
     --color-background-alt: var(--color-hinted-grey-14);
@@ -23,6 +14,17 @@
     --color-background-button-white-transparent-hover: rgba(255, 255, 255, 0.3);
     --color-background-button-black-transparent: rgba(0, 0, 0, 0.05);
     --color-background-button-black-transparent-hover: rgba(0, 0, 0, 0.1);
+    --color-background-button-primary: var(--color-primary);
+    --color-background-button-primary-hover: var(--color-primary-dark);
+    --color-input-placeholder: var(--color-hinted-grey-9);
+    --color-input-background-focused: var(--color-white);
+    --color-input-background-unfocused: var(--color-hinted-grey-13);
+    --color-input-border-base: var(--color-input-background-unfocused);
+    --color-input-border-hover: var(--color-hinted-grey-10);
+    --color-input-border-highlight: var(--color-primary);
+
+    --color-selection: var(--color-primary-dark);
+    --color-selection-text: var(--color-white);
 }
 
 :root[data-theme="dark"] {
@@ -54,4 +56,52 @@
     --color-hinted-grey-14: #efeff1;
     --color-hinted-grey-15: #f7f7f8;
     --color-transparent: transparent;
+
+    --color-primary-dark: #a075c9;
+    --color-primary: #be98e2;
+    --color-primary-light: #e0b5ff;
+
+    --color-timetable-background-red-1: #eb514a;
+    --color-timetable-background-red-2: #cc3333;
+    --color-timetable-background-red-3: #ac1921;
+    --color-timetable-background-orange-1: #feb42f;
+    --color-timetable-background-orange-2: #fe9912;
+    --color-timetable-background-orange-3: #de7f0d;
+    --color-timetable-background-yellow-1: #fee851;
+    --color-timetable-background-yellow-2: #fecc33;
+    --color-timetable-background-yellow-3: #e0b018;
+    --color-timetable-background-green-1: #8fe03c;
+    --color-timetable-background-green-2: #72c41f;
+    --color-timetable-background-green-3: #54a807;
+    --color-timetable-background-skyblue-1: #75c7e2;
+    --color-timetable-background-skyblue-1: #58acc6;
+    --color-timetable-background-skyblue-1: #3991aa;
+    --color-timetable-background-blue-1: #628efd;
+    --color-timetable-background-blue-2: #4075e1;
+    --color-timetable-background-blue-3: #195dc4;
+    --color-timetable-background-purple-1: #c87cfe;
+    --color-timetable-background-purple-2: #ab62e2;
+    --color-timetable-background-purple-3: #8e48c6;
+    --color-timetable-background-pink-1: #f87ec2;
+    --color-timetable-background-pink-2: #db63a7;
+    --color-timetable-background-pink-3: #be478c;
+    --color-timetable-background-grey-1: #919191;
+    --color-timetable-background-grey-2: #787878;
+    --color-timetable-background-grey-3: #5f5f5f;
+}
+
+:root {
+    --box-shadow-separator: 0 0.2rem 0.5rem var(--color-shadow-separator);
+    --box-shadow-widget: 0 0 1.4rem 0 rgba(0, 0, 0, 0.1);
+    --transition-duration-base: 0.15s;
+    --transition-timing-function: cubic-bezier(0, 0, 0.15, 1);
+    --transition-background-color: background-color var(--transition-duration-base);
+    --size-header-height: 5rem;
+    --size-sidebar-width: 24rem;
+
+    --border-radius-small: 0.2rem;
+    --border-radius-medium: 0.4rem;
+    --border-radius-large: 0.6rem;
+    --border-radius-extra-large: 1rem;
+    --border-radius-extra-extra-large: 1.6rem;
 }

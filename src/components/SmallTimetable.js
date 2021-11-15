@@ -95,6 +95,10 @@ export default function Timetable() {
     const { classroom } = useContext(ClassroomContext);
     const { isLogin } = useContext(UserContext);
     const [week, setWeek] = useState(0);
+    const [weekDays, setWeekDays] = useState([
+        { start: "0", end: "0" },
+        { start: "0", end: "0" },
+    ]);
 
     const [day, setDay] = useState(getDefaultDayNum());
 
@@ -109,7 +113,20 @@ export default function Timetable() {
                 setIsLoading(false);
             }
         }
+        function getWeekDays() {
+            const TODAY = new Date();
+            const MONDAY = new Date(TODAY.getTime() - (TODAY.getDay() - 1) * 24 * 60 * 60 * 1000);
+            const FRIDAY = new Date(MONDAY.getTime() + 4 * 24 * 60 * 60 * 1000);
+            const NEXTMONDAY = new Date(MONDAY.getTime() + 7 * 24 * 60 * 60 * 1000);
+            const NEXTFRIDAY = new Date(FRIDAY.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+            return [
+                { start: MONDAY.getDate(), end: FRIDAY.getDate() },
+                { start: NEXTMONDAY.getDate(), end: NEXTFRIDAY.getDate() },
+            ];
+        }
         fetchTimetable();
+        setWeekDays(getWeekDays());
     }, []);
 
     useEffect(() => {
@@ -142,17 +159,15 @@ export default function Timetable() {
         else setWeek(0);
     };
 
-    if (isLoading) return <div>Loading...</div>;
-
-    console.log(timeTableList);
-
     return (
         <div className={styles.timetable}>
             <div className={styles.timetableHeading}>
-                <div onClick={toggleWeek}>
+                <div className={styles.weekDay}>{weekDays[week].start}일</div>
+                <div onClick={toggleWeek} className={styles.weekButton}>
                     {weekString[week]}
                     <span className={styles.downArrow}>▼</span>
                 </div>
+                <div className={styles.weekDay}>{weekDays[week].end}일</div>
             </div>
             <div className={styles.dayContainer}>
                 {dayNameString.map((dayName, index) => {
