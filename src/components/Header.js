@@ -28,9 +28,14 @@ export default function Header({ title, subtitle, toggleSidebar }) {
                         {user.nickname}
                     </button>
                 ) : (
-                    <Link to="/login" className={styles.button}>
-                        로그인
-                    </Link>
+                    <>
+                        <Link to="/login" className={styles.button}>
+                            로그인
+                        </Link>
+                        <Link to="/register" className={styles.primaryButton}>
+                            회원가입
+                        </Link>
+                    </>
                 )}
                 <div style={displayMenu ? { display: "block" } : {}} className={styles.menu}>
                     <button

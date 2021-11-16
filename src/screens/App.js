@@ -56,7 +56,7 @@ export default function App() {
                         <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden" }}>
                             <Routes>
                                 <Route path="/" element={<Home />} />
-                                <Route path="/login" element={<LoginRegister />} />
+                                <Route path="/login" element={<LoginRegister defaultTab={0} />} />
                                 <Route path="/register" element={<LoginRegister defaultTab={1} />} />
                                 <Route path="/register/complete" element={<RegisterComplete />} />
                             </Routes>

@@ -5,13 +5,22 @@ import "./Tab.css";
 const TabContext = createContext();
 const useTabContext = () => useContext(TabContext);
 
-export function Tab({ className, style, children, defaultTab = 0 }) {
+export function Tab({ className, style, children, defaultTab = 0, tab }) {
     const [tabIndex, setTabIndex] = useState(defaultTab);
 
-    const context = {
-        tabIndex,
-        setTabIndex,
-    };
+    let context = {};
+
+    if (tab) {
+        context = {
+            tabIndex: tab,
+            setTabIndex,
+        };
+    } else {
+        context = {
+            tabIndex,
+            setTabIndex,
+        };
+    }
 
     return (
         <TabContext.Provider value={context}>

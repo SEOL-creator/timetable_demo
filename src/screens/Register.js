@@ -8,6 +8,7 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [nickname, setNickname] = useState("");
     const [password, setPassword] = useState("");
+    const [code, setCode] = useState("");
     const [emailError, setEmailError] = useState("");
     const [nicknameError, setNicknameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -50,10 +51,10 @@ export default function Register() {
         }
 
         axiosInstance
-            .post("/apis/register/", { email: email, nickname: nickname, password: password, password2: password })
+            .post("/apis/register/", { email: email, nickname: nickname, password: password, password2: password, code: code })
             .then((response) => {
                 const data = response.data;
-                navigate("/register/complete", { state: { email: email, nickname: nickname } });
+                navigate("/register/complete", { state: data });
             })
             .catch((error) => {
                 setLoading(false);
@@ -116,6 +117,18 @@ export default function Register() {
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     error={passwordError}
+                />
+                <Input
+                    autoComplete="off"
+                    spellCheck="false"
+                    autoCapitalize="none"
+                    inputWidth="30rem"
+                    label="가입 코드 (선택사항)"
+                    type="text"
+                    name="code"
+                    value={code}
+                    placeholder="Code"
+                    onChange={(e) => setCode(e.target.value)}
                 />
                 <Button disabled={loading} onClick={handleSubmit}>
                     회원가입

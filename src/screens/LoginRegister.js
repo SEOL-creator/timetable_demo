@@ -1,10 +1,13 @@
 import { height } from "@mui/system";
 import { isMobile } from "react-device-detect";
+import { useNavigate } from "react-router";
 import { Tab, TabContent, TabHeader, TabHeaderItem } from "../components/Tab";
 import Login from "./Login";
 import Register from "./Register";
 
 export default function LoginRegister({ defaultTab = 0 }) {
+    const navigate = useNavigate();
+
     return (
         <div
             style={{
@@ -26,11 +29,25 @@ export default function LoginRegister({ defaultTab = 0 }) {
                     borderRadius: "var(--border-radius-extra-extra-large)",
                     boxShadow: "var(--box-shadow-widget)",
                 }}
-                defaultTab={defaultTab}
+                tab={defaultTab}
             >
                 <TabHeader>
-                    <TabHeaderItem index={0}>로그인</TabHeaderItem>
-                    <TabHeaderItem index={1}>회원가입</TabHeaderItem>
+                    <TabHeaderItem
+                        index={0}
+                        onClickOverride={() => {
+                            navigate("/login");
+                        }}
+                    >
+                        로그인
+                    </TabHeaderItem>
+                    <TabHeaderItem
+                        index={1}
+                        onClickOverride={() => {
+                            navigate("/register");
+                        }}
+                    >
+                        회원가입
+                    </TabHeaderItem>
                 </TabHeader>
                 <TabContent index={0}>
                     <Login />
