@@ -4,6 +4,8 @@
     --color-background-alt: var(--color-hinted-grey-14);
     --color-background-alt-2: var(--color-hinted-grey-13);
     --color-background-float: var(--color-white);
+    --color-background-button-primary: var(--color-primary);
+    --color-background-button-primary-hover: var(--color-primary-dark);
     --color-background-button-secondary: rgba(0, 0, 0, 0.05);
     --color-background-button-secondary-hover: rgba(0, 0, 0, 0.1);
     --color-shadow-separator: rgba(0, 0, 0, 0.1);
@@ -57,9 +59,10 @@
     --color-hinted-grey-15: #f7f7f8;
     --color-transparent: transparent;
 
-    --color-primary-dark: #a075c9;
-    --color-primary: #be98e2;
-    --color-primary-light: #e0b5ff;
+    --color-primary-dark: #8e48c6;
+    --color-primary: #ab62e2;
+    --color-primary-light: #be98e2;
+    --color-primary-lighter: #e0b5ff;
 
     --color-timetable-background-red-1: #eb514a;
     --color-timetable-background-red-2: #cc3333;
