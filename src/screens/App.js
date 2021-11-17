@@ -6,10 +6,10 @@ import ClassroomContext from "../contexts/classroomContext";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Home from "./Home";
-import Login from "./Login";
 import UserContext from "../contexts/userContext";
 import LoginRegister from "./LoginRegister";
 import RegisterComplete from "./RegisterComplete";
+import Timetable from "./Timetable";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -59,6 +59,7 @@ export default function App() {
                                 <Route path="/login" element={<LoginRegister defaultTab={0} />} />
                                 <Route path="/register" element={<LoginRegister defaultTab={1} />} />
                                 <Route path="/register/complete" element={<RegisterComplete />} />
+                                <Route path="/timetable" element={<Timetable />} />
                             </Routes>
                         </div>
                     </BrowserRouter>

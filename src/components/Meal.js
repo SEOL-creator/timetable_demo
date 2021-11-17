@@ -1,3 +1,7 @@
+import { Skeleton } from "@mui/material";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import Box from "./Box";
 import styles from "./Meal.module.css";
 
 const meal = {
@@ -540,8 +544,10 @@ const meal = {
 };
 
 export default function Meal() {
-    // const TODAY = new Date(new Date().getTime() - 7 * 2 * 24 * 60 * 60 * 1000);
-    const TODAY = new Date();
+    const [loading, setLoading] = useState(true);
+
+    const TODAY = new Date(new Date().getTime() - 7 * 2 * 24 * 60 * 60 * 1000);
+    // const TODAY = new Date();
     console.log(TODAY);
     console.log(`${TODAY.getFullYear()}${TODAY.getMonth() + 1}${TODAY.getDate()}`);
     console.log(TODAY.getDate());
@@ -570,39 +576,70 @@ export default function Meal() {
     );
 
     return (
-        <div className={styles.meal}>
-            <div>
-                <span>밥</span>
-                <span>이번달 식단표 보러가기</span>
+        <Box className={styles.meal}>
+            <div className={styles.heading}>
+                <Link to="/meal">밥</Link>
             </div>
-            <div>
-                {!lunchToday && !dinnerToday ? (
-                    <div>오늘은 급식이 없네요</div>
-                ) : (
+            <div className={styles.mealContent}>
+                {loading ? (
                     <>
                         <div>
-                            <h1>중식</h1>
+                            <h1 className={styles.mealType}>중식</h1>
                             <div>
-                                {!lunchToday && <div>중식 정보 없음</div>}
-                                {lunchToday?.map((value) => (
-                                    <div>{value}</div>
-                                ))}
+                                <Skeleton animation="wave" width={60} height={19} />
+                                <Skeleton animation="wave" width={80} height={19} />
+                                <Skeleton animation="wave" width={60} height={19} />
+                                <Skeleton animation="wave" width={100} height={19} />
+                                <Skeleton animation="wave" width={80} height={19} />
+                                <Skeleton animation="wave" width={100} height={19} />
                             </div>
                         </div>
+                        <div className={styles.separator}></div>
                         <div>
-                            <h1>석식</h1>
+                            <h1 className={styles.mealType}>석식</h1>
                             <div>
-                                <div>
-                                    {!lunchToday && <div>석식 정보 없음</div>}
-                                    {dinnerToday?.map((value) => (
-                                        <div>{value}</div>
-                                    ))}
-                                </div>
+                                <Skeleton animation="wave" width={60} height={19} />
+                                <Skeleton animation="wave" width={80} height={19} />
+                                <Skeleton animation="wave" width={60} height={19} />
+                                <Skeleton animation="wave" width={100} height={19} />
+                                <Skeleton animation="wave" width={80} height={19} />
+                                <Skeleton animation="wave" width={100} height={19} />
                             </div>
                         </div>
                     </>
+                ) : !lunchToday && !dinnerToday ? (
+                    <>
+                        <div className={styles.noMeal}>오늘은 급식이 없어요 ㅠㅠ</div>
+                        <Link to="/meal">
+                            {">"} 다른 날 급식 보러가기 {"<"}
+                        </Link>
+                    </>
+                ) : (
+                    <>
+                        {lunchToday && (
+                            <div>
+                                <h1 className={styles.mealType}>중식</h1>
+                                <div>
+                                    {lunchToday?.map((value) => (
+                                        <div className={styles.menu}>{value}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {lunchToday && dinnerToday && <div className={styles.separator}></div>}
+                        {dinnerToday && (
+                            <div>
+                                <h1 className={styles.mealType}>석식</h1>
+                                <div>
+                                    {dinnerToday?.map((value) => (
+                                        <div className={styles.menu}>{value}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
-        </div>
+        </Box>
     );
 }

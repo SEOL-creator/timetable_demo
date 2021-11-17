@@ -12,7 +12,7 @@ export default function Sidebar({ display }) {
                 </SidebarCategory>
                 <SidebarCategory title=".">
                     <SidebarButton to="/timetable">시간표</SidebarButton>
-                    <SidebarButton to="/food">식단표</SidebarButton>
+                    <SidebarButton to="/meal">식단표</SidebarButton>
                 </SidebarCategory>
             </div>
             <SetCurrentClass />

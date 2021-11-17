@@ -1,11 +1,6 @@
 .timetable {
-    width: 100%;
-    background-color: white;
     width: 43.2rem;
-    margin: 2rem 3rem 0;
-    border-radius: 1.2rem;
     overflow: hidden;
-    box-shadow: var(--box-shadow-widget);
 }
 
 .timetableHeading {

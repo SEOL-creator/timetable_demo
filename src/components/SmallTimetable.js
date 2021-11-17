@@ -7,6 +7,7 @@ import SwipeableViews from "react-swipeable-views";
 import classNames from "classnames/bind";
 import isSameWeek from "../utils/isSameWeek";
 import UserContext from "../contexts/userContext";
+import Box from "./Box";
 const cx = classNames.bind(styles);
 
 const weekString = { 0: "이번주", 1: "다음주" };
@@ -160,7 +161,7 @@ export default function Timetable() {
     };
 
     return (
-        <div className={styles.timetable}>
+        <Box className={styles.timetable}>
             <div className={styles.timetableHeading}>
                 <div className={styles.weekDay}>{weekDays[week].start}일</div>
                 <div onClick={toggleWeek} className={styles.weekButton}>
@@ -207,6 +208,6 @@ export default function Timetable() {
             ) : (
                 <div className={styles.notLogin}>재학생 로그인 후 이용 가능합니다.</div>
             )}
-        </div>
+        </Box>
     );
 }
