@@ -4,11 +4,15 @@ import { useState } from "react";
 import formatTime from "../utils/formatTime";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import { useMediaQuery } from "react-responsive";
 const cx = classNames.bind(styles);
 
 export default function SmallClass({ classObj, isRemote, remoteURL, startTime, endTime, replaced = false }) {
     const [open, setOpen] = useState(false);
     const [blockClosed, setBlockClosed] = useState(false);
+
+    const isSmallMobile = useMediaQuery({ query: "(max-width: 320px)" });
+    const isMediumMobile = useMediaQuery({ query: "(max-width: 340px)" });
 
     function toggleOpen(e) {
         if ((e.target.tagName === "DIV") | (e.target.tagName === "SPAN")) {
@@ -18,7 +22,6 @@ export default function SmallClass({ classObj, isRemote, remoteURL, startTime, e
             });
         }
     }
-
     return (
         <div style={{ backgroundColor: classObj.color }} className={cx(styles.class, { "class--open": open, "class--closed": blockClosed })} onClick={toggleOpen}>
             <div className={styles.head}>
@@ -27,7 +30,7 @@ export default function SmallClass({ classObj, isRemote, remoteURL, startTime, e
                 </div>
                 <div className={styles.title}>
                     <span>
-                        {classObj.name}
+                        {isSmallMobile ? classObj.short_name : classObj.name}
                         {replaced && <div className={styles.replaced}>변경됨</div>}
                     </span>
                     {isRemote && remoteURL?.pc && remoteURL?.mobile && (
@@ -40,7 +43,7 @@ export default function SmallClass({ classObj, isRemote, remoteURL, startTime, e
             <div className={styles.information}>
                 <div className={styles.duration}>
                     <span>
-                        {formatTime(startTime, "a/p hh:mm")} ~ {formatTime(endTime, "a/p hh:mm")}
+                        {isMediumMobile ? `${formatTime(startTime, "HH:mm")} ~ ${formatTime(endTime, "HH:mm")}` : `${formatTime(startTime, "a/p hh:mm")} ~ ${formatTime(endTime, "a/p hh:mm")}`}
                     </span>
                     <Link to={`/teacher/${classObj.teacher.id}`}>{classObj.teacher.name}</Link>
                 </div>

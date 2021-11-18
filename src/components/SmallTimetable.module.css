@@ -67,6 +67,28 @@
     color: #222222;
 }
 
+@media (max-width: 400px) {
+    .day {
+        font-size: 1.8rem;
+    }
+    .selectedDay {
+        font-size: 2rem;
+    }
+    .dayContainer {
+        height: 1.8rem;
+        margin-bottom: 0.6rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .day {
+        font-size: 1.6rem;
+    }
+    .selectedDay {
+        font-size: 1.8rem;
+    }
+}
+
 .notLogin {
     width: 100%;
     display: flex;

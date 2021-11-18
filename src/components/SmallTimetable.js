@@ -8,11 +8,13 @@ import classNames from "classnames/bind";
 import isSameWeek from "../utils/isSameWeek";
 import UserContext from "../contexts/userContext";
 import Box from "./Box";
+import { useMediaQuery } from "react-responsive";
 const cx = classNames.bind(styles);
 
 const weekString = { 0: "이번주", 1: "다음주" };
 const CLASSTIMESTRING = { 1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth", 7: "seventh" };
 const dayNameString = ["월요일", "화요일", "수요일", "목요일", "금요일"];
+const dayNameStringShort = ["월", "화", "수", "목", "금"];
 
 function getClassTime(timeTable, classTimeNum) {
     if (!timeTable) return { start: "", end: "" };
@@ -103,6 +105,8 @@ export default function Timetable() {
 
     const [day, setDay] = useState(getDefaultDayNum());
 
+    const isSmallScreen = useMediaQuery({ query: "(max-width: 320px)" });
+
     useEffect(() => {
         async function fetchTimetable() {
             try {
@@ -171,19 +175,33 @@ export default function Timetable() {
                 <div className={styles.weekDay}>{weekDays[week].end}일</div>
             </div>
             <div className={styles.dayContainer}>
-                {dayNameString.map((dayName, index) => {
-                    return (
-                        <button
-                            key={index}
-                            onClick={() => {
-                                setDay(index);
-                            }}
-                            className={cx(styles.day, day === index && styles.selectedDay)}
-                        >
-                            {dayName}
-                        </button>
-                    );
-                })}
+                {isSmallScreen
+                    ? dayNameStringShort.map((dayName, index) => {
+                          return (
+                              <button
+                                  key={index}
+                                  onClick={() => {
+                                      setDay(index);
+                                  }}
+                                  className={cx(styles.day, day === index && styles.selectedDay)}
+                              >
+                                  {dayName}
+                              </button>
+                          );
+                      })
+                    : dayNameString.map((dayName, index) => {
+                          return (
+                              <button
+                                  key={index}
+                                  onClick={() => {
+                                      setDay(index);
+                                  }}
+                                  className={cx(styles.day, day === index && styles.selectedDay)}
+                              >
+                                  {dayName}
+                              </button>
+                          );
+                      })}
             </div>
             {isLogin ? (
                 <>
