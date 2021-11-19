@@ -36,7 +36,7 @@ export default function App() {
     useEffect(() => {
         async function velidateToken() {
             try {
-                const response = axiosInstance.post("/apis/validatetoken/", { token: token });
+                const response = await axiosInstance.post("/apis/validatetoken/", { token: token });
                 if (response.data.valid) {
                     setUser(response.data.user);
                     localStorage.setItem("user", JSON.stringify(response.data.user));
