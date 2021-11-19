@@ -41,6 +41,12 @@ code {
     display: flex;
 }
 
+@supports (-webkit-touch-callout: none) {
+    #root {
+        min-height: -webkit-fill-available;
+    }
+}
+
 ::selection {
     color: var(--color-selection-text);
     background-color: var(--color-selection);

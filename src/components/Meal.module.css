@@ -1,8 +1,14 @@
 .meal {
-    width: 21.6rem;
+    width: 20.1rem;
     overflow: hidden;
-    padding: 1rem 2rem;
+    padding: 1.4rem 2rem 1rem;
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 360px) {
+    .meal {
+        width: calc(100% - 3rem);
+    }
 }
 
 .heading {
@@ -14,12 +20,12 @@
 }
 
 .heading > a {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 600;
 }
 
 .mealContent {
-    padding: 1rem 0 1rem;
+    padding: 0 0 1rem;
 }
 
 .noMeal {
@@ -38,7 +44,7 @@
 }
 
 .mealType {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 500;
     margin-bottom: 0.4rem;
 }

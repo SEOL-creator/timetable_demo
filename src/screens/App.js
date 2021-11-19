@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ClassroomContext from "../contexts/classroomContext";
@@ -10,6 +10,7 @@ import UserContext from "../contexts/userContext";
 import LoginRegister from "./LoginRegister";
 import RegisterComplete from "./RegisterComplete";
 import Timetable from "./Timetable";
+import axiosInstance from "../utils/axiosInstance";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -32,6 +33,31 @@ export default function App() {
     const [isSidebarDisplay, setIsSidebarDisplay] = useState(false);
     const toggleSidebar = () => setIsSidebarDisplay(!isSidebarDisplay);
 
+    useEffect(() => {
+        async function velidateToken() {
+            try {
+                const response = axiosInstance.post("/apis/validatetoken/", { token: token });
+                if (response.data.valid) {
+                    setUser(response.data.user);
+                    localStorage.setItem("user", JSON.stringify(response.data.user));
+                } else {
+                    setIsLogin(false);
+                    setUser({ email: "", nickname: "" });
+                    setToken("");
+                    localStorage.setItem("isLogin", JSON.stringify(false));
+                    localStorage.setItem("user", JSON.stringify({ email: "", nickname: "" }));
+                    localStorage.setItem("token", "");
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        if (isLogin) {
+            velidateToken();
+        }
+    }, []);
+
     return (
         <>
             <UserContext.Provider
@@ -53,7 +79,7 @@ export default function App() {
                     <BrowserRouter>
                         <Header title={<span>수업 진행중!</span>} subtitle="23:30 남음" toggleSidebar={toggleSidebar} />
                         <Sidebar display={isSidebarDisplay} />
-                        <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden" }}>
+                        <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box", padding: "0 1.5rem" }}>
                             <Routes>
                                 <Route path="/" element={<Home />} />
                                 <Route path="/login" element={<LoginRegister defaultTab={0} />} />
