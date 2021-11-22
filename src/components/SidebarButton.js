@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./SidebarButton.module.css";
 const cx = classNames.bind(styles);
 
-export default function SidebarButton({ children, onClick, to }) {
+export default function SidebarButton({ children, onClick, to, href }) {
     if (to) {
         return (
             <NavLink
@@ -14,6 +14,12 @@ export default function SidebarButton({ children, onClick, to }) {
             >
                 {children}
             </NavLink>
+        );
+    } else if (href) {
+        return (
+            <a className={styles.button} href={href}>
+                {children}
+            </a>
         );
     } else {
         return (

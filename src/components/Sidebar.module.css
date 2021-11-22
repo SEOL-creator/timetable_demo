@@ -28,6 +28,12 @@
     }
 }
 
+@supports (-webkit-touch-callout: none) {
+    .sidebar {
+        height: -webkit-fill-available;
+    }
+}
+
 .sidebar > div {
     width: 100%;
 }

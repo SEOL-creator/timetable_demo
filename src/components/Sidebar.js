@@ -14,6 +14,7 @@ export default function Sidebar({ display }) {
                     <SidebarButton to="/timetable">시간표</SidebarButton>
                     <SidebarButton to="/meal">식단표</SidebarButton>
                     <SidebarButton to="/calendar">일정표</SidebarButton>
+                    <SidebarButton href="riotclient:product=league_of_legends">Open Riot Client</SidebarButton>
                 </SidebarCategory>
             </div>
             <SetCurrentClass />
