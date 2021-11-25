@@ -5,6 +5,8 @@ import axiosInstance from "../utils/axiosInstance";
 import formatDateTime from "../utils/formatDateTime";
 import Box from "./Box";
 import styles from "./DDay.module.css";
+import classNames from "classnames/bind";
+const cx = classNames.bind(styles);
 
 function calcDDay(date) {
     const now = new Date();
@@ -20,7 +22,7 @@ function calcDDay(date) {
     return "D-" + Math.ceil(diff / 1000 / 60 / 60 / 24);
 }
 
-export default function DDay() {
+export default function DDay({ direction = "column" }) {
     const [dDayList, setDDayList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -39,7 +41,7 @@ export default function DDay() {
     }, []);
 
     return (
-        <Box className={styles.box}>
+        <Box className={cx("box", { [`box--${direction}`]: true })}>
             <Link to="/calendar">주요 일정</Link>
             <div className={styles.content}>
                 {isLoading ? (
@@ -54,14 +56,16 @@ export default function DDay() {
                 ) : (
                     dDayList?.map((dDay) => {
                         return (
-                            <div key={dDay.id} style={{ width: "100%" }}>
+                            <>
                                 <div className={styles.separator}></div>
-                                <div className={styles.schedule}>
-                                    <span className={styles.scheduleName}>{dDay.name}</span>
-                                    <span className={styles.scheduleDate}>{formatDateTime(new Date(dDay.start_date), "YYYY년 MM월 dd일 aaaa")}</span>
+                                <div className={styles.schedule} key={dDay.id}>
+                                    <div className={styles.scheduleInfo}>
+                                        <span className={styles.scheduleName}>{dDay.name}</span>
+                                        <span className={styles.scheduleDate}>{formatDateTime(new Date(dDay.start_date), "YYYY년 MM월 dd일 aaaa")}</span>
+                                    </div>
                                     <span className={styles.scheduleRemain}>{calcDDay(dDay.start_date)}</span>
                                 </div>
-                            </div>
+                            </>
                         );
                     })
                 )}
