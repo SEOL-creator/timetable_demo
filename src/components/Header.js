@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import UserContext from "../contexts/userContext";
 import Hamburger from "./Hamburger";
@@ -7,6 +8,8 @@ import styles from "./Header.module.css";
 export default function Header({ title, subtitle, toggleSidebar }) {
     const { isLogin, user, setUser } = useContext(UserContext);
     const [displayMenu, setDisplayMenu] = useState(false);
+
+    const isMaxWidth600 = useMediaQuery({ maxWidth: "600px" });
 
     return (
         <header className={styles.header}>
@@ -29,9 +32,11 @@ export default function Header({ title, subtitle, toggleSidebar }) {
                     </button>
                 ) : (
                     <>
-                        <Link to="/login" className={styles.button}>
-                            로그인
-                        </Link>
+                        {!isMaxWidth600 && (
+                            <Link to="/login" className={styles.button}>
+                                로그인
+                            </Link>
+                        )}
                         <Link to="/register" className={styles.primaryButton}>
                             회원가입
                         </Link>
