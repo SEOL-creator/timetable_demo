@@ -64,6 +64,7 @@
 .scheduleDate {
     font-size: 1.3rem;
     color: #999;
+    word-break: keep-all;
 }
 
 .scheduleRemain {
