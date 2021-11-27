@@ -23,10 +23,10 @@ function getClassTime(timeTable, classTimeNum) {
 
 function drawClasstimesOfDay(classTimeTable, day, isRemote, currentTimeTable, tempClassTime, isThisWeek) {
     return classTimeTable.map((classTime) => {
-        if (classTime.dayOfWeek !== day) return;
+        if (classTime.dayOfWeek !== day) return null;
         const TODAY = new Date();
         const tempClass = tempClassTime.filter((time) => {
-            if (isSameWeek(time.date, TODAY) == isThisWeek && new Date(time.date).getDay() === day) {
+            if (isSameWeek(time.date, TODAY) === isThisWeek && new Date(time.date).getDay() === day) {
                 if (time.time === classTime.time) return true;
             }
             return false;
@@ -69,14 +69,12 @@ function makeWeekTimeTable(timeTable) {
     const TODAY = new Date();
     const MONDAY = new Date(TODAY.getTime() - (TODAY.getDay() - 1) * 24 * 60 * 60 * 1000);
     const NEXTMONDAY = new Date(MONDAY.getTime() + 7 * 24 * 60 * 60 * 1000);
-    let day = MONDAY;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0, day = MONDAY; i < 5; i++) {
         const possibleTable = timeTable.filter((table) => new Date(table.startdate).getTime() <= day.getTime());
         firstWeekTimeTable.push(possibleTable.slice(-1)[0]);
         day = new Date(day.getTime() + 24 * 60 * 60 * 1000);
     }
-    day = NEXTMONDAY;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0, day = NEXTMONDAY; i < 5; i++) {
         const possibleTable = timeTable.filter((table) => new Date(table.startdate).getTime() <= day.getTime());
         secondWeekTimeTable.push(possibleTable.slice(-1)[0]);
         day = new Date(day.getTime() + 24 * 60 * 60 * 1000);
