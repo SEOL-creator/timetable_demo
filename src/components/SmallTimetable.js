@@ -86,8 +86,8 @@ function makeWeekTimeTable(timeTable) {
 
 function getDefaultDayNum() {
     const day = new Date().getDay() - 1;
-    if (day > 4) return 0;
-    return day;
+    if (day >= 0 && day <= 4) return day;
+    return 0;
 }
 
 export default function Timetable() {
