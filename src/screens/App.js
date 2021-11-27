@@ -33,8 +33,9 @@ export default function App() {
     const [isSidebarDisplay, setIsSidebarDisplay] = useState(false);
     const toggleSidebar = () => setIsSidebarDisplay(!isSidebarDisplay);
 
+    //
     useEffect(() => {
-        async function velidateToken() {
+        async function validatetoken() {
             try {
                 const response = await axiosInstance.post("/apis/validatetoken/", { token: token });
                 if (response.data.valid) {
@@ -54,7 +55,7 @@ export default function App() {
         }
 
         if (isLogin) {
-            velidateToken();
+            validatetoken();
         }
     }, []);
 
