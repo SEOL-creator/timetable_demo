@@ -5,10 +5,6 @@ import Button from "../components/Button";
 import UserContext from "../contexts/userContext";
 import axiosInstance from "../utils/axiosInstance";
 
-import styles from "../components/Button.module.css";
-import classNames from "classnames/bind";
-const cx = classNames.bind(styles);
-
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
