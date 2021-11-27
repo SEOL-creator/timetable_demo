@@ -37,7 +37,7 @@ export default function Meal() {
             if (!targetDay) return;
             try {
                 const response = await axiosInstance.get(`/apis/meal/${targetDay.getFullYear()}/${targetDay.getMonth() + 1}/${targetDay.getDate()}/`);
-                response.data?.map((meal) => {
+                response.data?.forEach((meal) => {
                     if (meal.type === 2) {
                         setLunch(meal);
                     } else {
@@ -52,8 +52,6 @@ export default function Meal() {
 
         fetchMeal();
     }, [targetDay]);
-
-    console.log(targetDay);
 
     return (
         <Box className={styles.meal}>
@@ -100,7 +98,9 @@ export default function Meal() {
                                 <h1 className={styles.mealType}>중식</h1>
                                 <div>
                                     {lunch?.meal_item.map((menu) => (
-                                        <div className={styles.menu}>{menu.name}</div>
+                                        <div key={menu.name} className={styles.menu}>
+                                            {menu.name}
+                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -111,7 +111,9 @@ export default function Meal() {
                                 <h1 className={styles.mealType}>석식</h1>
                                 <div>
                                     {dinner?.meal_item.map((menu) => (
-                                        <div className={styles.menu}>{menu.name}</div>
+                                        <div key={menu.name} className={styles.menu}>
+                                            {menu.name}
+                                        </div>
                                     ))}
                                 </div>
                             </div>
