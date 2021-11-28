@@ -1,7 +1,7 @@
 import styles from "./SmallClass.module.css";
 import classNames from "classnames/bind";
 import { useState } from "react";
-import formatTime from "../utils/formatTime";
+import formatTimeString from "../utils/formatTimeString";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { useMediaQuery } from "react-responsive";
@@ -26,7 +26,7 @@ export default function SmallClass({ classObj, isRemote, remoteURL, startTime, e
         <div style={{ backgroundColor: classObj.color }} className={cx(styles.class, { "class--open": open, "class--closed": blockClosed })} onClick={toggleOpen}>
             <div className={styles.head}>
                 <div className={styles.startTime}>
-                    <div>{formatTime(startTime, "hh mm")}</div>
+                    <div>{formatTimeString(startTime, "hh mm")}</div>
                 </div>
                 <div className={styles.title}>
                     <span>
@@ -43,7 +43,9 @@ export default function SmallClass({ classObj, isRemote, remoteURL, startTime, e
             <div className={styles.information}>
                 <div className={styles.duration}>
                     <span>
-                        {isMediumMobile ? `${formatTime(startTime, "HH:mm")} ~ ${formatTime(endTime, "HH:mm")}` : `${formatTime(startTime, "a/p hh:mm")} ~ ${formatTime(endTime, "a/p hh:mm")}`}
+                        {isMediumMobile
+                            ? `${formatTimeString(startTime, "HH:mm")} ~ ${formatTimeString(endTime, "HH:mm")}`
+                            : `${formatTimeString(startTime, "a/p hh:mm")} ~ ${formatTimeString(endTime, "a/p hh:mm")}`}
                     </span>
                     <Link to={`/teacher/${classObj.teacher.id}`}>{classObj.teacher.name}</Link>
                 </div>

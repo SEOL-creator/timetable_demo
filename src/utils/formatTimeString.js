@@ -1,5 +1,7 @@
-export default function formatTime(time, format) {
-    const date = new Date("1970-12-01T" + time + "Z");
+export default function formatTimeString(time, format) {
+    const hour = parseInt(time.split(":")[0]);
+    const minute = parseInt(time.split(":")[1]);
+    const second = parseInt(time.split(":")[2]);
 
     const zf = (len, str) => {
         if (typeof str === "number") str = str.toString();
@@ -10,26 +12,26 @@ export default function formatTime(time, format) {
         return (result += str);
     };
 
-    if (!format || !date) return "";
+    if (!format || !time) return "";
 
     return format.replace(/(HHH|HH|hhh|hh|mm|ss|a\/p|a\/pENG)/gi, function (formatstr) {
         switch (formatstr) {
             case "HHH":
-                return zf(2, date.getHours());
+                return zf(2, hour);
             case "HH":
-                return zf(1, date.getHours());
+                return zf(1, hour);
             case "hhh":
-                return zf(2, date.getHours() % 12 ? date.getHours() % 12 : 12);
+                return zf(2, hour % 12 ? hour % 12 : 12);
             case "hh":
-                return date.getHours() % 12 ? date.getHours() % 12 : 12;
+                return hour % 12 ? hour % 12 : 12;
             case "mm":
-                return zf(2, date.getMinutes());
+                return zf(2, minute);
             case "ss":
-                return zf(2, date.getSeconds());
+                return zf(2, second);
             case "a/p":
-                return date.getHours() < 12 ? "오전" : "오후";
+                return hour < 12 ? "오전" : "오후";
             case "a/pENG":
-                return date.getHours() < 12 ? "AM" : "PM";
+                return hour < 12 ? "AM" : "PM";
             default:
                 return formatstr;
         }
