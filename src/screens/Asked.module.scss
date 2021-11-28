@@ -1,0 +1,119 @@
+.asked {
+    width: 100%;
+    height: 100%;
+    --theme: #7b85c8;
+}
+.header {
+    width: 100%;
+    height: 5rem;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--theme);
+    font-family: "Malgun Gothic";
+}
+
+.thickbar {
+    width: 100%;
+    height: 3.5rem;
+    background-color: var(--theme);
+}
+
+.infocontainer {
+    width: 100%;
+    height: 27rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 1.6rem;
+    box-sizing: border-box;
+}
+
+.user_info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 1.5rem;
+
+    & > img {
+        width: 4.4rem;
+        height: 4.4rem;
+    }
+}
+
+.user_text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 1.2rem;
+
+    & > span:first-of-type {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #333;
+    }
+    & > span:last-of-type {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #9a9a9a;
+    }
+}
+.textarea {
+    width: 30rem;
+    height: 12rem;
+    resize: none;
+    outline: none;
+    border: none;
+    background-color: #f3f3f5;
+    border-radius: 0.6rem;
+    box-sizing: border-box;
+    padding: 0.8rem 1rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: "Spoqa Han Sans Neo";
+    color: #333;
+
+    &::placeholder {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #c8cada;
+    }
+}
+
+.content {
+    width: 100%;
+    height: max-content;
+    background-color: white;
+    border-top: 2px solid #ededed;
+}
+
+.headerTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 0;
+    color: #434343;
+    & > span:first-of-type {
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+    & > span:last-of-type {
+        font-size: 1.2rem;
+        font-weight: 400;
+    }
+}

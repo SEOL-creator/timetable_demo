@@ -4,9 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import useDateUpdate from "../hooks/useDateUpdate";
 import ClassroomContext from "../contexts/classroomContext";
 
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 import Home from "./Home";
+import Asked from "./Asked";
 import UserContext from "../contexts/userContext";
 import LoginRegister from "./LoginRegister";
 import RegisterComplete from "./RegisterComplete";
@@ -63,7 +64,7 @@ export default function App() {
         if (isLogin) {
             validatetoken();
         }
-    }, [isLogin, token]);
+    }, []);
 
     useEffect(() => {
         if (isLogin) {
@@ -102,13 +103,14 @@ export default function App() {
                             <Header toggleSidebar={toggleSidebar} />
                         </TodayTimetableContext.Provider>
                         <Sidebar display={isSidebarDisplay} />
-                        <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box", padding: "0 1.5rem" }}>
+                        <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box" }}>
                             <Routes>
                                 <Route path="/" element={<Home />} />
                                 <Route path="/login" element={<LoginRegister defaultTab={0} />} />
                                 <Route path="/register" element={<LoginRegister defaultTab={1} />} />
                                 <Route path="/register/complete" element={<RegisterComplete />} />
                                 <Route path="/timetable" element={<Timetable />} />
+                                <Route path="/asked" element={<Asked />} />
                             </Routes>
                         </div>
                     </BrowserRouter>

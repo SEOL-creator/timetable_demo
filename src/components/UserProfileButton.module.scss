@@ -1,0 +1,55 @@
+.button {
+    width: 10rem;
+    height: 3.6rem;
+    border-radius: 2rem;
+    background-color: var(--color-background-button-secondary);
+    transition: background-color 0.15s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover {
+    background-color: var(--color-background-button-secondary-hover);
+}
+
+.userProfileButton {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 1.2rem;
+    width: auto;
+}
+
+.userIcon {
+    color: #adb5bd;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.userProfilePicImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.userProfilePicImg {
+    width: 20px;
+}
+.userNickname {
+    margin: 0 0.6rem;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

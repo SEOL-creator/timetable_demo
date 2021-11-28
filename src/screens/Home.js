@@ -8,7 +8,7 @@ export default function Home() {
     const isMaxWidth390 = useMediaQuery({ maxWidth: 390 });
 
     return (
-        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "flex-start", flexWrap: "wrap" }}>
+        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "flex-start", flexWrap: "wrap", padding: "0 1.5rem" }}>
             <Timetable />
             <div style={{ width: "46.2rem", display: "flex", justifyContent: "center", alignItems: "flex-start", flexWrap: "wrap" }}>
                 <Meal />

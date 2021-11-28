@@ -1,10 +1,17 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { Tab, TabContent, TabHeader, TabHeaderItem } from "../components/Tab";
+import UserContext from "../contexts/userContext";
 import Login from "./Login";
 import Register from "./Register";
 
 export default function LoginRegister({ defaultTab = 0 }) {
     const navigate = useNavigate();
+    const userContext = useContext(UserContext);
+
+    if (userContext.isLogin) {
+        navigate("/");
+    }
 
     return (
         <div

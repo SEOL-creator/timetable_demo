@@ -2,9 +2,12 @@ import { useContext, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import UserContext from "../contexts/userContext";
-import Hamburger from "./Hamburger";
+import Hamburger from "../components/Hamburger";
 import styles from "./Header.module.css";
-import HeaderTitle from "./HeaderTitle";
+import HeaderTitle from "../components/HeaderTitle";
+import UserProfileButton from "../components/UserProfileButton";
+import UserMenu from "../components/UserMenu";
+import { ClickAwayListener } from "@mui/material";
 
 export default function Header({ toggleSidebar }) {
     const { isLogin, user, setUser } = useContext(UserContext);
@@ -20,14 +23,29 @@ export default function Header({ toggleSidebar }) {
             <HeaderTitle></HeaderTitle>
             <div className={styles.buttonContainer}>
                 {isLogin ? (
-                    <button
-                        onClick={() => {
-                            setDisplayMenu(!displayMenu);
+                    <ClickAwayListener
+                        onClickAway={() => {
+                            setDisplayMenu(false);
                         }}
-                        className={styles.button}
                     >
-                        {user.nickname}
-                    </button>
+                        <div>
+                            <UserProfileButton
+                                nickname={user.nickname}
+                                onClick={() => {
+                                    setDisplayMenu(!displayMenu);
+                                }}
+                            />
+                            <UserMenu
+                                display={displayMenu}
+                                onClick={() => {
+                                    setDisplayMenu(!displayMenu);
+                                }}
+                                handleClose={() => {
+                                    setDisplayMenu(false);
+                                }}
+                            />
+                        </div>
+                    </ClickAwayListener>
                 ) : (
                     <>
                         {!isMaxWidth600 && (
@@ -40,16 +58,6 @@ export default function Header({ toggleSidebar }) {
                         </Link>
                     </>
                 )}
-                <div style={displayMenu ? { display: "block" } : {}} className={styles.menu}>
-                    <button
-                        onClick={() => {
-                            setUser({ isLogin: false, user: { email: "", nickname: "" }, token: "" });
-                            setDisplayMenu(false);
-                        }}
-                    >
-                        Log Out
-                    </button>
-                </div>
             </div>
         </header>
     );

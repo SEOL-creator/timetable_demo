@@ -73,13 +73,3 @@
 .primaryButton:hover {
     background-color: var(--color-background-button-primary-hover);
 }
-
-.menu {
-    display: none;
-    width: 10rem;
-    height: 10rem;
-    background-color: chartreuse;
-    position: absolute;
-    top: 5rem;
-    right: 0;
-}

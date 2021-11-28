@@ -39,6 +39,7 @@ function diffTimeString(a, b) {
 }
 
 function getCurrentState(timetable, today) {
+    if (!timetable) return null;
     const currentTimeString = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
     if (diffTimeString(currentTimeString, timetable[0].start) > 0) {
         const prev = null;

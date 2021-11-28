@@ -36,7 +36,9 @@ export const TabHeader = (props) => {
     const tabBarWidth = Math.round(10000 / props.children.length) / 100;
     return (
         <>
-            <div className="tab__header">{props.children}</div>
+            <div className="tab__header" style={props.style}>
+                {props.children}
+            </div>
             <div className="tab__bar">
                 <div style={{ width: tabBarWidth + "%", marginLeft: tabIndex * tabBarWidth + "%" }}></div>
             </div>
@@ -45,7 +47,7 @@ export const TabHeader = (props) => {
 };
 
 export const TabHeaderItem = (props) => {
-    const { setTabIndex } = useTabContext();
+    const { tabIndex, setTabIndex } = useTabContext();
 
     let onClickHandler = () => setTabIndex(props.index);
     if (props.onClickOverride) {
@@ -55,12 +57,8 @@ export const TabHeaderItem = (props) => {
         };
     }
 
-    let classNames = [];
-    classNames.push("header__item");
-    classNames.push(props.className);
-    classNames = classNames.join(" ");
     return (
-        <div className={classNames} onClick={onClickHandler}>
+        <div className={classNames("header__item", props.className, { ["header--disabled"]: tabIndex !== props.index })} onClick={onClickHandler}>
             {props.children}
         </div>
     );
