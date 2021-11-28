@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import useDateUpdate from "../hooks/useDateUpdate";
 import ClassroomContext from "../contexts/classroomContext";
 
 import Header from "../components/Header";
@@ -11,6 +12,7 @@ import LoginRegister from "./LoginRegister";
 import RegisterComplete from "./RegisterComplete";
 import Timetable from "./Timetable";
 import axiosInstance from "../utils/axiosInstance";
+import TodayTimetableContext from "../contexts/todayTimetableContext";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -29,6 +31,10 @@ export default function App() {
         localStorage.setItem("classroom", JSON.stringify(classroom));
         setClassroom(classroom);
     };
+
+    const { dateUpdate } = useDateUpdate();
+
+    const [todayTimetable, setTodayTimetable] = useState({});
 
     const [isSidebarDisplay, setIsSidebarDisplay] = useState(false);
     const toggleSidebar = () => setIsSidebarDisplay(!isSidebarDisplay);
@@ -57,7 +63,21 @@ export default function App() {
         if (isLogin) {
             validatetoken();
         }
-    }, []);
+    }, [isLogin, token]);
+
+    useEffect(() => {
+        if (isLogin) {
+            async function getTodayTimetable() {
+                try {
+                    const response = await axiosInstance.get(`/apis/improvedtimetable/${classroom.grade}/${classroom.room}/today/`);
+                    setTodayTimetable(response.data);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            getTodayTimetable();
+        }
+    }, [dateUpdate, classroom, isLogin]);
 
     return (
         <>
@@ -78,7 +98,9 @@ export default function App() {
             >
                 <ClassroomContext.Provider value={{ classroom: classroom, setClassroom: setClassroomStorage }}>
                     <BrowserRouter>
-                        <Header title={<span>수업 진행중!</span>} subtitle="23:30 남음" toggleSidebar={toggleSidebar} />
+                        <TodayTimetableContext.Provider value={todayTimetable}>
+                            <Header toggleSidebar={toggleSidebar} />
+                        </TodayTimetableContext.Provider>
                         <Sidebar display={isSidebarDisplay} />
                         <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box", padding: "0 1.5rem" }}>
                             <Routes>

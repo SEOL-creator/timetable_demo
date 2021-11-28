@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import UserContext from "../contexts/userContext";
 import Hamburger from "./Hamburger";
 import styles from "./Header.module.css";
+import HeaderTitle from "./HeaderTitle";
 
-export default function Header({ title, subtitle, toggleSidebar }) {
+export default function Header({ toggleSidebar }) {
     const { isLogin, user, setUser } = useContext(UserContext);
     const [displayMenu, setDisplayMenu] = useState(false);
 
@@ -16,10 +17,7 @@ export default function Header({ title, subtitle, toggleSidebar }) {
             <div className={styles.hamburgerContainer} onClick={toggleSidebar}>
                 <Hamburger />
             </div>
-            <div className={styles.titleContainer}>
-                <span className={styles.title}>{title}</span>
-                <span className={styles.subtitle}>{subtitle}</span>
-            </div>
+            <HeaderTitle></HeaderTitle>
             <div className={styles.buttonContainer}>
                 {isLogin ? (
                     <button

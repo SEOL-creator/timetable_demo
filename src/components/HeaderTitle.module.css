@@ -1,0 +1,16 @@
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+.subtitle {
+    font-size: 0.75em;
+    color: var(--color-text-secondary);
+}
