@@ -31,16 +31,16 @@ export function Tab({ className, style, children, defaultTab = 0, tab }) {
     );
 }
 
-export const TabHeader = (props) => {
+export const TabHeader = ({ style, className, children }) => {
     const { tabIndex } = useTabContext();
-    const tabBarWidth = Math.round(10000 / props.children.length) / 100;
+    const tabBarWidth = Math.round(10000 / children.length) / 100;
     return (
         <>
-            <div className="tab__header" style={props.style}>
-                {props.children}
-            </div>
-            <div className="tab__bar">
-                <div style={{ width: tabBarWidth + "%", marginLeft: tabIndex * tabBarWidth + "%" }}></div>
+            <div className={classNames("tab__header", className)} style={style}>
+                {children}
+                <div className="tab__bar">
+                    <div style={{ width: tabBarWidth + "%", marginLeft: tabIndex * tabBarWidth + "%" }}></div>
+                </div>
             </div>
         </>
     );

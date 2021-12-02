@@ -1,0 +1,67 @@
+.settings {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.userInfo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.profileArea {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 4.2rem;
+}
+
+.userProfilepic {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow-widget);
+}
+.addProfilePicLabel {
+    margin-top: 2rem;
+    padding: 0.6rem 1rem;
+    border-radius: var(--border-radius-large);
+    font-size: 1.4rem;
+    color: var(--color-white);
+    transition: background-color var(--transition-duration-base);
+    cursor: pointer;
+    background-color: var(--color-background-button-primary);
+
+    &:hover {
+        background-color: var(--color-background-button-primary-hover);
+    }
+
+    .profilePicInput {
+        display: none;
+    }
+}
+
+.input {
+    margin: 1.2rem 0;
+    width: calc(100% - 6rem);
+}
+
+.userInfoTexts {
+    width: 40rem;
+
+    & > div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        & > span {
+            width: max-content;
+            width: 6rem;
+        }
+    }
+}

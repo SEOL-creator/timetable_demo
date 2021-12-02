@@ -1,0 +1,13 @@
+.block {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--color-background-base);
+    padding: 2rem;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-large);
+    border: 1px solid var(--color-background-alt-2);
+
+    margin-top: 2.4rem;
+}

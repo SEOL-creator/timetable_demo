@@ -1,6 +1,7 @@
 .header {
     width: 100%;
     height: var(--size-header-height);
+    height: 5rem;
     background-color: var(--color-background-base);
     box-shadow: var(--box-shadow-separator);
     display: flex;

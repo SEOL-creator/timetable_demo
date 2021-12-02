@@ -18,9 +18,11 @@ export default function Input({
     spellCheck,
     autoCapitalize,
     error,
+    className,
+    disabled = false,
 }) {
     return (
-        <label className={cx("label", { "stack-stack": stack }, { [`stack-${stack}`]: stack })}>
+        <label className={cx(className, "label", { "stack-stack": stack }, { [`stack-${stack}`]: stack })}>
             {!hideLabel && (
                 <>
                     <span className={styles.span} style={{ width: labelWidth }}>
@@ -33,7 +35,7 @@ export default function Input({
                 autoComplete={autoComplete}
                 spellCheck={spellCheck}
                 autoCapitalize={autoCapitalize}
-                className={cx("input", { "input--error": error })}
+                className={cx("input", { "input--error": error, "input--disabled": disabled })}
                 name={name}
                 type={type}
                 placeholder={placeholder}
@@ -41,6 +43,7 @@ export default function Input({
                 style={{ width: inputWidth }}
                 value={value}
                 onChange={onChange}
+                disabled={disabled}
             />
         </label>
     );

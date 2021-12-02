@@ -2,12 +2,13 @@ import styles from "./UserMenu.module.scss";
 import classNames from "classnames/bind";
 import { useContext } from "react";
 import UserContext from "../contexts/userContext";
-import { ClickAwayListener } from "@mui/material";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 export default function UserMenu({ display, handleClose, ref }) {
     const { setUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
     return (
         <div ref={ref} className={cx("menu", { "menu--display": display, "menu--hidden": !display })} onClick={handleClose}>
@@ -15,11 +16,12 @@ export default function UserMenu({ display, handleClose, ref }) {
                 className={cx("menu__item")}
                 onClick={() => {
                     setUser({ isLogin: false, user: { email: "", nickname: "" }, token: "" });
+                    navigate("/");
                 }}
             >
                 로그아웃
             </button>
-            <Link className={cx("menu__item")} to="/settings">
+            <Link className={cx("menu__item")} to="">
                 설정
             </Link>
         </div>

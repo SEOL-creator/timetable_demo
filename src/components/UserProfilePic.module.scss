@@ -1,0 +1,22 @@
+.profilepicContainer {
+    svg.faIcon {
+        width: 100%;
+        height: 100%;
+        color: #adb5bd;
+    }
+}
+
+.imageContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+
+    & > img {
+        width: 100%;
+        height: 100%;
+    }
+}

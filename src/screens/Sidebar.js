@@ -15,7 +15,7 @@ export default function Sidebar({ display }) {
                     <SidebarButton to="/calendar">일정표</SidebarButton>
                 </SidebarCategory>
                 <SidebarCategory title="소통해요">
-                    <SidebarButton>Asked.kr</SidebarButton>
+                    <SidebarButton to="/asked">Asked.kr</SidebarButton>
                 </SidebarCategory>
             </div>
         </aside>

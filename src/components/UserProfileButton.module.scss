@@ -27,25 +27,11 @@
     width: auto;
 }
 
-.userIcon {
-    color: #adb5bd;
-    font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.userProfilePic {
+    width: 2rem;
+    height: 2rem;
 }
-.userProfilePicImg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-.userProfilePicImg {
-    width: 20px;
-}
+
 .userNickname {
     margin: 0 0.6rem;
     font-size: 1.5rem;

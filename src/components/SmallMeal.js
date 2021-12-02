@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import formatDateTime from "../utils/formatDateTime";
 import axiosInstance from "../utils/axiosInstance";
 import Box from "./Box";
-import styles from "./Meal.module.css";
+import styles from "./SmallMeal.module.css";
 
 function getNextMonday(date) {
     if (date.getDay() === 0) {
@@ -22,7 +22,7 @@ function getTargetDay() {
     return today;
 }
 
-export default function Meal() {
+export default function SmallMeal() {
     const [isLoading, setIsLoading] = useState(true);
     const [targetDay, setTargetDay] = useState(null);
     const [lunch, setLunch] = useState(null);
@@ -57,7 +57,7 @@ export default function Meal() {
         <Box className={styles.meal}>
             <div className={styles.heading}>
                 <Link to="/meal">밥</Link>
-                <span>{formatDateTime(targetDay, "dd일 aaaa")}</span>
+                <span>{formatDateTime(targetDay, "DD일 aaaa")}</span>
             </div>
             <div className={styles.separator}></div>
             <div className={styles.mealContent}>

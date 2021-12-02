@@ -2,6 +2,7 @@
     width: 100%;
     height: 100%;
     --theme: #7b85c8;
+    background-color: #f8f9fb;
 }
 .header {
     width: 100%;
@@ -97,7 +98,6 @@
 .content {
     width: 100%;
     height: max-content;
-    background-color: white;
     border-top: 2px solid #ededed;
 }
 
@@ -115,5 +115,134 @@
     & > span:last-of-type {
         font-size: 1.2rem;
         font-weight: 400;
+    }
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > div:last-of-type {
+        margin: 0.6rem 0;
+
+        & > button {
+            padding: 0.6rem 1.6rem;
+            background: none;
+            background-color: var(--theme);
+            color: white;
+            font-size: 1.4rem;
+            border-radius: 1.6rem;
+        }
+    }
+}
+
+.askInstence {
+    width: 100%;
+    margin-bottom: 1.4rem;
+    box-sizing: border-box;
+    padding: 1.2rem 1.2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: white;
+}
+
+.ask--title {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div:first-of-type {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        & > span:first-of-type {
+            font-size: 1.2rem;
+            color: #8e8e8e;
+        }
+        & > span:last-of-type {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #585858;
+            margin: 0.4rem 0;
+        }
+    }
+
+    & > div:last-of-type {
+        font-size: 1.4rem;
+        color: #8e8e8e;
+    }
+}
+
+.ask--user {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    & > div:first-of-type {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        overflow: hidden;
+        & > img {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+
+    & > div:last-of-type {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin-left: 1rem;
+
+        & > span:first-of-type {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #3f3f3f;
+            margin-bottom: 0.3rem;
+        }
+        & > span:last-of-type {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #a4a4a4;
+        }
+    }
+
+    margin: 1rem 0;
+}
+
+.ask--response {
+    font-size: 1.4rem;
+    color: #3d3d3d;
+    font-weight: 400;
+    min-height: 5rem;
+}
+
+.ask--like {
+    border-top: 1px solid #f8f9fb;
+    width: 100%;
+    color: #bdbdbd;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.4rem 0;
+
+    & > svg {
+        margin-right: 0.4rem;
+    }
+
+    & > span {
+        font-size: 1.4rem;
+        color: #555;
     }
 }

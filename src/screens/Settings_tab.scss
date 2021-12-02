@@ -1,0 +1,31 @@
+.tab {
+    width: 100%;
+    height: max-content;
+}
+
+.tabHeader {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 0;
+
+    & > div:not(:last-of-type) {
+        padding: 0.4rem 2rem;
+        min-height: auto;
+        font-weight: 400;
+        width: max-content;
+        border-bottom: 1px solid transparent;
+        transition: border-bottom-color 0.1s ease-in-out;
+        margin-bottom: -1px;
+        z-index: 2;
+    }
+    & > div:not(:last-of-type):not(#{".header--disabled"}) {
+        color: var(--color-primary);
+        border-bottom-color: var(--color-primary);
+    }
+    & > div:last-of-type {
+        display: none;
+    }
+}

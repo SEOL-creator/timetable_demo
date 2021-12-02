@@ -20,6 +20,7 @@
     -webkit-appearance: none;
     box-sizing: border-box;
     transition: border-color var(--transition-duration-base);
+    font-family: inherit;
 }
 
 .input:hover {
@@ -38,6 +39,15 @@
 
 .input--error {
     border-color: rgb(240, 100, 100);
+}
+
+.input--disabled {
+    background-color: var(--color-input-background-disabled);
+    border-color: var(--color-input-background-disabled);
+    color: var(--color-text-secondary);
+}
+.input--disabled:hover {
+    border-color: var(--color-input-background-disabled);
 }
 
 .span {

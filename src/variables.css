@@ -21,6 +21,7 @@
     --color-input-placeholder: var(--color-hinted-grey-9);
     --color-input-background-focused: var(--color-white);
     --color-input-background-unfocused: var(--color-hinted-grey-13);
+    --color-input-background-disabled: var(--color-hinted-grey-14);
     --color-input-border-base: var(--color-input-background-unfocused);
     --color-input-border-hover: var(--color-hinted-grey-10);
     --color-input-border-highlight: var(--color-primary);

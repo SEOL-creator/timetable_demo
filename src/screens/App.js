@@ -14,6 +14,7 @@ import RegisterComplete from "./RegisterComplete";
 import Timetable from "./Timetable";
 import axiosInstance from "../utils/axiosInstance";
 import TodayTimetableContext from "../contexts/todayTimetableContext";
+import Settings from "./Settings";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -95,6 +96,10 @@ export default function App() {
                         localStorage.setItem("user", JSON.stringify(obj.user));
                         localStorage.setItem("token", JSON.stringify(obj.token));
                     },
+                    setUserInfo: (obj) => {
+                        setUser(obj);
+                        localStorage.setItem("user", JSON.stringify(obj));
+                    },
                 }}
             >
                 <ClassroomContext.Provider value={{ classroom: classroom, setClassroom: setClassroomStorage }}>
@@ -111,6 +116,8 @@ export default function App() {
                                 <Route path="/register/complete" element={<RegisterComplete />} />
                                 <Route path="/timetable" element={<Timetable />} />
                                 <Route path="/asked" element={<Asked />} />
+                                <Route path="/settings" element={<Settings />} />
+                                <Route path="*" element={<Home />} />
                             </Routes>
                         </div>
                     </BrowserRouter>

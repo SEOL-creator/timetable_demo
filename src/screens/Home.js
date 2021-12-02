@@ -1,7 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 
 import DDay from "../components/DDay";
-import Meal from "../components/Meal";
+import SmallMeal from "../components/SmallMeal";
 import Timetable from "../components/SmallTimetable";
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
         <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "flex-start", flexWrap: "wrap", padding: "0 1.5rem", boxSizing: "border-box" }}>
             <Timetable />
             <div style={{ width: "46.2rem", display: "flex", justifyContent: "center", alignItems: "flex-start", flexWrap: "wrap" }}>
-                <Meal />
+                <SmallMeal />
                 <DDay direction={isMaxWidth390 ? "row" : "column"} />
             </div>
         </div>

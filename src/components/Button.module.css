@@ -4,6 +4,7 @@
     font-size: 1.4rem;
     color: var(--color-white);
     transition: background-color var(--transition-duration-base);
+    cursor: pointer;
 }
 
 .button-primary {
