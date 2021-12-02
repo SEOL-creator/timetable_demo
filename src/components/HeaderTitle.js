@@ -96,7 +96,7 @@ export default function HeaderTitle() {
         if (state.prev === null && state.current === null && state.next) {
             if (parseInt(state.next.start.split(":")[0]) * 60 + parseInt(state.next.start.split(":")[1]) - (today.getHours() * 60 + today.getMinutes()) <= 10) {
                 setTitle(getRandomString("beforeGoingToSchool"));
-                setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${state.next.start}`));
+                setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${state.next.start}+9`));
                 setSubtitle(classTimer);
             } else {
                 setTitle(getRandomString("morning"));
@@ -111,17 +111,17 @@ export default function HeaderTitle() {
                     parseInt(state.next.start.split(":")[0]) * 60 + parseInt(state.next.start.split(":")[0]) - (today.getHours() * 60 + today.getMinutes()) <= 30 * 60
                 ) {
                     setTitle(`${state.current.class.name} 수업중`);
-                    setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${state.current.end}`));
+                    setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${state.current.end}+9`));
                     setSubtitle(`점심시간까지 ${classTimer}!`);
                 } else {
                     setTitle(`${state.current.class.name} 수업중`);
-                    setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${state.current.end}`));
+                    setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${state.current.end}+9`));
                     setSubtitle(`${classTimer} 후 쉬는시간`);
                 }
             }
             if (state.current.type === "lunch") {
                 setTitle(getRandomString("duringLaunch"));
-                setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${state.current.end}`));
+                setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${state.current.end}+9`));
                 setSubtitle(`${classTimer} 남음`);
             }
             if (state.current.type === "morning_meeting") {
@@ -130,7 +130,7 @@ export default function HeaderTitle() {
             }
             if (state.current.type === "prepare") {
                 setTitle("수업 시작까지");
-                setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${state.next.start}`));
+                setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${state.next.start}+9`));
                 setSubtitle(classTimer);
             }
             if (state.current.type === "dinner") {
@@ -140,7 +140,7 @@ export default function HeaderTitle() {
         } else if (!state.current) {
             if (state.next.type === "class") {
                 setTitle(`${state.next.class.name} 시작까지`);
-                setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${state.next.start}`));
+                setTimerTargetDate(new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${state.next.start}+9`));
                 setSubtitle(classTimer);
             }
         }
