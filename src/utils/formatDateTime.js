@@ -12,7 +12,7 @@ export default function formatDateTime(date, format) {
 
     if (!format || !date) return "";
 
-    return format.replace(/(YYYY|YY|MM|DD|dd|aaaa|aaa|HH|hh|mm|ss|a\/p|a\/pENG)/gi, function (formatstr) {
+    return format.replace(/(YYYY|YY|MM|mm|DD|dd|aaaa|aaa|HH|hh|mm|ss|a\/p|a\/pENG)/gi, function (formatstr) {
         switch (formatstr) {
             case "YYYY":
                 return date.getFullYear();
@@ -20,6 +20,8 @@ export default function formatDateTime(date, format) {
                 return zf(2, date.getFullYear() % 1000);
             case "MM":
                 return date.getMonth() + 1;
+            case "mm":
+                return zf(2, date.getMonth() + 1);
             case "DD":
                 return date.getDate();
             case "dd":
