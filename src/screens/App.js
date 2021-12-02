@@ -15,6 +15,7 @@ import Timetable from "./Timetable";
 import axiosInstance from "../utils/axiosInstance";
 import TodayTimetableContext from "../contexts/todayTimetableContext";
 import Settings from "./Settings";
+import HighlightedMealContext from "../contexts/highlightedMealContext";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -37,6 +38,8 @@ export default function App() {
     const { dateUpdate } = useDateUpdate();
 
     const [todayTimetable, setTodayTimetable] = useState({});
+
+    const [highlightedMeal, setHighlightedMeal] = useState(getLocalStorage("highlightedMeal", {}));
 
     const [isSidebarDisplay, setIsSidebarDisplay] = useState(false);
     const toggleSidebar = () => setIsSidebarDisplay(!isSidebarDisplay);
@@ -108,18 +111,30 @@ export default function App() {
                             <Header toggleSidebar={toggleSidebar} />
                         </TodayTimetableContext.Provider>
                         <Sidebar display={isSidebarDisplay} />
-                        <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box" }}>
-                            <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/login" element={<LoginRegister defaultTab={0} />} />
-                                <Route path="/register" element={<LoginRegister defaultTab={1} />} />
-                                <Route path="/register/complete" element={<RegisterComplete />} />
-                                <Route path="/timetable" element={<Timetable />} />
-                                <Route path="/asked" element={<Asked />} />
-                                <Route path="/settings" element={<Settings />} />
-                                <Route path="*" element={<Home />} />
-                            </Routes>
-                        </div>
+                        <HighlightedMealContext.Provider
+                            value={{
+                                highlightedMeal: highlightedMeal,
+                                toggleHighlightedMeal: (mealName) => {
+                                    const newHighlightedMeal = { ...highlightedMeal };
+                                    newHighlightedMeal[mealName] = !newHighlightedMeal[mealName];
+                                    setHighlightedMeal(newHighlightedMeal);
+                                    localStorage.setItem("highlightedMeal", JSON.stringify(newHighlightedMeal));
+                                },
+                            }}
+                        >
+                            <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box" }}>
+                                <Routes>
+                                    <Route path="/" element={<Home />} />
+                                    <Route path="/login" element={<LoginRegister defaultTab={0} />} />
+                                    <Route path="/register" element={<LoginRegister defaultTab={1} />} />
+                                    <Route path="/register/complete" element={<RegisterComplete />} />
+                                    <Route path="/timetable" element={<Timetable />} />
+                                    <Route path="/asked" element={<Asked />} />
+                                    <Route path="/settings" element={<Settings />} />
+                                    <Route path="*" element={<Home />} />
+                                </Routes>
+                            </div>
+                        </HighlightedMealContext.Provider>
                     </BrowserRouter>
                 </ClassroomContext.Provider>
             </UserContext.Provider>

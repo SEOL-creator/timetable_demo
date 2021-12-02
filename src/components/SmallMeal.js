@@ -1,10 +1,13 @@
 import { Skeleton } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import formatDateTime from "../utils/formatDateTime";
 import axiosInstance from "../utils/axiosInstance";
 import Box from "./Box";
 import styles from "./SmallMeal.module.css";
+import classNames from "classnames/bind";
+import HighlightedMealContext from "../contexts/highlightedMealContext";
+const cx = classNames.bind(styles);
 
 function getNextMonday(date) {
     if (date.getDay() === 0) {
@@ -27,6 +30,8 @@ export default function SmallMeal() {
     const [targetDay, setTargetDay] = useState(null);
     const [lunch, setLunch] = useState(null);
     const [dinner, setDinner] = useState(null);
+
+    const { highlightedMeal, toggleHighlightedMeal } = useContext(HighlightedMealContext);
 
     useEffect(() => {
         setTargetDay(getTargetDay());
@@ -98,7 +103,13 @@ export default function SmallMeal() {
                                 <h1 className={styles.mealType}>중식</h1>
                                 <div>
                                     {lunch?.meal_item.map((menu) => (
-                                        <div key={menu.name} className={styles.menu}>
+                                        <div
+                                            key={menu.name}
+                                            className={cx("menu", { "menu--highlighted": highlightedMeal[menu.name] === true })}
+                                            onClick={() => {
+                                                toggleHighlightedMeal(menu.name);
+                                            }}
+                                        >
                                             {menu.name}
                                         </div>
                                     ))}
@@ -111,7 +122,13 @@ export default function SmallMeal() {
                                 <h1 className={styles.mealType}>석식</h1>
                                 <div>
                                     {dinner?.meal_item.map((menu) => (
-                                        <div key={menu.name} className={styles.menu}>
+                                        <div
+                                            key={menu.name}
+                                            className={cx("menu", { "menu--highlighted": highlightedMeal[menu.name] === true })}
+                                            onClick={(e) => {
+                                                toggleHighlightedMeal(menu.name);
+                                            }}
+                                        >
                                             {menu.name}
                                         </div>
                                     ))}

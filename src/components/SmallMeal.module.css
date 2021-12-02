@@ -52,4 +52,11 @@
 .menu {
     font-size: 1.4rem;
     line-height: 1.4;
+    width: max-content;
+    cursor: pointer;
+}
+
+.menu--highlighted {
+    color: white;
+    background-color: var(--color-primary);
 }
