@@ -10,8 +10,6 @@ export default function UserProfilePic({ profilepicObject = null, className, ...
 
     const profilepic = profilepicObject ? profilepicObject : user.user.profilepic;
 
-    console.log(profilepic);
-
     return (
         <div className={classNames(styles.profilepicContainer, className)} {...props}>
             {profilepic && profilepic["512px"] ? (

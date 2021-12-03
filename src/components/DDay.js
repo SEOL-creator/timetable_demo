@@ -57,7 +57,6 @@ export default function DDay({ direction = "column" }) {
                     dDayList?.map((dDay) => {
                         return (
                             <div className={styles.schedule} key={dDay.id}>
-                                <div className={styles.separator}></div>
                                 <div className={styles.scheduleInfo}>
                                     <span className={styles.scheduleName}>{dDay.name}</span>
                                     <span className={styles.scheduleDate}>{formatDateTime(new Date(dDay.start_date), "YYYY년 MM월 dd일 aaaa")}</span>

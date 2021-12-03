@@ -115,9 +115,9 @@ export default function HeaderTitle() {
                     setTimerTargetDate(new Date(`${formatDateTime(today, "YYYY-mm-dd")}T${state.current.end}+09:00`));
                     setSubtitle(`점심시간까지 ${classTimer}!`);
                 } else {
-                    setTitle(`${state.current.class.name} 수업중`);
+                    setTitle(`${state.current.class.short_name} 수업중`);
                     setTimerTargetDate(new Date(`${formatDateTime(today, "YYYY-mm-dd")}T${state.current.end}+09:00`));
-                    setSubtitle(`${classTimer} 후 쉬는시간`);
+                    setSubtitle(`${classTimer} 남음`);
                 }
             }
             if (state.current.type === "lunch") {
