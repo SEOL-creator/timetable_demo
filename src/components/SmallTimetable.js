@@ -38,6 +38,7 @@ function drawClasstimesOfDay(classTimeTable, day, isRemote, currentTimeTable, te
                     classObj={classTime._class}
                     isRemote={isRemote}
                     remoteURL={classTime.remoteURL}
+                    classtingURL={classTime.classtingURL}
                     startTime={getClassTime(currentTimeTable, classTime.time).start}
                     endTime={getClassTime(currentTimeTable, classTime.time).end}
                 />
@@ -51,6 +52,7 @@ function drawClasstimesOfDay(classTimeTable, day, isRemote, currentTimeTable, te
                         classObj={classTime._class}
                         isRemote={isRemote}
                         remoteURL={classTime.remoteURL}
+                        classtingURL={classTime.classtingURL}
                         startTime={getClassTime(currentTimeTable, classTime.time).start}
                         endTime={getClassTime(currentTimeTable, classTime.time).end}
                         replaced={true}

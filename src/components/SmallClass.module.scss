@@ -90,14 +90,47 @@
 .information {
     width: 100%;
     height: max-content;
-    padding-left: 7rem;
     box-sizing: border-box;
     font-size: 1.4rem;
     display: none;
     margin-top: 6rem;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.informationLeft {
+    width: 7rem;
+    height: 100%;
+    padding: 0 1.2rem 0.4rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.informationRight {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
+}
+
+.classtingLink {
+    padding: 0.6rem 0.6rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-background-color);
+    position: relative;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    & > img {
+        width: 2.6rem;
+        height: 2.6rem;
+    }
 }
 
 .duration {
