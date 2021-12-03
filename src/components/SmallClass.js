@@ -44,7 +44,7 @@ export default function SmallClass({ classObj, isRemote, remoteURL, classtingURL
             <div className={styles.information}>
                 <div className={styles.informationLeft}>
                     {classtingURL && (
-                        <a className={styles.classtingLink} href={isMobile ? classtingURL.replace("https://classting.com/", "classting://") : classtingURL} target="_blank">
+                        <a className={styles.classtingLink} href={isMobile ? classtingURL.replace("https://www.classting.com/", "classting://") : classtingURL} target="_blank">
                             <img src={classtingLogoWhite} alt="클래스팅 로고" />
                         </a>
                     )}
