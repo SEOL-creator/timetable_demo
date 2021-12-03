@@ -53,7 +53,7 @@ export default function Login() {
             .catch((error) => {
                 setLoading(false);
                 console.log(error.response);
-                if (error.response.status === 400) {
+                if (error.response?.status === 400) {
                     if (error.response.data.non_field_errors) {
                         setError("로그인할 수 없습니다. 이메일 혹은 비밀번호가 잘못되었을 수 있습니다.");
                     }

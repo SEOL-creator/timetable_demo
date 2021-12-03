@@ -16,6 +16,7 @@ import axiosInstance from "../utils/axiosInstance";
 import TodayTimetableContext from "../contexts/todayTimetableContext";
 import Settings from "./Settings";
 import HighlightedMealContext from "../contexts/highlightedMealContext";
+import Error404 from "./Error404";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -131,7 +132,7 @@ export default function App() {
                                     <Route path="/timetable" element={<Timetable />} />
                                     <Route path="/asked" element={<Asked />} />
                                     <Route path="/settings" element={<Settings />} />
-                                    <Route path="*" element={<Home />} />
+                                    <Route path="*" element={<Error404 />} />
                                 </Routes>
                             </div>
                         </HighlightedMealContext.Provider>
