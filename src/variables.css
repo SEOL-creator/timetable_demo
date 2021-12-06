@@ -6,14 +6,14 @@
     --color-background-float: var(--color-white);
     --color-background-button-primary: var(--color-primary);
     --color-background-button-primary-hover: var(--color-primary-dark);
-    --color-background-button-secondary: rgba(0, 0, 0, 0.05);
-    --color-background-button-secondary-hover: rgba(0, 0, 0, 0.1);
+    --color-background-button-secondary: #f2f2f2;
+    --color-background-button-secondary-hover: #e5e5e5;
     --color-shadow-separator: rgba(0, 0, 0, 0.1);
     --color-text-base: #222222;
     --color-text-secondary: #3f3f3f;
     --color-fill-button-icon: var(--color-text-base);
-    --color-background-button-white-transparent: rgba(255, 255, 255, 0.2);
-    --color-background-button-white-transparent-hover: rgba(255, 255, 255, 0.3);
+    --color-background-button-white-transparent: #e3e3e5;
+    --color-background-button-white-transparent-hover: #b0b0b2;
     --color-background-button-black-transparent: rgba(0, 0, 0, 0.05);
     --color-background-button-black-transparent-hover: rgba(0, 0, 0, 0.1);
     --color-background-button-primary: var(--color-primary);

@@ -16,6 +16,27 @@ export default function Login() {
     const navigate = useNavigate();
 
     function handleSubmit(e) {
+        async function login() {
+            const response = await axiosInstance.post("/apis/token/", { email: email, password: password });
+            if (response.status === 200) {
+                const data = response.data;
+                setUser({ isLogin: true, user: data.user, token: data.token });
+            } else {
+                setLoading(false);
+                console.log(response);
+                if (response?.status === 400) {
+                    if (response.data.non_field_errors) {
+                        setError("로그인할 수 없습니다. 이메일 혹은 비밀번호가 잘못되었을 수 있습니다.");
+                    }
+                } else if (response.data.detail) {
+                    setError(response.data.detail);
+                } else {
+                    setError("알 수 없는 오류가 발생했습니다.");
+                    console.log(response.data);
+                }
+            }
+        }
+
         e.preventDefault();
         setLoading(true);
         setError("");
@@ -41,29 +62,7 @@ export default function Login() {
             return;
         }
 
-        axiosInstance
-            .post("/apis/token/", { email: email, password: password })
-            .then((response) => {
-                if (response.status === 200) {
-                    const data = response.data;
-                    setUser({ isLogin: true, user: { email: data.email, nickname: data.nickname }, token: data.token });
-                    navigate("/");
-                }
-            })
-            .catch((error) => {
-                setLoading(false);
-                console.log(error.response);
-                if (error.response?.status === 400) {
-                    if (error.response.data.non_field_errors) {
-                        setError("로그인할 수 없습니다. 이메일 혹은 비밀번호가 잘못되었을 수 있습니다.");
-                    }
-                } else if (error.response.data.detail) {
-                    setError(error.response.data.detail);
-                } else {
-                    setError("알 수 없는 오류가 발생했습니다.");
-                    console.log(error.response.data);
-                }
-            });
+        login();
     }
 
     return (
@@ -94,7 +93,6 @@ export default function Login() {
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                {/* <input className={cx("button", "button-primary", { "button--disabled": loading })} type="submit" value="로그인" disabled={loading} style={{ border: "none" }} /> */}
                 <Button disabled={loading} onClick={handleSubmit}>
                     로그인
                 </Button>

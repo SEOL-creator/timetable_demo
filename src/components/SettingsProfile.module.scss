@@ -65,3 +65,35 @@
         }
     }
 }
+
+.profilePicConfirm {
+    width: 30rem;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    & img {
+        object-fit: cover;
+        width: 30rem;
+        height: 30rem;
+        position: absolute;
+    }
+    & > img {
+        filter: grayscale(80%);
+    }
+
+    & > div {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        z-index: 2;
+        position: absolute;
+        // border: 2px solid white;
+        box-shadow: var(--box-shadow-separator);
+    }
+}

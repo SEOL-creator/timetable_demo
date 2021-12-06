@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import useDateUpdate from "../hooks/useDateUpdate";
 import ClassroomContext from "../contexts/classroomContext";
 
+import Layout from "./Layout";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Home from "./Home";
@@ -17,14 +18,18 @@ import TodayTimetableContext from "../contexts/todayTimetableContext";
 import Settings from "./Settings";
 import HighlightedMealContext from "../contexts/highlightedMealContext";
 import Error404 from "./Error404";
+import Todo from "./Todo";
+import ModalLoginRegister from "./ModalLoginRegister";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
     else localStorage.setItem(key, JSON.stringify(defaultValue));
     return defaultValue;
 }
-
 export default function App() {
+    const location = useLocation();
+    const state = location.state;
+
     const [isLogin, setIsLogin] = useState(getLocalStorage("isLogin", false));
     const [user, setUser] = useState(getLocalStorage("user", { email: "", nickname: "" }));
     const [token, setToken] = useState(getLocalStorage("token", ""));
@@ -41,9 +46,6 @@ export default function App() {
     const [todayTimetable, setTodayTimetable] = useState({});
 
     const [highlightedMeal, setHighlightedMeal] = useState(getLocalStorage("highlightedMeal", {}));
-
-    const [isSidebarDisplay, setIsSidebarDisplay] = useState(false);
-    const toggleSidebar = () => setIsSidebarDisplay(!isSidebarDisplay);
 
     //
     useEffect(() => {
@@ -86,59 +88,60 @@ export default function App() {
     }, [dateUpdate, classroom, isLogin]);
 
     return (
-        <>
-            <UserContext.Provider
-                value={{
-                    isLogin: isLogin,
-                    user: user,
-                    token: token,
-                    setUser: (obj) => {
-                        setIsLogin(obj.isLogin);
-                        setUser(obj.user);
-                        setToken(obj.token);
-                        localStorage.setItem("isLogin", JSON.stringify(obj.isLogin));
-                        localStorage.setItem("user", JSON.stringify(obj.user));
-                        localStorage.setItem("token", JSON.stringify(obj.token));
-                    },
-                    setUserInfo: (obj) => {
-                        setUser(obj);
-                        localStorage.setItem("user", JSON.stringify(obj));
-                    },
-                }}
-            >
-                <ClassroomContext.Provider value={{ classroom: classroom, setClassroom: setClassroomStorage }}>
-                    <BrowserRouter>
-                        <TodayTimetableContext.Provider value={todayTimetable}>
-                            <Header toggleSidebar={toggleSidebar} />
-                        </TodayTimetableContext.Provider>
-                        <Sidebar display={isSidebarDisplay} />
-                        <HighlightedMealContext.Provider
-                            value={{
-                                highlightedMeal: highlightedMeal,
-                                toggleHighlightedMeal: (mealName) => {
-                                    const newHighlightedMeal = { ...highlightedMeal };
-                                    newHighlightedMeal[mealName] = !newHighlightedMeal[mealName];
-                                    setHighlightedMeal(newHighlightedMeal);
-                                    localStorage.setItem("highlightedMeal", JSON.stringify(newHighlightedMeal));
-                                },
-                            }}
-                        >
-                            <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box" }}>
-                                <Routes>
-                                    <Route path="/" element={<Home />} />
-                                    <Route path="/login" element={<LoginRegister defaultTab={0} />} />
-                                    <Route path="/register" element={<LoginRegister defaultTab={1} />} />
-                                    <Route path="/register/complete" element={<RegisterComplete />} />
-                                    <Route path="/timetable" element={<Timetable />} />
-                                    <Route path="/asked" element={<Asked />} />
-                                    <Route path="/settings" element={<Settings />} />
-                                    <Route path="*" element={<Error404 />} />
-                                </Routes>
-                            </div>
-                        </HighlightedMealContext.Provider>
-                    </BrowserRouter>
-                </ClassroomContext.Provider>
-            </UserContext.Provider>
-        </>
+        <UserContext.Provider
+            value={{
+                isLogin: isLogin,
+                user: user,
+                token: token,
+                setUser: (obj) => {
+                    setIsLogin(obj.isLogin);
+                    setUser(obj.user);
+                    setToken(obj.token);
+                    localStorage.setItem("isLogin", JSON.stringify(obj.isLogin));
+                    localStorage.setItem("user", JSON.stringify(obj.user));
+                    localStorage.setItem("token", JSON.stringify(obj.token));
+                },
+                setUserInfo: (obj) => {
+                    setUser(obj);
+                    localStorage.setItem("user", JSON.stringify(obj));
+                },
+            }}
+        >
+            <ClassroomContext.Provider value={{ classroom: classroom, setClassroom: setClassroomStorage }}>
+                <TodayTimetableContext.Provider value={todayTimetable}>
+                    <HighlightedMealContext.Provider
+                        value={{
+                            highlightedMeal: highlightedMeal,
+                            toggleHighlightedMeal: (mealName) => {
+                                const newHighlightedMeal = { ...highlightedMeal };
+                                newHighlightedMeal[mealName] = !newHighlightedMeal[mealName];
+                                setHighlightedMeal(newHighlightedMeal);
+                                localStorage.setItem("highlightedMeal", JSON.stringify(newHighlightedMeal));
+                            },
+                        }}
+                    >
+                        <Routes location={state?.backgroundLocation || location}>
+                            <Route path="/" element={<Layout />}>
+                                <Route index element={<Home />} />
+                                <Route path="/login" element={<LoginRegister defaultTab={0} />} />
+                                <Route path="/register" element={<LoginRegister defaultTab={1} />} />
+                                <Route path="/register/complete" element={<RegisterComplete />} />
+                                <Route path="/timetable" element={<Timetable />} />
+                                <Route path="/asked" element={<Asked />} />
+                                <Route path="/todo" element={<Todo />} />
+                                <Route path="/settings" element={<Settings />} />
+                                <Route path="*" element={<Error404 />} />
+                            </Route>
+                        </Routes>
+                        {state?.backgroundLocation && (
+                            <Routes>
+                                <Route path="/login" element={<ModalLoginRegister defaultTab={0} />} />
+                                <Route path="/register" element={<ModalLoginRegister defaultTab={1} />} />
+                            </Routes>
+                        )}
+                    </HighlightedMealContext.Provider>
+                </TodayTimetableContext.Provider>
+            </ClassroomContext.Provider>
+        </UserContext.Provider>
     );
 }

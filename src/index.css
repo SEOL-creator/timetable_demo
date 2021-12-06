@@ -40,9 +40,20 @@ code {
     height: 100%;
     display: flex;
 }
+#modal {
+    width: auto;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+}
 
 @supports (-webkit-touch-callout: none) {
     #root {
+        min-height: -webkit-fill-available;
+    }
+    #modal {
         min-height: -webkit-fill-available;
     }
 }

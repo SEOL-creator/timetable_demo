@@ -9,7 +9,7 @@
     align-items: center;
     padding: 0 1rem;
     border-radius: var(--border-radius-extra-large);
-    background-color: var(--color-background-button-secondary);
+    background-color: var(--color-background-button-white-transparent);
     box-sizing: border-box;
     transition: var(--transition-background-color);
     cursor: pointer;

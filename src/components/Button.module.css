@@ -13,6 +13,13 @@
 .button-primary:hover {
     background-color: var(--color-background-button-primary-hover);
 }
+.button-secondary {
+    background-color: var(--color-background-button-secondary);
+    color: black;
+}
+.button-secondary:hover {
+    background-color: var(--color-background-button-secondary-hover);
+}
 
 .button--disabled {
     cursor: progress;

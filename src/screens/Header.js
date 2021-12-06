@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import UserContext from "../contexts/userContext";
 import Hamburger from "../components/Hamburger";
 import styles from "./Header.module.css";
@@ -10,10 +10,14 @@ import UserMenu from "../components/UserMenu";
 import { ClickAwayListener } from "@mui/material";
 
 export default function Header({ toggleSidebar }) {
+    const location = useLocation();
+
     const { isLogin, user, setUser } = useContext(UserContext);
     const [displayMenu, setDisplayMenu] = useState(false);
 
     const isMaxWidth600 = useMediaQuery({ maxWidth: "600px" });
+
+    const linkState = location.pathname === "/login" || location.pathname === "/register" ? undefined : { backgroundLocation: location };
 
     return (
         <header className={styles.header}>
@@ -49,11 +53,11 @@ export default function Header({ toggleSidebar }) {
                 ) : (
                     <>
                         {!isMaxWidth600 && (
-                            <Link to="/login" className={styles.button}>
+                            <Link to="/login" state={linkState} className={styles.button}>
                                 로그인
                             </Link>
                         )}
-                        <Link to="/register" className={styles.primaryButton}>
+                        <Link to="/register" state={linkState} className={styles.primaryButton}>
                             회원가입
                         </Link>
                     </>
