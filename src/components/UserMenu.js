@@ -21,7 +21,7 @@ export default function UserMenu({ display, handleClose, ref }) {
             >
                 로그아웃
             </button>
-            <Link className={cx("menu__item")} to="">
+            <Link className={cx("menu__item")} to="/settings">
                 설정
             </Link>
         </div>
