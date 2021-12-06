@@ -22,6 +22,11 @@ function getTargetDay() {
     const today = new Date();
     if (today.getDay() === 6 || today.getDay() === 0) {
         return getNextMonday(today);
+    } else if (today.getHours() >= 18) {
+        if (today.getDay() === 5) {
+            return getNextMonday(today);
+        }
+        return new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000);
     }
     return today;
 }
