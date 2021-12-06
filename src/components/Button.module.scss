@@ -22,5 +22,10 @@
 }
 
 .button--disabled {
-    cursor: progress;
+    cursor: not-allowed;
+    background-color: var(--color-background-button-primary-disabled);
+
+    &:hover {
+        background-color: var(--color-background-button-primary-disabled);
+    }
 }

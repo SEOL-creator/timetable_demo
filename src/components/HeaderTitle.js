@@ -140,7 +140,7 @@ export default function HeaderTitle() {
             }
         } else if (!state.current) {
             if (state.next.type === "class") {
-                setTitle(`${state.next.class.name} 시작까지`);
+                setTitle(`${state.next.class.short_name} 시작까지`);
                 setTimerTargetDate(new Date(`${formatDateTime(today, "YYYY-MMM-dd")}T${state.next.start}+09:00`));
                 setSubtitle(classTimer);
             }

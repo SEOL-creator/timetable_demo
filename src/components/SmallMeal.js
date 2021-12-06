@@ -7,6 +7,7 @@ import Box from "./Box";
 import styles from "./SmallMeal.module.css";
 import classNames from "classnames/bind";
 import HighlightedMealContext from "../contexts/highlightedMealContext";
+import useDateUpdate from "../hooks/useDateUpdate";
 const cx = classNames.bind(styles);
 
 function getNextMonday(date) {
@@ -33,9 +34,11 @@ export default function SmallMeal() {
 
     const { highlightedMeal, toggleHighlightedMeal } = useContext(HighlightedMealContext);
 
+    const dateUpdate = useDateUpdate();
+
     useEffect(() => {
         setTargetDay(getTargetDay());
-    }, []);
+    }, [dateUpdate]);
 
     useEffect(() => {
         async function fetchMeal() {

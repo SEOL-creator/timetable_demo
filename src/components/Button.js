@@ -1,4 +1,4 @@
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 import classNames from "classnames/bind";
 import { forwardRef } from "react";
 const cx = classNames.bind(styles);

@@ -30,7 +30,7 @@ export default function Layout() {
 
             <Sidebar display={isSidebarDisplay} />
 
-            <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box" }}>
+            <div style={{ width: "calc(100% - var(--size-sidebar-width))", minHeight: "100%", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box" }}>
                 <Outlet />
             </div>
         </>

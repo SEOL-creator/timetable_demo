@@ -3,19 +3,12 @@ import UserContext from "../contexts/userContext";
 import axiosInstance from "../utils/axiosInstance";
 import Input from "./Input";
 import Modal from "./Modal";
+import Button from "./Button";
 import styles from "./SettingsProfile.module.scss";
 import UserProfilePic from "./UserProfilePic";
 import classNames from "classnames/bind";
 import SettingBlock from "./SettingBlock";
 const cx = classNames.bind(styles);
-
-function uploadProfilePic(image) {
-    return (
-        <div>
-            <img src={image} alt="profile" />
-        </div>
-    );
-}
 
 export default function SettingsProfile() {
     const { user, setUserInfo } = useContext(UserContext);
@@ -23,6 +16,7 @@ export default function SettingsProfile() {
     const profilePicInputRef = useRef(null);
     const [profilePic, setProfilePic] = useState(null);
     const [profilePicPreview, setProfilePicPreview] = useState(null);
+    const [nickname, setNickname] = useState(user.nickname);
 
     useEffect(() => {
         if (profilePic) {
@@ -93,7 +87,37 @@ export default function SettingsProfile() {
                     </div>
                     <div>
                         <span>닉네임</span>
-                        <Input hideLabel className={styles.input} inputWidth="100%" value={user.nickname} />
+                        <Input
+                            hideLabel
+                            className={styles.input}
+                            inputWidth="100%"
+                            value={nickname}
+                            onChange={(e) => {
+                                setNickname(e.target.value);
+                            }}
+                        />
+                    </div>
+                    <div>
+                        <Button
+                            disabled={nickname === user.nickname}
+                            className={cx({ "nicknameButton--disabled": nickname === user.nickname })}
+                            onClick={() => {
+                                axiosInstance
+                                    .patch(`/apis/users/${user.id}/`, { nickname })
+                                    .then((response) => {
+                                        if (response.status === 200) {
+                                            setUserInfo(response.data);
+                                        } else {
+                                            console.log(response);
+                                        }
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                    });
+                            }}
+                        >
+                            적용
+                        </Button>
                     </div>
                 </div>
             </SettingBlock>

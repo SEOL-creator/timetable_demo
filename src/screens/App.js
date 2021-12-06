@@ -31,7 +31,7 @@ export default function App() {
     const state = location.state;
 
     const [isLogin, setIsLogin] = useState(getLocalStorage("isLogin", false));
-    const [user, setUser] = useState(getLocalStorage("user", { email: "", nickname: "" }));
+    const [user, setUser] = useState(getLocalStorage("user", { id: -1, email: "", nickname: "", profilePic: {}, is_staff: false }));
     const [token, setToken] = useState(getLocalStorage("token", ""));
 
     const [classroom, setClassroom] = useState(getLocalStorage("classroom", { grade: 2, room: 1 }));

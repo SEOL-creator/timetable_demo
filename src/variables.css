@@ -18,6 +18,7 @@
     --color-background-button-black-transparent-hover: rgba(0, 0, 0, 0.1);
     --color-background-button-primary: var(--color-primary);
     --color-background-button-primary-hover: var(--color-primary-dark);
+    --color-background-button-primary-disabled: var(--color-primary-light);
     --color-input-placeholder: var(--color-hinted-grey-9);
     --color-input-background-focused: var(--color-white);
     --color-input-background-unfocused: var(--color-hinted-grey-13);

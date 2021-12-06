@@ -64,6 +64,11 @@
             width: 6rem;
         }
     }
+
+    & > div:last-of-type {
+        width: 100%;
+        justify-content: flex-end;
+    }
 }
 
 .profilePicConfirm {
