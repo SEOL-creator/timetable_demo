@@ -34,7 +34,7 @@ export default function SmallMeal() {
 
     const { highlightedMeal, toggleHighlightedMeal } = useContext(HighlightedMealContext);
 
-    const dateUpdate = useDateUpdate();
+    const { dateUpdate } = useDateUpdate();
 
     useEffect(() => {
         setTargetDay(getTargetDay());
