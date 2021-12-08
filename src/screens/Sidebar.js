@@ -17,7 +17,7 @@ export default function Sidebar({ display, mobile, clickAway = () => {} }) {
         >
             <div
                 onClick={(e) => {
-                    e.preventDefault();
+                    e.stopPropagation();
                 }}
             >
                 <SidebarCategory title="">

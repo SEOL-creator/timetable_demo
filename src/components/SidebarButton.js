@@ -18,7 +18,7 @@ export default function SidebarButton({ children, onClick, to, href, ...props })
         );
     } else if (href) {
         return (
-            <a {...props} className={styles.button} href={href}>
+            <a {...props} className={styles.button} href={href} onClick={onClick}>
                 {children}
             </a>
         );

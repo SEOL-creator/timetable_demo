@@ -22,7 +22,7 @@ export default function Layout() {
                     overflowY: "scroll",
                     overflowX: "hidden",
                     boxSizing: "border-box",
-                    paddingBottom: "env(safe-area-inset-bottom)",
+                    paddingBottom: "env(safe-area-inset-bottom, 2rem)",
                 }}
             >
                 <Outlet />

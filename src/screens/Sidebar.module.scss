@@ -3,7 +3,7 @@
     height: 100%;
     background-color: var(--color-background-alt);
     box-sizing: border-box;
-    padding: 3rem 2rem max(env(safe-area-inset-bottom, 2rem), 4rem);
+    padding: 3rem 2rem max(env(safe-area-inset-bottom, 2rem), 4rem) calc(env(safe-area-inset-left, 2rem) + 2rem);
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
@@ -11,7 +11,6 @@
     align-items: center;
     overflow-y: scroll;
     margin-left: calc(-1 * env(safe-area-inset-left));
-    padding-left: env(safe-area-inset-left);
 }
 
 @keyframes slidein {
