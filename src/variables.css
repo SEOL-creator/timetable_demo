@@ -112,3 +112,9 @@
     --border-radius-extra-large: 1rem;
     --border-radius-extra-extra-large: 1.6rem;
 }
+
+@media screen and (max-width: 675px) {
+    :root {
+        --size-sidebar-width: 0px;
+    }
+}

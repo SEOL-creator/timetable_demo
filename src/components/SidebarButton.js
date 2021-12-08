@@ -11,6 +11,7 @@ export default function SidebarButton({ children, onClick, to, href, ...props })
                     return cx("button", { active: state.isActive });
                 }}
                 to={to}
+                onClick={onClick}
             >
                 {children}
             </NavLink>
