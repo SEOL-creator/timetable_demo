@@ -22,6 +22,7 @@
 .heading > a {
     font-size: 2rem;
     font-weight: 600;
+    width: fit-content;
 }
 
 .mealContent {
@@ -52,8 +53,9 @@
 .menu {
     font-size: 1.4rem;
     line-height: 1.4;
-    width: max-content;
+    width: fit-content;
     cursor: pointer;
+    word-break: break-all;
 }
 
 .menu--highlighted {

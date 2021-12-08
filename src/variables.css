@@ -104,6 +104,8 @@
     --size-header-height: 5rem;
     --size-sidebar-width: 24rem;
 
+    -size-box-padding: 1.4rem 2rem 1rem;
+
     --border-radius-small: 0.2rem;
     --border-radius-medium: 0.4rem;
     --border-radius-large: 0.6rem;

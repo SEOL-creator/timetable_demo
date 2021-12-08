@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 const cx = classNames.bind(styles);
 
 export default function UserProfileButton({ onClick, nickname }) {
-    const isMaxWidth400 = useMediaQuery({ query: "(max-width: 400px)" });
+    const isMaxWidth400 = useMediaQuery({ query: "(max-width: 500px)" });
 
     return (
         <button onClick={onClick} className={cx("button", "userProfileButton", { ["profilePicOnly"]: isMaxWidth400 })}>
