@@ -1,5 +1,4 @@
 .button {
-    width: 10rem;
     height: 3.6rem;
     border-radius: 2rem;
     background-color: var(--color-background-button-secondary);
@@ -23,29 +22,36 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 1.2rem;
+    padding: 0 0.8rem;
+    box-sizing: border-box;
     width: auto;
+    max-width: 100%;
 }
 
 .profilePicOnly {
-    padding: 0.6rem;
+    padding: 0;
     height: auto;
+    border: 1px solid #ccc;
 
     & > .userProfilePic {
-        width: 2.8rem;
-        height: 2.8rem;
+        width: 3rem;
+        height: 3rem;
     }
 }
 
 .userProfilePic {
-    width: 2rem;
-    height: 2rem;
+    width: 2.4rem;
+    min-width: 2.4rem;
+    height: 2.4rem;
+    flex-shrink: none;
 }
 
 .userNickname {
-    margin: 0 0.6rem;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: min-content;
+    margin: 0 0.8rem;
+    font-size: 1.4rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

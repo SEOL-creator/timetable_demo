@@ -32,7 +32,7 @@ export default function Header({ toggleSidebar }) {
                             setDisplayMenu(false);
                         }}
                     >
-                        <div>
+                        <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
                             <UserProfileButton
                                 nickname={user.nickname}
                                 onClick={() => {

@@ -19,6 +19,16 @@
     height: 100%;
 }
 
+@media screen and (max-width: 500px) {
+    .header > div {
+        width: 15%;
+    }
+}
+
+.header > div:nth-of-type(2) {
+    width: auto;
+}
+
 .hamburgerContainer {
     display: flex;
     justify-content: flex-start;
