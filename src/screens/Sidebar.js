@@ -18,6 +18,11 @@ export default function Sidebar({ display }) {
                     <SidebarButton to="/asked">Asked.kr</SidebarButton>
                     <SidebarButton to="/todo">To Do</SidebarButton>
                 </SidebarCategory>
+                <SidebarCategory title="유용한 것들">
+                    <SidebarButton target="_blank" rel="noopener noreferer nofollow" href="https://forms.gle/H6GQ2g5hQXxGUg699">
+                        시험기간 급식 번호 기록
+                    </SidebarButton>
+                </SidebarCategory>
             </div>
         </aside>
     );
