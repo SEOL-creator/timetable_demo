@@ -1,5 +1,5 @@
 .sidebar {
-    width: var(--size-sidebar-width);
+    width: calc(var(--size-sidebar-width) + env(safe-area-inset-left));
     height: 100%;
     background-color: var(--color-background-alt);
     box-sizing: border-box;
@@ -10,6 +10,8 @@
     justify-content: space-between;
     align-items: center;
     overflow-y: scroll;
+    margin-left: calc(-1 * env(safe-area-inset-left));
+    padding-left: env(safe-area-inset-left);
 }
 
 @keyframes slidein {

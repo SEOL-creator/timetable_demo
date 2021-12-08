@@ -15,7 +15,16 @@ export default function Layout() {
         <>
             <Header toggleSidebar={toggleSidebar} />
             <Sidebar display={isSidebarDisplay} mobile={isMaxWidth675} clickAway={toggleSidebar} />
-            <div style={{ width: "calc(100% - var(--size-sidebar-width))", height: "100%", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box" }}>
+            <div
+                style={{
+                    width: "calc(100% - var(--size-sidebar-width))",
+                    height: "100%",
+                    overflowY: "scroll",
+                    overflowX: "hidden",
+                    boxSizing: "border-box",
+                    paddingBottom: "env(safe-area-inset-bottom)",
+                }}
+            >
                 <Outlet />
             </div>
         </>
