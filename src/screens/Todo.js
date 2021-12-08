@@ -90,6 +90,15 @@ export default function Todo() {
                         <FontAwesomeIcon icon={faEdit} width="100%" height="100%" color="inherit" fixedWidth />
                     </button>
                 </div>
+                <div className={styles.separator}></div>
+                <div
+                    style={{
+                        fontSize: "1.4rem",
+                        color: "var(--color-text-secondary)",
+                    }}
+                >
+                    버그, 아이디어 제안, 개선사항 등을 남겨주세요.
+                </div>
                 <div className={styles.todoContainer}>
                     {todoItems.map((todo) => {
                         return (
@@ -131,6 +140,19 @@ export default function Todo() {
                                             >
                                                 수정
                                             </button>
+                                            <button
+                                                style={{ cursor: "pointer" }}
+                                                onClick={() => {
+                                                    setDeleteToDoId(todo.id);
+                                                    setIsDeleteModalOpen(true);
+                                                }}
+                                            >
+                                                삭제
+                                            </button>
+                                        </div>
+                                    )}
+                                    {todo.author.id !== user.id && user.is_staff && (
+                                        <div className={styles.todoControlAdmin}>
                                             <button
                                                 style={{ cursor: "pointer" }}
                                                 onClick={() => {
