@@ -23,6 +23,9 @@ export default function Layout() {
                     overflowX: "hidden",
                     boxSizing: "border-box",
                     paddingBottom: "env(safe-area-inset-bottom, 2rem)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
                 }}
             >
                 <Outlet />

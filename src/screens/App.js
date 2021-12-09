@@ -20,6 +20,8 @@ import HighlightedMealContext from "../contexts/highlightedMealContext";
 import Error404 from "./Error404";
 import Todo from "./Todo";
 import ModalLoginRegister from "./ModalLoginRegister";
+import Meal from "./Meal";
+import Schedule from "./Schedule";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -127,6 +129,8 @@ export default function App() {
                                 <Route path="/register" element={<LoginRegister defaultTab={1} />} />
                                 <Route path="/register/complete" element={<RegisterComplete />} />
                                 <Route path="/timetable" element={<Timetable />} />
+                                <Route path="/meal" element={<Meal />} />
+                                <Route path="/schedule" element={<Schedule />} />
                                 <Route path="/asked" element={<Asked />} />
                                 <Route path="/todo" element={<Todo />} />
                                 <Route path="/settings" element={<Settings />} />

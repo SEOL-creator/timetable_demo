@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap");
+
+$calendar-line: 1px solid var(--color-primary-lighter);
+
+.calendar {
+    font-family: "Jura", sans-serif;
+    font-weight: 300;
+
+    width: 100%;
+    max-width: 640px;
+    max-width: 980px;
+
+    padding: 0 2rem;
+    padding-bottom: 3rem;
+    box-sizing: border-box;
+
+    aspect-ratio: 5 / 4;
+
+    .title {
+        font-size: 2.4rem;
+        font-weight: 400;
+
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 0;
+
+        & > span:first-of-type {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        & > span:last-of-type {
+            font-weight: 600;
+            letter-spacing: 0.3rem;
+        }
+    }
+
+    .calendarBody {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: auto repeat(5, 1fr);
+
+        .dayName {
+            font-size: 1.6rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding-bottom: 1.2rem;
+            margin-bottom: 0.6rem;
+            border-bottom: $calendar-line;
+        }
+
+        .day {
+            border: $calendar-line;
+            border-right: none;
+
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+
+            .dayNumber {
+                font-size: 1.6rem;
+                font-weight: 400;
+                margin: 0.6rem 0;
+            }
+
+            &:nth-of-type(7n + 1) {
+                border-left: none;
+            }
+            &:nth-of-type(n + 15):nth-of-type(-n + 42) {
+                border-top: none;
+            }
+        }
+    }
+}

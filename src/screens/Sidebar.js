@@ -2,9 +2,13 @@ import styles from "./Sidebar.module.scss";
 import SidebarButton from "../components/SidebarButton";
 import SidebarCategory from "../components/SidebarCategory";
 import classNames from "classnames/bind";
+import { useContext } from "react";
+import UserContext from "../contexts/userContext";
 const cx = classNames.bind(styles);
 
 export default function Sidebar({ display, mobile, clickAway = () => {} }) {
+    const { isLogin } = useContext(UserContext);
+
     return (
         <aside
             className={cx("sidebar", { "sidebar--mobile": mobile, "sidebar--display": display })}
@@ -32,7 +36,7 @@ export default function Sidebar({ display, mobile, clickAway = () => {} }) {
                     <SidebarButton to="/meal" onClick={clickAway}>
                         식단표
                     </SidebarButton>
-                    <SidebarButton to="/calendar" onClick={clickAway}>
+                    <SidebarButton to="/schedule" onClick={clickAway}>
                         일정표
                     </SidebarButton>
                 </SidebarCategory>
@@ -45,9 +49,11 @@ export default function Sidebar({ display, mobile, clickAway = () => {} }) {
                     </SidebarButton>
                 </SidebarCategory>
                 <SidebarCategory title="유용한 것들">
-                    <SidebarButton target="_blank" rel="noopener noreferer nofollow" href="https://forms.gle/H6GQ2g5hQXxGUg699">
-                        시험기간 급식 번호 기록
-                    </SidebarButton>
+                    {isLogin && (
+                        <SidebarButton target="_blank" rel="noopener noreferer nofollow" href="https://forms.gle/H6GQ2g5hQXxGUg699">
+                            시험기간 급식 번호 기록
+                        </SidebarButton>
+                    )}
                 </SidebarCategory>
             </div>
         </aside>
