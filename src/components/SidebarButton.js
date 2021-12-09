@@ -11,13 +11,14 @@ export default function SidebarButton({ children, onClick, to, href, ...props })
                     return cx("button", { active: state.isActive });
                 }}
                 to={to}
+                onClick={onClick}
             >
                 {children}
             </NavLink>
         );
     } else if (href) {
         return (
-            <a {...props} className={styles.button} href={href}>
+            <a {...props} className={styles.button} href={href} onClick={onClick}>
                 {children}
             </a>
         );
