@@ -58,7 +58,6 @@ export default function Modal({ title, children, type, open, onClose, exitOnEsca
             }
         } else {
             if (previousFocus.current) {
-                console.log(previousFocus.current);
                 previousFocus.current?.focus();
             }
         }
