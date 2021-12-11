@@ -4,57 +4,88 @@
     "icons": [
         {
             "src": "favicon.ico",
-            "sizes": "64x64 32x32 24x24 16x16",
-            "type": "image/x-icon"
+            "type": "image/x-icon",
+            "sizes": "48x48"
         },
         {
             "src": "icon-48.png",
             "type": "image/png",
-            "sizes": "48x48"
+            "sizes": "48x48",
+            "purpose": "any maskable"
         },
         {
             "src": "icon-72.png",
             "type": "image/png",
-            "sizes": "72x72"
+            "sizes": "72x72",
+            "purpose": "any maskable"
         },
         {
             "src": "icon-96.png",
             "type": "image/png",
-            "sizes": "96x96"
+            "sizes": "96x96",
+            "purpose": "any maskable"
         },
         {
             "src": "icon-120.png",
             "type": "image/png",
-            "sizes": "120x120"
+            "sizes": "120x120",
+            "purpose": "any maskable"
         },
         {
             "src": "icon-144.png",
             "type": "image/png",
-            "sizes": "144x144"
+            "sizes": "144x144",
+            "purpose": "any maskable"
         },
         {
             "src": "icon-180.png",
             "type": "image/png",
-            "sizes": "180x180"
+            "sizes": "180x180",
+            "purpose": "any maskable"
         },
         {
             "src": "icon-192.png",
             "type": "image/png",
-            "sizes": "192x192"
+            "sizes": "192x192",
+            "purpose": "any maskable"
         },
         {
             "src": "icon-512.png",
             "type": "image/png",
-            "sizes": "512x512"
+            "sizes": "512x512",
+            "purpose": "any maskable"
         },
         {
             "src": "icon-1024.png",
             "type": "image/png",
-            "sizes": "1024x1024"
+            "sizes": "1024x1024",
+            "purpose": "any maskable"
         }
     ],
+    "category": ["education", "lifestyle", "social", "productivity"],
+    "lang": "ko-KR",
     "start_url": ".",
     "display": "standalone",
+    "screenshots": [
+        {
+            "src": "screenshot1.png",
+            "sizes": "428x926",
+            "type": "image/png"
+        },
+        {
+            "src": "screenshot2.png",
+            "sizes": "428x926",
+            "type": "image/png"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "2학년 1반 Asked",
+            "short_name": "Asked",
+            "description": "2학년 1반에게 질문하고 답변하는 공간",
+            "url": "/asked"
+        }
+    ],
     "theme_color": "#c7a4e7",
     "background_color": "#f7f7f8"
 }
