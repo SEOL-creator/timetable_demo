@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import useDateUpdate from "../hooks/useDateUpdate";
@@ -30,6 +30,8 @@ export default function App() {
     const location = useLocation();
     const state = location.state;
 
+    const isFirstLaunch = useRef(true);
+
     const [isLogin, setIsLogin] = useState(getLocalStorage("isLogin", false));
     const [user, setUser] = useState(getLocalStorage("user", { id: -1, email: "", nickname: "", profilePic: {}, is_staff: false }));
     const [token, setToken] = useState(getLocalStorage("token", ""));
@@ -48,30 +50,32 @@ export default function App() {
     const [highlightedMeal, setHighlightedMeal] = useState(getLocalStorage("highlightedMeal", {}));
 
     //
+    const validateToken = useCallback(async () => {
+        try {
+            const response = await axiosInstance.post("/apis/validatetoken/", { token: token });
+            if (response.data.valid) {
+                setUser(response.data.user);
+                localStorage.setItem("user", JSON.stringify(response.data.user));
+            } else {
+                setIsLogin(false);
+                setUser({ email: "", nickname: "" });
+                setToken("");
+                localStorage.setItem("isLogin", JSON.stringify(false));
+                localStorage.setItem("user", JSON.stringify({ email: "", nickname: "" }));
+                localStorage.setItem("token", "");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }, [token]);
     useEffect(() => {
-        async function validatetoken() {
-            try {
-                const response = await axiosInstance.post("/apis/validatetoken/", { token: token });
-                if (response.data.valid) {
-                    setUser(response.data.user);
-                    localStorage.setItem("user", JSON.stringify(response.data.user));
-                } else {
-                    setIsLogin(false);
-                    setUser({ email: "", nickname: "" });
-                    setToken("");
-                    localStorage.setItem("isLogin", JSON.stringify(false));
-                    localStorage.setItem("user", JSON.stringify({ email: "", nickname: "" }));
-                    localStorage.setItem("token", "");
-                }
-            } catch (error) {
-                console.error(error);
+        if (isFirstLaunch.current) {
+            isFirstLaunch.current = false;
+            if (isLogin) {
+                validateToken();
             }
         }
-
-        if (isLogin) {
-            validatetoken();
-        }
-    }, [isLogin, token]);
+    }, [isLogin, validateToken]);
 
     useEffect(() => {
         if (isLogin) {
@@ -94,12 +98,12 @@ export default function App() {
                 user: user,
                 token: token,
                 setUser: (obj) => {
-                    setIsLogin(obj.isLogin);
-                    setUser(obj.user);
                     setToken(obj.token);
-                    localStorage.setItem("isLogin", JSON.stringify(obj.isLogin));
-                    localStorage.setItem("user", JSON.stringify(obj.user));
+                    setUser(obj.user);
+                    setIsLogin(obj.isLogin);
                     localStorage.setItem("token", JSON.stringify(obj.token));
+                    localStorage.setItem("user", JSON.stringify(obj.user));
+                    localStorage.setItem("isLogin", JSON.stringify(obj.isLogin));
                 },
                 setUserInfo: (obj) => {
                     setUser(obj);
