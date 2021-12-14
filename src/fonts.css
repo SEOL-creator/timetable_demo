@@ -27,3 +27,27 @@
     font-weight: 100;
     src: local("Spoqa Han Sans Neo Thin"), url("./assets/fonts/SpoqaHanSansNeo/SpoqaHanSansNeo-Thin.woff2") format("woff2");
 }
+
+@font-face {
+    font-family: "Jura";
+    font-weight: 600;
+    src: local("Jura Semi-Bold"), url("./assets/fonts/Jura/Jura600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Jura";
+    font-weight: 500;
+    src: local("Jura Medium"), url("./assets/fonts/Jura/Jura500.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Jura";
+    font-weight: 400;
+    src: local("Jura Regular"), url("./assets/fonts/Jura/Jura400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Jura";
+    font-weight: 300;
+    src: local("Jura Light"), url("./assets/fonts/Jura/Jura300.woff2") format("woff2");
+}

@@ -1,14 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap");
-
 $calendar-line: 1px solid var(--color-primary-lighter);
 
 .calendar {
-    font-family: "Jura", sans-serif;
+    font-family: "Jura", "Spoqa Han Sans Neo", sans-serif;
     font-weight: 300;
 
     width: 100%;
-    max-width: 640px;
-    max-width: 980px;
+    max-width: 98rem;
+
+    font-size: 1rem;
 
     padding: 0 2rem;
     padding-bottom: 3rem;
@@ -32,6 +31,7 @@ $calendar-line: 1px solid var(--color-primary-lighter);
             font-size: 1.8rem;
             font-weight: 500;
             margin-bottom: 0.2rem;
+            word-spacing: 0.6rem;
         }
         & > span:last-of-type {
             font-weight: 600;
@@ -47,14 +47,14 @@ $calendar-line: 1px solid var(--color-primary-lighter);
         grid-template-rows: auto repeat(5, 1fr);
 
         .dayName {
-            font-size: 1.6rem;
+            font-size: 1.6em;
             font-weight: 500;
             display: flex;
             justify-content: center;
             align-items: center;
 
-            padding-bottom: 1.2rem;
-            margin-bottom: 0.6rem;
+            padding-bottom: 1.2em;
+            margin-bottom: 0.6em;
             border-bottom: $calendar-line;
         }
 
@@ -69,9 +69,9 @@ $calendar-line: 1px solid var(--color-primary-lighter);
             justify-content: flex-start;
 
             .dayNumber {
-                font-size: 1.6rem;
+                font-size: 1.6em;
                 font-weight: 400;
-                margin: 0.6rem 0;
+                margin: 0.6em 0;
             }
 
             &:nth-of-type(7n + 1) {
