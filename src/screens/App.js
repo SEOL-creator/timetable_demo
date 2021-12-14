@@ -5,8 +5,6 @@ import useDateUpdate from "../hooks/useDateUpdate";
 import ClassroomContext from "../contexts/classroomContext";
 
 import Layout from "./Layout";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
 import Home from "./Home";
 import Asked from "./Asked";
 import UserContext from "../contexts/userContext";
@@ -73,7 +71,7 @@ export default function App() {
         if (isLogin) {
             validatetoken();
         }
-    }, []);
+    }, [isLogin, token]);
 
     useEffect(() => {
         if (isLogin) {

@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import UserContext from "../contexts/userContext";
@@ -12,8 +11,6 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
 
     const { setUser } = useContext(UserContext);
-
-    const navigate = useNavigate();
 
     function handleSubmit(e) {
         async function login() {

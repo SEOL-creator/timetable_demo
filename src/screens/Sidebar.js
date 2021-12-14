@@ -4,6 +4,7 @@ import SidebarCategory from "../components/SidebarCategory";
 import classNames from "classnames/bind";
 import { useContext } from "react";
 import UserContext from "../contexts/userContext";
+import { ReactComponent as LinkBlack } from "../assets/icons/link_black.svg";
 const cx = classNames.bind(styles);
 
 export default function Sidebar({ display, mobile, clickAway = () => {} }) {
@@ -51,6 +52,7 @@ export default function Sidebar({ display, mobile, clickAway = () => {} }) {
                 <SidebarCategory title="유용한 것들">
                     {isLogin && (
                         <SidebarButton target="_blank" rel="noopener noreferer nofollow" href="https://forms.gle/H6GQ2g5hQXxGUg699">
+                            <LinkBlack color="inherit" style={{ marginRight: "0.2rem" }} />
                             시험기간 급식 번호 기록
                         </SidebarButton>
                     )}

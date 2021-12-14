@@ -31,7 +31,7 @@ export default function Asked() {
         }
 
         getUserInformation();
-    }, [refetch]);
+    }, [userId, refetch]);
 
     useEffect(() => {
         async function getPosts() {
@@ -62,7 +62,7 @@ export default function Asked() {
         }
 
         getPosts();
-    }, [pageIndex]);
+    }, [userId, pageIndex]);
 
     function postAsk(id, ref) {
         axiosInstance
@@ -91,7 +91,7 @@ export default function Asked() {
             <div className={cx("infocontainer")}>
                 <div className={cx("info")}>
                     <div className={cx("user_info")}>
-                        <img src={user_image} />
+                        <img alt="사용자 프로필 사진" src={user_image} />
                         <div className={cx("user_text")}>
                             <span>{userName}</span>
                             <span>익명질문을 남겨주세요.</span>
