@@ -6,7 +6,7 @@ import axiosInstance from "../utils/axiosInstance";
 import UserContext from "../contexts/userContext";
 import UserProfilePic from "../components/UserProfilePic";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle as circleSolid, faCheck, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faCircle as circleRegular } from "@fortawesome/free-regular-svg-icons";
 import classNames from "classnames/bind";
 import Modal from "../components/Modal";

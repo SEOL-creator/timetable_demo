@@ -58,7 +58,7 @@ export const TabHeaderItem = (props) => {
     }
 
     return (
-        <div className={classNames("header__item", props.className, { ["header--disabled"]: tabIndex !== props.index })} onClick={onClickHandler}>
+        <div className={classNames("header__item", props.className, { "header--disabled": tabIndex !== props.index })} onClick={onClickHandler}>
             {props.children}
         </div>
     );

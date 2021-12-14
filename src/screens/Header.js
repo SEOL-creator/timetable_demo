@@ -12,7 +12,7 @@ import { ClickAwayListener } from "@mui/material";
 export default function Header({ toggleSidebar }) {
     const location = useLocation();
 
-    const { isLogin, user, setUser } = useContext(UserContext);
+    const { isLogin, user } = useContext(UserContext);
     const [displayMenu, setDisplayMenu] = useState(false);
 
     const isMaxWidth600 = useMediaQuery({ maxWidth: "600px" });

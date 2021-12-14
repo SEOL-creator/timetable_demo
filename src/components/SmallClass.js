@@ -48,7 +48,7 @@ export default function SmallClass({ classObj, isRemote, remoteURL, classtingURL
                             className={styles.classtingLink}
                             href={isMobile ? classtingURL.replace("https://www.classting.com/", "classting://") : classtingURL}
                             target="_blank"
-                            rel="noopener noreferer nofollow"
+                            rel="noreferrer noopener nofollow"
                         >
                             <img src={classtingLogoWhite} alt="클래스팅 로고" />
                         </a>

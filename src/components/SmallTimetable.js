@@ -91,7 +91,6 @@ function getDefaultDayNum() {
 }
 
 export default function Timetable() {
-    const [isLoading, setIsLoading] = useState(true);
     const [timeTableList, setTimeTableList] = useState([]);
     const [classTimetable, setclassTimetable] = useState([]);
     const [tempClassTime, setTempClassTime] = useState([]);
@@ -114,8 +113,6 @@ export default function Timetable() {
                 setTimeTableList(makeWeekTimeTable(response.data));
             } catch (e) {
                 console.error(e);
-            } finally {
-                setIsLoading(false);
             }
         }
         function getWeekDays() {
@@ -141,8 +138,6 @@ export default function Timetable() {
                 setclassTimetable(response.data);
             } catch (e) {
                 console.error(e);
-            } finally {
-                setIsLoading(false);
             }
         }
         async function fetchTempClassTime(classroom) {

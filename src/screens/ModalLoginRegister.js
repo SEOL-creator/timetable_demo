@@ -13,7 +13,7 @@ export default function ModalLoginRegister({ defaultTab = 0 }) {
 
     useEffect(() => {
         isLogin && navigate(location.state.backgroundLocation.pathname, { replace: true });
-    }, [isLogin]);
+    });
 
     return (
         <Modal

@@ -56,17 +56,16 @@ export default function Modal({ title, children, type, open, onClose, exitOnEsca
                     lastFocusable.current?.focus();
                 }
             }
-        } else {
-            if (previousFocus.current) {
-                previousFocus.current?.focus();
-            }
+            return () => {
+                app.removeAttribute("tabindex");
+                app.removeAttribute("aria-hidden");
+            };
         }
 
-        return () => {
-            app.removeAttribute("tabindex");
-            app.removeAttribute("aria-hidden");
-        };
-    }, [unmounted]);
+        if (unmounted && previousFocus.current) {
+            previousFocus.current?.focus();
+        }
+    }, [unmounted, disableAutoFocus]);
 
     useEffect(() => {
         const ANIMATION_DURATION = 100;
