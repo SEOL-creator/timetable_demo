@@ -231,8 +231,8 @@ export default function Todo() {
                         setEditToDoTitle(e.target.value);
                     }}
                     label="ToDo 제목"
-                    labelWidth="24rem"
                     autofocus
+                    style={{ width: "24rem" }}
                 />
                 <textarea
                     value={editToDoDescription}
@@ -272,12 +272,16 @@ export default function Todo() {
                     onChange={(e) => {
                         setNewToDoTitle(e.target.value);
                     }}
+                    hideLabel={true}
                     label="ToDo 제목"
-                    labelWidth="24rem"
+                    placeholder="제목을 입력하세요"
                     autofocus
+                    style={{ width: "24rem" }}
                 />
                 <textarea
+                    className={styles.newTodoTextarea}
                     value={newToDoDescription}
+                    rows="4"
                     onChange={(e) => {
                         setNewToDoDescription(e.target.value);
                     }}

@@ -73,7 +73,6 @@ export default function SettingsProfile() {
                     </label>
                     <Modal type="confirm" open={displayProfileUploadModal} onClose={handleUpload} title="확인">
                         <div className={styles.profilePicConfirm}>
-                            {/* <img src={profilePicPreview} alt="" /> */}
                             <div>
                                 <img src={profilePicPreview} alt="새 프로필 사진" />
                             </div>
@@ -83,14 +82,13 @@ export default function SettingsProfile() {
                 <div className={styles.userInfoTexts}>
                     <div>
                         <span>이메일</span>
-                        <Input hideLabel className={styles.input} inputWidth="100%" disabled value={user.email} />
+                        <Input hideLabel className={styles.input} disabled value={user.email} />
                     </div>
                     <div>
                         <span>닉네임</span>
                         <Input
                             hideLabel
                             className={styles.input}
-                            inputWidth="100%"
                             value={nickname}
                             onChange={(e) => {
                                 setNickname(e.target.value);

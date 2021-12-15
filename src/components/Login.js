@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import Input from "../components/Input";
-import Button from "../components/Button";
+import Input from "./Input";
+import Button from "./Button";
 import UserContext from "../contexts/userContext";
 import axiosInstance from "../utils/axiosInstance";
 
@@ -64,12 +64,11 @@ export default function Login() {
 
     return (
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", width: "100%", height: "max-content" }}>
-            <form onSubmit={handleSubmit} autoComplete="on">
+            <form onSubmit={handleSubmit} autoComplete="on" style={{ width: "100%" }}>
                 <Input
                     autoComplete="username"
                     spellCheck="false"
                     autoCapitalize="none"
-                    inputWidth="30rem"
                     label="이메일"
                     type="email"
                     name="email"
@@ -77,18 +76,19 @@ export default function Login() {
                     placeholder="Email"
                     autofocus={true}
                     onChange={(e) => setEmail(e.target.value)}
+                    style={{ margin: "3.6rem 0" }}
                 />
                 <Input
                     autoComplete="current-password"
                     spellCheck="false"
                     autoCapitalize="off"
-                    inputWidth="30rem"
                     label="비밀번호"
                     type="password"
                     name="password"
                     value={password}
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
+                    style={{ margin: "3.6rem 0" }}
                 />
                 <Button disabled={loading} onClick={handleSubmit}>
                     로그인

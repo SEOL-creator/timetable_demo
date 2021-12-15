@@ -12,20 +12,19 @@ export default function Input({
     placeholder,
     stack = null,
     hideLabel = false,
-    labelWidth = "auto",
-    inputWidth = "16rem",
     autoComplete,
     spellCheck,
     autoCapitalize,
     error,
     className,
     disabled = false,
+    ...props
 }) {
     return (
-        <label className={cx(className, "label", { "stack-stack": stack }, { [`stack-${stack}`]: stack })}>
+        <label className={cx(className, "label", { "stack-stack": stack }, { [`stack-${stack}`]: stack })} {...props}>
             {!hideLabel && (
                 <>
-                    <span className={styles.span} style={{ width: labelWidth }}>
+                    <span className={styles.span}>
                         {label}
                         <span style={{ fontSize: "1.3rem", marginLeft: "1rem", color: "rgb(240, 100, 100)" }}>{error}</span>
                     </span>
@@ -40,7 +39,6 @@ export default function Input({
                 type={type}
                 placeholder={placeholder}
                 autoFocus={autofocus}
-                style={{ width: inputWidth }}
                 value={value}
                 onChange={onChange}
                 disabled={disabled}

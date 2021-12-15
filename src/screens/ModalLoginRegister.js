@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router";
 import Modal from "../components/Modal";
 import { Tab, TabContent, TabHeader, TabHeaderItem } from "../components/Tab";
 import UserContext from "../contexts/userContext";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 export default function ModalLoginRegister({ defaultTab = 0 }) {
     const navigate = useNavigate();

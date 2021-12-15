@@ -77,7 +77,7 @@ export default function Register() {
 
     return (
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", width: "100%", height: "100%" }}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ width: "100%" }}>
                 <Input
                     autoComplete="username"
                     spellCheck="false"
@@ -91,6 +91,7 @@ export default function Register() {
                     autofocus={true}
                     onChange={(e) => setEmail(e.target.value)}
                     error={emailError}
+                    style={{ margin: "3.6rem 0" }}
                 />
                 <Input
                     autoComplete="nickname"
@@ -104,6 +105,7 @@ export default function Register() {
                     placeholder="Nickname"
                     onChange={(e) => setNickname(e.target.value)}
                     error={nicknameError}
+                    style={{ margin: "3.6rem 0" }}
                 />
                 <Input
                     autoComplete="new-password"
@@ -117,18 +119,20 @@ export default function Register() {
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     error={passwordError}
+                    style={{ margin: "3.6rem 0" }}
                 />
                 <Input
                     autoComplete="off"
                     spellCheck="false"
                     autoCapitalize="none"
                     inputWidth="30rem"
-                    label="가입 코드 (선택사항)"
+                    label="학생 인증 코드"
                     type="text"
                     name="code"
                     value={code}
                     placeholder="Code"
                     onChange={(e) => setCode(e.target.value)}
+                    style={{ margin: "3.6rem 0" }}
                 />
                 <Button disabled={loading} onClick={handleSubmit}>
                     회원가입

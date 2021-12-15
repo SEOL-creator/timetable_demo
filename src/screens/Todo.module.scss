@@ -150,3 +150,14 @@
         height: 1.6rem;
     }
 }
+
+.newTodoTextarea {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-large);
+    padding: 0.8rem 1.2rem;
+    font-size: 1.6rem;
+    font-family: inherit;
+    outline-color: var(--color-primary);
+    transition: all 0.2s ease-in-out;
+}

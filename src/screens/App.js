@@ -1,31 +1,32 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
-import useDateUpdate from "../hooks/useDateUpdate";
 import ClassroomContext from "../contexts/classroomContext";
+import HighlightedMealContext from "../contexts/highlightedMealContext";
+import TodayTimetableContext from "../contexts/todayTimetableContext";
+import UserContext from "../contexts/userContext";
+import useDateUpdate from "../hooks/useDateUpdate";
+import axiosInstance from "../utils/axiosInstance";
 
 import Layout from "./Layout";
 import Home from "./Home";
-import Asked from "./Asked";
-import UserContext from "../contexts/userContext";
 import LoginRegister from "./LoginRegister";
 import RegisterComplete from "./RegisterComplete";
 import Timetable from "./Timetable";
-import axiosInstance from "../utils/axiosInstance";
-import TodayTimetableContext from "../contexts/todayTimetableContext";
-import Settings from "./Settings";
-import HighlightedMealContext from "../contexts/highlightedMealContext";
-import Error404 from "./Error404";
-import Todo from "./Todo";
-import ModalLoginRegister from "./ModalLoginRegister";
 import Meal from "./Meal";
 import Schedule from "./Schedule";
+import Asked from "./Asked";
+import Todo from "./Todo";
+import Settings from "./Settings";
+import Error404 from "./Error404";
+import ModalLoginRegister from "./ModalLoginRegister";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
     else localStorage.setItem(key, JSON.stringify(defaultValue));
     return defaultValue;
 }
+
 export default function App() {
     const location = useLocation();
     const state = location.state;
@@ -49,7 +50,6 @@ export default function App() {
 
     const [highlightedMeal, setHighlightedMeal] = useState(getLocalStorage("highlightedMeal", {}));
 
-    //
     const validateToken = useCallback(async () => {
         try {
             const response = await axiosInstance.post("/apis/validatetoken/", { token: token });
