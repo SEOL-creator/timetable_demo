@@ -6,6 +6,7 @@ import formatDateTime from "../utils/formatDateTime";
 import Box from "./Box";
 import styles from "./DDay.module.css";
 import classNames from "classnames/bind";
+import { useMediaQuery } from "react-responsive";
 const cx = classNames.bind(styles);
 
 function calcDDay(date) {
@@ -26,6 +27,8 @@ export default function DDay({ direction = "column" }) {
     const [dDayList, setDDayList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const isMaxWidth320 = useMediaQuery({ maxWidth: 320 });
+
     useEffect(() => {
         async function fetchDDay() {
             try {
@@ -41,7 +44,7 @@ export default function DDay({ direction = "column" }) {
     }, []);
 
     return (
-        <Box className={cx("box", { [`box--${direction}`]: true })}>
+        <Box half={isMaxWidth320 ? false : true} className={cx("box", { [`box--${direction}`]: true })}>
             <Link to="/calendar">주요 일정</Link>
             <div className={styles.content}>
                 {isLoading ? (

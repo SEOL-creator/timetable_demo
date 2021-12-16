@@ -1,15 +1,7 @@
 .box {
-    width: calc(50% - 3rem);
-    overflow: hidden;
     padding: 1.4rem 2rem 1rem;
-    box-sizing: border-box;
 }
 
-@media screen and (max-width: 390px) {
-    .box {
-        width: calc(100% - 3rem);
-    }
-}
 
 .box > a {
     font-size: 2rem;

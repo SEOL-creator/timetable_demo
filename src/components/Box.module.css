@@ -1,6 +1,22 @@
 .box {
+    width: 100%;
+    overflow: hidden;
     background-color: white;
     margin: 3rem 1.5rem 0;
     border-radius: 1.2rem;
+    box-sizing: border-box;
     box-shadow: var(--box-shadow-widget);
+}
+
+.box--half {
+    width: calc(50% - 3rem);
+}
+
+@media screen and (max-width: 430px) {
+    .box {
+        margin: 2rem 0.75rem 0;
+    }
+    .box--half {
+        width: calc(50% - 1.5rem);
+    }
 }

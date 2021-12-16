@@ -8,6 +8,7 @@ import styles from "./SmallMeal.module.css";
 import classNames from "classnames/bind";
 import HighlightedMealContext from "../contexts/highlightedMealContext";
 import useDateUpdate from "../hooks/useDateUpdate";
+import { useMediaQuery } from "react-responsive";
 const cx = classNames.bind(styles);
 
 function getNextMonday(date) {
@@ -41,6 +42,8 @@ export default function SmallMeal() {
 
     const { dateUpdate } = useDateUpdate();
 
+    const isMaxWidth320 = useMediaQuery({ maxWidth: 320 });
+
     useEffect(() => {
         setTargetDay(getTargetDay());
     }, [dateUpdate]);
@@ -67,7 +70,7 @@ export default function SmallMeal() {
     }, [targetDay]);
 
     return (
-        <Box className={styles.meal}>
+        <Box half={isMaxWidth320 ? false : true} className={styles.meal}>
             <div className={styles.heading}>
                 <Link to="/meal">밥</Link>
                 <span>{formatDateTime(targetDay, "DD일 aaaa")}</span>

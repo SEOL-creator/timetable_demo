@@ -1,18 +1,19 @@
 import { useMediaQuery } from "react-responsive";
+import styles from "./Home.module.css";
 
 import DDay from "../components/DDay";
 import SmallMeal from "../components/SmallMeal";
 import Timetable from "../components/SmallTimetable";
 
 export default function Home() {
-    const isMaxWidth390 = useMediaQuery({ maxWidth: 390 });
+    const isMaxWidth320 = useMediaQuery({ maxWidth: 320 });
 
     return (
-        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "flex-start", flexWrap: "wrap", padding: "0 1.5rem", paddingBottom: "4rem", boxSizing: "border-box" }}>
+        <div className={styles.main}>
             <Timetable />
-            <div style={{ width: "46.2rem", display: "flex", justifyContent: "center", alignItems: "flex-start", flexWrap: "wrap" }}>
+            <div className={styles.container}>
                 <SmallMeal />
-                <DDay direction={isMaxWidth390 ? "row" : "column"} />
+                <DDay direction={isMaxWidth320 ? "row" : "column"} />
             </div>
         </div>
     );
