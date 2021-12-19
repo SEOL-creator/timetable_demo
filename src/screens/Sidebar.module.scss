@@ -3,14 +3,29 @@
     height: 100%;
     background-color: var(--color-background-alt);
     box-sizing: border-box;
-    padding: 3rem 2rem max(env(safe-area-inset-bottom, 2rem), 4rem) calc(env(safe-area-inset-left, 2rem) + 2rem);
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    overflow-y: scroll;
     margin-left: calc(-1 * env(safe-area-inset-left));
+
+    & > div {
+        padding: 3rem 2rem max(env(safe-area-inset-bottom, 2rem), 4rem) calc(env(safe-area-inset-left, 2rem) + 2rem);
+        overflow-y: auto;
+
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+
+        & > div {
+            width: 100%;
+        }
+    }
 }
 
 @keyframes slidein {
@@ -35,10 +50,16 @@
 
     &.sidebar > div {
         width: 64%;
-        min-height: 100%;
+        height: 100%;
         background-color: var(--color-background-alt);
         box-sizing: border-box;
-        padding: 3rem 2rem max(env(safe-area-inset-bottom, 2rem), 4rem);
+        padding: 3rem 2rem calc(env(safe-area-inset-bottom, 2rem) + 2rem);
+
+        overflow-y: auto;
+
+        & > div {
+            width: 100%;
+        }
     }
 
     &.sidebar--display {

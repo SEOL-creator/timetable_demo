@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 import ClassroomContext from "../contexts/classroomContext";
 import HighlightedMealContext from "../contexts/highlightedMealContext";
@@ -20,6 +20,8 @@ import Todo from "./Todo";
 import Settings from "./Settings";
 import Error404 from "./Error404";
 import ModalLoginRegister from "./ModalLoginRegister";
+import Information from "./Information";
+import ReleaseNotes from "./ReleaseNotes";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -27,11 +29,32 @@ function getLocalStorage(key, defaultValue) {
     return defaultValue;
 }
 
+async function checkVersion() {
+    const storageVersion = localStorage.getItem("version");
+    const currentVersion = process.env.REACT_APP_VERSION;
+    try {
+        const response = await axiosInstance.get(`/apis/v2/version/`);
+        const latestVersion = response.data.version;
+        localStorage.setItem("version", currentVersion);
+        if (!storageVersion) {
+            return { current: currentVersion, latest: latestVersion, isLatest: currentVersion === latestVersion, detail: "firstLaunch" };
+        }
+        if (storageVersion !== currentVersion) {
+            return { current: currentVersion, latest: latestVersion, isLatest: currentVersion === latestVersion, detail: "updated" };
+        }
+        return { current: currentVersion, latest: latestVersion, isLatest: currentVersion === latestVersion, detail: "normal" };
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export default function App() {
     const location = useLocation();
     const state = location.state;
+    const navigate = useNavigate();
 
     const isFirstLaunch = useRef(true);
+    const [version, setVersion] = useState({ current: "", latest: "", isLatest: false, detail: "" });
 
     const [isLogin, setIsLogin] = useState(getLocalStorage("isLogin", false));
     const [user, setUser] = useState(getLocalStorage("user", { id: -1, email: "", nickname: "", profilePic: {}, is_staff: false }));
@@ -49,6 +72,16 @@ export default function App() {
     const [todayTimetable, setTodayTimetable] = useState({});
 
     const [highlightedMeal, setHighlightedMeal] = useState(getLocalStorage("highlightedMeal", {}));
+
+    useEffect(() => {
+        checkVersion().then((result) => {
+            setVersion(result);
+            console.log(version);
+            if (result?.detail === "updated") {
+                navigate("/releasenotes", { state: { backgroundLocation: location } });
+            }
+        });
+    }, []);
 
     const validateToken = useCallback(async () => {
         try {
@@ -136,6 +169,8 @@ export default function App() {
                                 <Route path="/asked" element={<Asked />} />
                                 <Route path="/todo" element={<Todo />} />
                                 <Route path="/settings" element={<Settings />} />
+                                <Route path="/information" element={<Information version={version} />} />
+                                <Route path="/releasenotes" element={<ReleaseNotes />} />
                                 <Route path="*" element={<Error404 />} />
                             </Route>
                         </Routes>
@@ -143,6 +178,8 @@ export default function App() {
                             <Routes>
                                 <Route path="/login" element={<ModalLoginRegister defaultTab={0} />} />
                                 <Route path="/register" element={<ModalLoginRegister defaultTab={1} />} />
+                                <Route path="/information" element={<Information version={version} />} />
+                                <Route path="/releasenotes" element={<ReleaseNotes />} />
                             </Routes>
                         )}
                     </HighlightedMealContext.Provider>

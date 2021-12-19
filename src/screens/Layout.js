@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Outlet } from "react-router-dom";
 
@@ -7,9 +7,15 @@ import Sidebar from "./Sidebar";
 
 export default function Layout() {
     const [isSidebarDisplay, setIsSidebarDisplay] = useState(false);
-    const toggleSidebar = () => setIsSidebarDisplay(!isSidebarDisplay);
+    const toggleSidebar = () => {
+        if (isMaxWidth675) setIsSidebarDisplay(!isSidebarDisplay);
+    };
 
     const isMaxWidth675 = useMediaQuery({ query: "(max-width: 675px)" });
+
+    useEffect(() => {
+        setIsSidebarDisplay(false);
+    }, [isMaxWidth675]);
 
     return (
         <>

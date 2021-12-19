@@ -1,0 +1,29 @@
+.releaseNotes {
+    width: 100%;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.note {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .noteVersion {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-top: 0.2rem;
+        margin-bottom: 1.4rem;
+    }
+
+    .noteBody {
+        font-size: 1.6rem;
+        font-weight: 400;
+        white-space: pre-wrap;
+    }
+}

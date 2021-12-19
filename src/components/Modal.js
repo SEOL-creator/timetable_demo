@@ -8,7 +8,7 @@ import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
 const cx = classNames.bind(styles);
 
-export default function Modal({ title, children, type, open, onClose, exitOnEscape = true, submitButtonText = "확인", disableAutoFocus, unstyled, ...props }) {
+export default function Modal({ title, children, type, open, onClose, exitOnEscape = true, submitButtonText = "확인", disableAutoFocus, unstyled, nomargin, ...props }) {
     // type = "alert" | "confirm" | "none"
 
     const firstFocusable = useRef(null);
@@ -93,7 +93,7 @@ export default function Modal({ title, children, type, open, onClose, exitOnEsca
                 }}
                 mouseEvent="onMouseDown"
             >
-                <div className={cx("modal", { "modal--open": open, "modal--closed": !open }, { "modal--unstyled": unstyled })}>
+                <div className={cx("modal", { "modal--open": open, "modal--closed": !open }, { "modal--unstyled": unstyled }, { "modal--nomargin": nomargin })} {...props}>
                     {unstyled ? (
                         children
                     ) : (

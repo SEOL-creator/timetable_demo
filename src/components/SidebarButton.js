@@ -12,6 +12,7 @@ export default function SidebarButton({ children, onClick, to, href, ...props })
                 }}
                 to={to}
                 onClick={onClick}
+                {...props}
             >
                 {children}
             </NavLink>

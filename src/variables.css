@@ -11,6 +11,7 @@
     --color-shadow-separator: rgba(0, 0, 0, 0.1);
     --color-text-base: #222222;
     --color-text-secondary: #3f3f3f;
+    --color-link: #0066cc;
     --color-fill-button-icon: var(--color-text-base);
     --color-background-button-white-transparent: #e3e3e5;
     --color-background-button-white-transparent-hover: #b0b0b2;
