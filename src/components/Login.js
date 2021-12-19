@@ -14,7 +14,7 @@ export default function Login() {
 
     function handleSubmit(e) {
         async function login() {
-            const response = await axiosInstance.post("/apis/token/", { email: email, password: password });
+            const response = await axiosInstance.post("/apis/v2/accounts/token/", { email: email, password: password });
             if (response.status === 200) {
                 const data = response.data;
                 setUser({ isLogin: true, user: data.user, token: data.token });

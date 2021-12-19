@@ -23,7 +23,7 @@ export default function Asked() {
     useEffect(() => {
         async function getUserInformation() {
             try {
-                const response = await axiosInstance.get(`apis/asked/userinfo/${userId}/`);
+                const response = await axiosInstance.get(`apis/v2/asked/userinfo/${userId}/`);
                 setUserInformation(JSON.parse(response.data));
             } catch (e) {
                 console.error(e);
@@ -36,7 +36,7 @@ export default function Asked() {
     useEffect(() => {
         async function getPosts() {
             try {
-                const response = await axiosInstance.get(`apis/asked/posts/${userId}/${pageIndex}/`);
+                const response = await axiosInstance.get(`apis/v2/asked/posts/${userId}/${pageIndex}/`);
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(response.data, "text/html");
                 doc.querySelectorAll(".com_card > center").forEach((e) => {
@@ -66,7 +66,7 @@ export default function Asked() {
 
     function postAsk(id, ref) {
         axiosInstance
-            .post(`apis/asked/ask/`, `id=${id}&content=${ref.current.value}&makarong_bat=-1&show_user=0`, {
+            .post(`apis/v2/asked/ask/`, `id=${id}&content=${ref.current.value}&makarong_bat=-1&show_user=0`, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencode; charset=UTF-8",
                 },

@@ -52,7 +52,7 @@ export default function App() {
 
     const validateToken = useCallback(async () => {
         try {
-            const response = await axiosInstance.post("/apis/validatetoken/", { token: token });
+            const response = await axiosInstance.post("/apis/v2/accounts/validatetoken/", { token: token });
             if (response.data.valid) {
                 setUser(response.data.user);
                 localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -81,7 +81,7 @@ export default function App() {
         if (isLogin) {
             async function getTodayTimetable() {
                 try {
-                    const response = await axiosInstance.get(`/apis/improvedtimetable/${classroom.grade}/${classroom.room}/today/`);
+                    const response = await axiosInstance.get(`/apis/v2/timetable/improvedtimetable/${classroom.grade}/${classroom.room}/today/`);
                     setTodayTimetable(response.data);
                 } catch (error) {
                     console.error(error);

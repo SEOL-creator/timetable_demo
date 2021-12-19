@@ -109,7 +109,7 @@ export default function Timetable() {
     useEffect(() => {
         async function fetchTimetable() {
             try {
-                const response = await axiosInstance.get("/apis/timetable/");
+                const response = await axiosInstance.get("/apis/v2/timetable/");
                 setTimeTableList(makeWeekTimeTable(response.data));
             } catch (e) {
                 console.error(e);
@@ -134,7 +134,7 @@ export default function Timetable() {
     useEffect(() => {
         async function fetchClassTimetable(classroom) {
             try {
-                const response = await axiosInstance.get(`/apis/classtime/${classroom.grade}/${classroom.room}/`);
+                const response = await axiosInstance.get(`/apis/v2/timetable/classtime/${classroom.grade}/${classroom.room}/`);
                 setclassTimetable(response.data);
             } catch (e) {
                 console.error(e);
@@ -142,7 +142,7 @@ export default function Timetable() {
         }
         async function fetchTempClassTime(classroom) {
             try {
-                const response = await axiosInstance.get(`/apis/tempclasstime/${classroom.grade}/${classroom.room}/`);
+                const response = await axiosInstance.get(`/apis/v2/timetable/tempclasstime/${classroom.grade}/${classroom.room}/`);
                 setTempClassTime(response.data);
             } catch (e) {
                 console.error(e);

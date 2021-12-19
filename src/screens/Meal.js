@@ -10,7 +10,7 @@ export default function Meal() {
         async function fetchMeal() {
             if (!targetDay) return;
             try {
-                const response = await axiosInstance.get(`/apis/meal/${targetDay.getFullYear()}/${targetDay.getMonth() + 1}/`);
+                const response = await axiosInstance.get(`/apis/v2/meal/${targetDay.getFullYear()}/${targetDay.getMonth() + 1}/`);
                 response.data?.forEach((meal) => {
                     if (meal.type === 2) {
                         // lunch

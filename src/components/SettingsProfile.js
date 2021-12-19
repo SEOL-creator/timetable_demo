@@ -42,7 +42,7 @@ export default function SettingsProfile() {
             const formData = new FormData();
             formData.append("image", profilePicInputRef.current.files[0]);
             axiosInstance
-                .post("/apis/users/uploadprofilepic/", formData, {
+                .post("/apis/v2/accounts/users/uploadprofilepic/", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
@@ -101,7 +101,7 @@ export default function SettingsProfile() {
                             className={cx({ "nicknameButton--disabled": nickname === user.nickname })}
                             onClick={() => {
                                 axiosInstance
-                                    .patch(`/apis/users/${user.id}/`, { nickname })
+                                    .patch(`/apis/v2/accounts/users/${user.id}/`, { nickname })
                                     .then((response) => {
                                         if (response.status === 200) {
                                             setUserInfo(response.data);

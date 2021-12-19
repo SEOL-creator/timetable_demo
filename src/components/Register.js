@@ -51,7 +51,7 @@ export default function Register() {
         }
 
         axiosInstance
-            .post("/apis/register/", { email: email, nickname: nickname, password: password, password2: password, code: code })
+            .post("/apis/v2/accounts/register/", { email: email, nickname: nickname, password: password, password2: password, code: code })
             .then((response) => {
                 const data = response.data;
                 navigate("/register/complete", { state: data });

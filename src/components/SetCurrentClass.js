@@ -21,7 +21,7 @@ export default function SetCurrentClass() {
     useEffect(() => {
         async function fetchClassroomList() {
             try {
-                const response = await axiosInstance.get("apis/classroom/");
+                const response = await axiosInstance.get("apis/v2/timetable/classroom/");
                 setClassroomList(response.data);
             } catch (e) {
                 console.log(e);

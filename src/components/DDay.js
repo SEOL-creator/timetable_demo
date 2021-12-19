@@ -32,7 +32,7 @@ export default function DDay({ direction = "column" }) {
     useEffect(() => {
         async function fetchDDay() {
             try {
-                const response = await axiosInstance.get("/apis/dday/");
+                const response = await axiosInstance.get("/apis/v2/calendar/dday/");
                 setDDayList(response.data);
                 setIsLoading(false);
             } catch (e) {
