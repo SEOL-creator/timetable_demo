@@ -72,12 +72,12 @@ function makeWeekTimeTable(timeTable) {
     const MONDAY = new Date(TODAY.getTime() - (TODAY.getDay() - 1) * 24 * 60 * 60 * 1000);
     const NEXTMONDAY = new Date(MONDAY.getTime() + 7 * 24 * 60 * 60 * 1000);
     for (let i = 0, day = MONDAY; i < 5; i++) {
-        const possibleTable = timeTable.filter((table) => new Date(table.startdate).getTime() <= day.getTime());
+        const possibleTable = timeTable.filter((table) => new Date(table.startdate + "T00:00:00+09:00").getTime() <= day.getTime());
         firstWeekTimeTable.push(possibleTable.slice(-1)[0]);
         day = new Date(day.getTime() + 24 * 60 * 60 * 1000);
     }
     for (let i = 0, day = NEXTMONDAY; i < 5; i++) {
-        const possibleTable = timeTable.filter((table) => new Date(table.startdate).getTime() <= day.getTime());
+        const possibleTable = timeTable.filter((table) => new Date(table.startdate + "T00:00:00+09:00").getTime() <= day.getTime());
         secondWeekTimeTable.push(possibleTable.slice(-1)[0]);
         day = new Date(day.getTime() + 24 * 60 * 60 * 1000);
     }
