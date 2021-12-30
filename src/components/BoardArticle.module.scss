@@ -1,0 +1,106 @@
+.article {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.4rem 2rem;
+    border-radius: var(--border-radius-extra-large);
+    margin-bottom: 2rem;
+
+    & > div {
+        width: 100%;
+    }
+
+    .articleInfo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        height: 3.6rem;
+
+        .articleInfoLeft {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            & > div:first-of-type {
+                width: 3rem;
+                height: 3rem;
+                margin-right: 1rem;
+            }
+            & > div:last-of-type {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: space-between;
+
+                & > div:first-of-type {
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                }
+                & > div:last-of-type {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+        .articleInfoRight {
+            font-size: 1.4rem;
+        }
+    }
+
+    .articleTitle {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 1rem 0;
+    }
+    .articleBody {
+        font-size: 1.5rem;
+    }
+    .articleFooter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.3rem;
+        margin-top: 1.4rem;
+
+        & > button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            svg {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 0.6rem;
+            }
+        }
+
+        & > button:first-of-type {
+            background-color: transparent;
+            color: var(--color-text-weak-50);
+            padding-left: 0;
+            align-items: center;
+            font-weight: 600;
+            & > svg {
+                color: var(--color-text-primary);
+                width: 2.4rem;
+                height: 2.4rem;
+            }
+        }
+    }
+}
+
+.textButon {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    &:not(:last-of-type) {
+        margin-right: 0.4rem;
+    }
+    &:hover {
+        text-decoration: underline;
+    }
+}

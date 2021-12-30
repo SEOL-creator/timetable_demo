@@ -17,11 +17,14 @@ import Meal from "./Meal";
 import Schedule from "./Schedule";
 import Asked from "./Asked";
 import Todo from "./Todo";
+import BoardArticleList from "./BoardArticleList";
+import BoardArticleView from "./BoardArticleView";
 import Settings from "./Settings";
 import Error404 from "./Error404";
 import ModalLoginRegister from "./ModalLoginRegister";
 import Information from "./Information";
 import ReleaseNotes from "./ReleaseNotes";
+import BoardListContext from "../contexts/boardListContext";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -73,10 +76,11 @@ export default function App() {
 
     const [highlightedMeal, setHighlightedMeal] = useState(getLocalStorage("highlightedMeal", {}));
 
+    const [boardList, setBoardList] = useState([]);
+
     useEffect(() => {
         checkVersion().then((result) => {
             setVersion(result);
-            console.log(version);
             if (result?.detail === "updated") {
                 navigate("/releasenotes", { state: { backgroundLocation: location } });
             }
@@ -124,6 +128,20 @@ export default function App() {
         }
     }, [dateUpdate, classroom, isLogin]);
 
+    useEffect(() => {
+        async function getBoardList() {
+            try {
+                const response = await axiosInstance.get("/apis/v2/boards/");
+                setBoardList(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        if (isLogin) {
+            getBoardList();
+        }
+    }, [isLogin]);
+
     return (
         <UserContext.Provider
             value={{
@@ -157,23 +175,27 @@ export default function App() {
                             },
                         }}
                     >
-                        <Routes location={state?.backgroundLocation || location}>
-                            <Route path="/" element={<Layout />}>
-                                <Route index element={<Home />} />
-                                <Route path="/login" element={<LoginRegister defaultTab={0} />} />
-                                <Route path="/register" element={<LoginRegister defaultTab={1} />} />
-                                <Route path="/register/complete" element={<RegisterComplete />} />
-                                <Route path="/timetable" element={<Timetable />} />
-                                <Route path="/meal" element={<Meal />} />
-                                <Route path="/schedule" element={<Schedule />} />
-                                <Route path="/asked" element={<Asked />} />
-                                <Route path="/todo" element={<Todo />} />
-                                <Route path="/settings" element={<Settings />} />
-                                <Route path="/information" element={<Information version={version} />} />
-                                <Route path="/releasenotes" element={<ReleaseNotes />} />
-                                <Route path="*" element={<Error404 />} />
-                            </Route>
-                        </Routes>
+                        <BoardListContext.Provider value={boardList}>
+                            <Routes location={state?.backgroundLocation || location}>
+                                <Route path="/" element={<Layout />}>
+                                    <Route index element={<Home />} />
+                                    <Route path="/login" element={<LoginRegister defaultTab={0} />} />
+                                    <Route path="/register" element={<LoginRegister defaultTab={1} />} />
+                                    <Route path="/register/complete" element={<RegisterComplete />} />
+                                    <Route path="/timetable" element={<Timetable />} />
+                                    <Route path="/meal" element={<Meal />} />
+                                    <Route path="/schedule" element={<Schedule />} />
+                                    <Route path="/asked" element={<Asked />} />
+                                    <Route path="/todo" element={<Todo />} />
+                                    <Route path="/settings" element={<Settings />} />
+                                    <Route path="/information" element={<Information version={version} />} />
+                                    <Route path="/releasenotes" element={<ReleaseNotes />} />
+                                    <Route path="/boards/article/:articleId" element={<BoardArticleView />} />
+                                    <Route path="/boards/:boardCode" element={<BoardArticleList />} />
+                                    <Route path="*" element={<Error404 />} />
+                                </Route>
+                            </Routes>
+                        </BoardListContext.Provider>
                         {state?.backgroundLocation && (
                             <Routes>
                                 <Route path="/login" element={<ModalLoginRegister defaultTab={0} />} />

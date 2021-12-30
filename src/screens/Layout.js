@@ -25,7 +25,7 @@ export default function Layout() {
                 style={{
                     width: "calc(100% - var(--size-sidebar-width))",
                     height: "100%",
-                    overflowY: "scroll",
+                    overflowY: "auto",
                     overflowX: "hidden",
                     boxSizing: "border-box",
                     paddingBottom: "env(safe-area-inset-bottom, 2rem)",
