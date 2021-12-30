@@ -1,0 +1,185 @@
+.commentArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .newComment {
+        width: 100%;
+        min-height: 3.4rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        margin-top: 1rem;
+
+        .newCommentProfilePic {
+            width: 3.4rem;
+            min-width: 3.4rem;
+            height: 3.4rem;
+            margin-right: 1rem;
+        }
+        .newCommentProfile {
+            width: max-content;
+            min-width: max-content;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            .newCommentProfileNickname {
+                font-size: 1.5rem;
+                font-weight: 500;
+            }
+            .anonCheckbox {
+                & > input {
+                    display: none;
+                }
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                font-size: 1.3rem;
+                font-weight: 600;
+                cursor: pointer;
+                color: var(--color-text-weak-100);
+                &.anonCheckbox--checked {
+                    color: var(--color-primary-dark);
+                }
+            }
+        }
+        textarea {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0.4rem 0;
+            padding-left: 0.8rem;
+            margin-left: 0.4rem;
+            margin-right: 0.6rem;
+            font-size: 1.6rem;
+            font-family: inherit;
+            line-height: 2rem;
+
+            background: none;
+            border: none;
+            outline: none;
+
+            resize: none;
+
+            border-bottom: 2px solid var(--color-input-background-unfocused);
+
+            transition: border-color 0.1s ease-in-out;
+
+            &::placeholder {
+                font-size: 1.6rem;
+                font-family: inherit;
+            }
+
+            &:hover,
+            &:focus {
+                border-bottom: 2px solid var(--color-input-border-hover);
+            }
+        }
+        & > button {
+            width: max-content;
+            min-width: max-content;
+            height: 100%;
+        }
+    }
+
+    .commentContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .comment {
+        width: 100%;
+        .commentInfo {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            .user {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-bottom: 0.6rem;
+
+                & > div:first-of-type {
+                    width: 3rem;
+                    height: 3rem;
+                    margin-right: 1rem;
+                }
+                .user--text {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: space-between;
+
+                    & span:first-of-type {
+                        font-size: 1.4rem;
+                        font-weight: 500;
+                    }
+                    & span:last-of-type {
+                        font-size: 1.2rem;
+                        font-weight: 400;
+                    }
+                }
+            }
+            .commentControl {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+        }
+        .commentBody {
+            width: 100%;
+            padding-left: 4rem;
+            box-sizing: border-box;
+        }
+    }
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    margin: 1rem 0;
+}
+
+.like_btn {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.4rem;
+    cursor: pointer;
+    & > svg {
+        width: 1.8rem;
+        height: 1.8rem;
+        margin-right: 0.4rem;
+    }
+    & > span {
+        font-size: 1.3rem;
+        color: #555;
+    }
+}
+
+.textButon {
+    font-size: 1.4rem;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    &:not(:last-of-type) {
+        margin-right: 0.6rem;
+    }
+    &:hover {
+        text-decoration: underline;
+    }
+}

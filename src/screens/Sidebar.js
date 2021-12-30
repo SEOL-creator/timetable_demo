@@ -4,6 +4,7 @@ import SidebarCategory from "../components/SidebarCategory";
 import classNames from "classnames/bind";
 import { useContext } from "react";
 import UserContext from "../contexts/userContext";
+import BoardListContext from "../contexts/boardListContext";
 import { ReactComponent as LinkBlack } from "../assets/icons/material/link_black.svg";
 import { useLocation } from "react-router-dom";
 const cx = classNames.bind(styles);
@@ -13,6 +14,8 @@ export default function Sidebar({ display, mobile, clickAway = () => {}, appVers
 
     const location = useLocation();
     const informationState = location.pathname === "/information" ? undefined : { backgroundLocation: location };
+
+    const boardList = useContext(BoardListContext);
 
     return (
         <aside
@@ -48,6 +51,16 @@ export default function Sidebar({ display, mobile, clickAway = () => {}, appVers
                         <SidebarButton to="/asked" onClick={clickAway}>
                             Asked.kr
                         </SidebarButton>
+                        <BoardListContext.Provider value={boardList}>
+                            {isLogin &&
+                                boardList.map((board) => {
+                                    return (
+                                        <SidebarButton key={board.code} to={`/boards/${board.code}`} onClick={clickAway}>
+                                            {board.title}
+                                        </SidebarButton>
+                                    );
+                                })}
+                        </BoardListContext.Provider>
                     </SidebarCategory>
                     <SidebarCategory title="유용한 것들">
                         {isLogin && (

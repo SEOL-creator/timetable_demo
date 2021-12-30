@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import styles from "./ReleaseNotes.module.scss";
 import Modal from "../components/Modal";
-import { Skeleton } from "@mui/material";
 import { useEffect, useState } from "react";
 import Separator from "../components/Separator";
 

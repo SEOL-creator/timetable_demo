@@ -66,7 +66,7 @@ export default function SettingsProfile() {
         <div className={cx("settings")}>
             <SettingBlock className={cx("userInfo")}>
                 <div className={cx("profileArea")}>
-                    <UserProfilePic className={styles.userProfilepic} />
+                    <UserProfilePic size="512px" className={styles.userProfilepic} />
                     <label className={styles.addProfilePicLabel}>
                         {user.profilepic ? "프로필 사진 변경" : "프로필 사진 추가"}
                         <input onChange={onProfilePicInputChange} ref={profilePicInputRef} type="file" accept="image/*" className={styles.profilePicInput} />
