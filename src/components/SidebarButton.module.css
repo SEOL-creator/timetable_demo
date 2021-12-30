@@ -1,6 +1,6 @@
 .button {
     background: none;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: var(--color-text-base);
     width: 100%;
     display: flex;
