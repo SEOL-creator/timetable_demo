@@ -142,16 +142,10 @@
     padding-right: 2rem;
 }
 
-.duration > a {
+.duration > span:last-of-type {
     color: white;
     padding: 0rem 1rem;
-    border-radius: 1rem;
-    transition: var(--transition-background-color);
     font-size: 1.3rem;
-}
-
-.duration > a:hover {
-    background-color: var(--color-background-button-white-transparent-hover);
 }
 
 .memoContainer {

@@ -61,7 +61,7 @@ export default function SmallClass({ classObj, isRemote, remoteURL, classtingURL
                                 ? `${formatTimeString(startTime, "HH:mm")} ~ ${formatTimeString(endTime, "HH:mm")}`
                                 : `${formatTimeString(startTime, "a/p hh:mm")} ~ ${formatTimeString(endTime, "a/p hh:mm")}`}
                         </span>
-                        <Link to={`/teacher/${classObj.teacher.id}`}>{classObj.teacher.name}</Link>
+                        <span>{classObj.teacher.name}</span>
                     </div>
                     <div className={styles.memoContainer}>
                         <button className={styles.memoButton}>메모 추가</button>
