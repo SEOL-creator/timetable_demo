@@ -115,12 +115,22 @@ export default function BoardArticleList() {
             </div>
             <BoardArticleWriteModal
                 open={isNewArticleModalOpen}
-                onClose={(e, reason, title, content, isAnonChecked) => {
+                handleClose={(e, reason, data) => {
                     if (reason === "submitButtonClick") {
-                        const response = axiosInstance.post(`/apis/v2/boards/${boardCode}/`, {
-                            title,
-                            content,
-                            is_anonymous: isAnonChecked,
+                        const formData = new FormData();
+                        formData.append("title", data.title);
+                        formData.append("content", data.content);
+                        formData.append("is_anonymous", data.isAnonChecked);
+                        data.image.forEach((image) => {
+                            formData.append("photos", image);
+                        });
+                        data.vote?.forEach((vote) => {
+                            formData.append("vote", vote.title);
+                        });
+                        const response = axiosInstance.post(`/apis/v2/boards/${boardCode}/`, formData, {
+                            headers: {
+                                "Content-Type": "multipart/form-data",
+                            },
                         });
                         response.then((res) => {
                             if (res.status === 201) {

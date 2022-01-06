@@ -1,0 +1,45 @@
+.imageContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    cursor: pointer;
+
+    scroll-snap-align: center;
+
+    position: relative;
+
+    .img--square {
+        width: 100%;
+        height: 100%;
+    }
+
+    .img--vertical {
+        height: 100%;
+    }
+    .img--horizontal {
+        width: 100%;
+    }
+
+    .imageIcon {
+        box-sizing: border-box;
+        padding: 0.2rem;
+        border-radius: var(--border-radius-medium);
+        color: var(--color-background-alt);
+        position: absolute;
+        bottom: 0.4rem;
+        right: 0.4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.6);
+
+        & > svg {
+            width: 1.8rem;
+            height: 1.8rem;
+            color: var(--color-background-alt);
+        }
+    }
+}
