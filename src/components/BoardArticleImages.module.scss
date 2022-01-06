@@ -24,6 +24,7 @@
 
     & > div > :global(.react-swipeable-view-container) {
         height: 100%;
+        min-width: 100%;
     }
 }
 
