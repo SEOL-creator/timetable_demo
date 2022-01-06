@@ -46,7 +46,7 @@ export default function Information({ version }) {
                             <a href="mailto:sbseol@icloud.com">
                                 <IconMail />
                             </a>
-                            <a href="https://github.com/SEOL-creator" target="_blank" rel="noopener">
+                            <a href="https://github.com/SEOL-creator" target="_blank" rel="noreferrer">
                                 <img src={githubMark} alt="github logo" />
                             </a>
                         </div>

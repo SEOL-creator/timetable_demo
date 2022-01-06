@@ -1,0 +1,81 @@
+.voteContainer {
+    width: 100%;
+    margin-top: 2rem;
+
+    .voteItem {
+        width: 100%;
+        border: 1px solid #999;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        border-radius: var(--border-radius-medium);
+        padding: 0.8rem 1.2rem;
+        box-sizing: border-box;
+        margin-bottom: 0.8rem;
+        cursor: pointer;
+
+        .vote--title {
+            font-size: 1.6rem;
+            z-index: 10;
+        }
+        .vote--percentage {
+            display: none;
+            font-size: 1.4rem;
+            z-index: 10;
+        }
+        .vote--barContainer {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            padding: 0.1rem;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .vote--bar {
+            display: none;
+            background-color: #eee;
+            height: 100%;
+            width: 50%;
+            box-sizing: border-box;
+            border-radius: var(--border-radius-medium);
+        }
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        color: #999;
+    }
+}
+
+.voteContainer--voted {
+    .voteItem:not(.voteItem--selected) {
+        border-color: #e5e5e5;
+        color: #666;
+    }
+    .voteItem--selected {
+        border-color: var(--color-primary);
+        color: var(--color-primary-dark);
+        font-weight: 500;
+
+        & > .vote--percentage {
+            font-weight: 500;
+        }
+        & .vote--bar {
+            background-color: var(--color-primary-extra-light);
+        }
+    }
+    .voteItem {
+        .vote--bar {
+            display: block;
+        }
+        .vote--percentage {
+            display: block;
+        }
+    }
+}

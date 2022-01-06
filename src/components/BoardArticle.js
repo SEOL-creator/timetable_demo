@@ -10,6 +10,8 @@ import getDisplayTimePassed from "../utils/getDisplayTimePassed";
 import formatDateTime from "../utils/formatDateTime";
 import BoardArticleComment from "./BoardArticleComment";
 import { useState } from "react";
+import BoardArticleVote from "./BoardArticleVote";
+import BoardArticleImages from "./BoardArticleImages";
 
 export default function BoardArticle({ article, onDeleteClick, onLikeClick }) {
     const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -36,6 +38,8 @@ export default function BoardArticle({ article, onDeleteClick, onLikeClick }) {
             </div>
             <div className={styles.articleTitle}>{article.title}</div>
             <div className={styles.articleBody}>{article.content}</div>
+            {article.photos?.length > 0 && <BoardArticleImages images={article.photos} />}
+            {article.vote && <BoardArticleVote poll={article.vote} articleId={article.id} />}
             <div className={styles.articleFooter}>
                 <Button onClick={onLikeClick}>
                     {article.is_liked ? <ThumbUpIcon style={{ color: "var(--color-primary-dark)" }} /> : <ThumbUpOffIcon />}
