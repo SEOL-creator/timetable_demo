@@ -105,7 +105,9 @@
     --transition-duration-base: 0.15s;
     --transition-timing-function: cubic-bezier(0, 0, 0.15, 1);
     --transition-background-color: background-color var(--transition-duration-base);
+    --size-header-margin-top: 0rem;
     --size-header-height: 5rem;
+    --size-header-occupy: calc(var(--size-header-height) + var(--size-header-margin-top));
     --size-sidebar-width: 24rem;
 
     -size-box-padding: 1.4rem 2rem 1rem;

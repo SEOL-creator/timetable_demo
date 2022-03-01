@@ -1,0 +1,25 @@
+.important_information {
+    position: absolute;
+    width: 100%;
+    height: 1.4rem;
+    background-color: #f7d9ff;
+    padding: 0.8rem 0;
+    font-size: 1.4rem;
+    line-height: 1;
+    top: 0;
+    left: 0;
+    z-index: 250;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+.important_information:hover {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+:root {
+    --size-header-margin-top: 3rem;
+}
