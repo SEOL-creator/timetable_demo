@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import { Outlet } from "react-router-dom";
 
 import Header from "./Header";
+import ImportantAlert from "./ImportantAlert";
 import Sidebar from "./Sidebar";
 
 export default function Layout() {
@@ -19,6 +20,7 @@ export default function Layout() {
 
     return (
         <>
+            <ImportantAlert />
             <Header toggleSidebar={toggleSidebar} />
             <Sidebar display={isSidebarDisplay} mobile={isMaxWidth675} clickAway={toggleSidebar} />
             <div

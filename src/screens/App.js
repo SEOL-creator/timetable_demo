@@ -25,6 +25,7 @@ import ModalLoginRegister from "./ModalLoginRegister";
 import Information from "./Information";
 import ReleaseNotes from "./ReleaseNotes";
 import BoardListContext from "../contexts/boardListContext";
+import Job from "./Job";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -192,6 +193,7 @@ export default function App() {
                                     <Route path="/releasenotes" element={<ReleaseNotes />} />
                                     <Route path="/boards/article/:articleId" element={<BoardArticleView />} />
                                     <Route path="/boards/:boardCode" element={<BoardArticleList />} />
+                                    <Route path="/job" element={<Job />} />
                                     <Route path="*" element={<Error404 />} />
                                 </Route>
                             </Routes>

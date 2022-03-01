@@ -39,7 +39,7 @@ code {
     position: relative;
     margin: 0;
     padding: 0;
-    padding-top: var(--size-header-height);
+    padding-top: var(--size-header-occupy);
     width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
     height: 100%;
     display: flex;
