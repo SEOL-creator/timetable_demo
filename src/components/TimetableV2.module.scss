@@ -1,0 +1,112 @@
+.timetable {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .timetable__dayName {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .dayName {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 25%;
+            box-sizing: border-box;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0.8rem 0;
+        }
+    }
+}
+
+.timetable__contents {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.timetable__row {
+    width: 100%;
+    min-height: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: aqua;
+    margin: auto 0;
+}
+
+.timetable__item {
+    width: 100%;
+    flex-basis: 100%;
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 0 1.2rem;
+    background-color: #ccc;
+
+    .item__name {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 1.4rem 0 0;
+        color: white;
+    }
+    .item__description {
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin: 0.4rem 0;
+        color: #eee;
+    }
+}
+
+.timetable__item--flexible-not-chosen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: white;
+    background-color: #ddd !important;
+    cursor: pointer;
+}
+
+.timetable__item--time-not-chosen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+    background-color: #ddd !important;
+    cursor: pointer;
+}
+
+.timetable__item--empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #eee;
+}
+
+.flexClassSetModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    & > button {
+        padding: 1rem 2rem;
+        cursor: pointer;
+        &:not(:last-of-type) {
+            margin-bottom: 3rem;
+        }
+    }
+}

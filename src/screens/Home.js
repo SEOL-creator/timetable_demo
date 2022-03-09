@@ -3,14 +3,14 @@ import styles from "./Home.module.css";
 
 import DDay from "../components/DDay";
 import SmallMeal from "../components/SmallMeal";
-import Timetable from "../components/SmallTimetable";
+import SmallTimetabbleV2 from "../components/SmallTimetableV2";
 
 export default function Home() {
     const isMaxWidth320 = useMediaQuery({ maxWidth: 320 });
 
     return (
         <div className={styles.main}>
-            <Timetable />
+            <SmallTimetabbleV2 />
             <div className={styles.container}>
                 <SmallMeal />
                 <DDay direction={isMaxWidth320 ? "row" : "column"} />

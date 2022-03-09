@@ -24,7 +24,7 @@ export default function Header({ toggleSidebar }) {
             <div className={styles.hamburgerContainer} onClick={toggleSidebar}>
                 <Hamburger />
             </div>
-            <HeaderTitle></HeaderTitle>
+            {/* <HeaderTitle></HeaderTitle> */}
             <div className={styles.buttonContainer}>
                 {isLogin ? (
                     <ClickAwayListener

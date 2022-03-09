@@ -34,6 +34,7 @@ export default function SmallClass({ classObj, isRemote, remoteURL, classtingURL
                         {isSmallMobile ? classObj.short_name : classObj.name}
                         {replaced && <div className={styles.replaced}>변경됨</div>}
                     </span>
+                    {classObj.location && <span className={styles.location}>{classObj.location}</span>}
                     {isRemote && remoteURL?.pc && remoteURL?.mobile && (
                         <a className={styles.attendRemote} href={isMobile ? remoteURL.mobile : remoteURL.pc}>
                             원격수업 참가

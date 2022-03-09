@@ -8,6 +8,7 @@ import styles from "./SettingsProfile.module.scss";
 import UserProfilePic from "./UserProfilePic";
 import classNames from "classnames/bind";
 import SettingBlock from "./SettingBlock";
+import SettingsProfileClass from "./SettingsProfileClass";
 const cx = classNames.bind(styles);
 
 export default function SettingsProfile() {
@@ -119,6 +120,7 @@ export default function SettingsProfile() {
                     </div>
                 </div>
             </SettingBlock>
+            <SettingsProfileClass />
         </div>
     );
 }

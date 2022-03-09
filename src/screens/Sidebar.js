@@ -48,9 +48,9 @@ export default function Sidebar({ display, mobile, clickAway = () => {}, appVers
                         </SidebarButton>
                     </SidebarCategory>
                     <SidebarCategory title="소통해요">
-                        <SidebarButton to="/asked" onClick={clickAway}>
+                        {/* <SidebarButton to="/asked" onClick={clickAway}>
                             Asked.kr
-                        </SidebarButton>
+                        </SidebarButton> */}
                         <BoardListContext.Provider value={boardList}>
                             {isLogin &&
                                 boardList.map((board) => {
@@ -63,12 +63,12 @@ export default function Sidebar({ display, mobile, clickAway = () => {}, appVers
                         </BoardListContext.Provider>
                     </SidebarCategory>
                     <SidebarCategory title="유용한 것들">
-                        {isLogin && (
+                        {/* {isLogin && (
                             <SidebarButton target="_blank" rel="noopener noreferer nofollow" href="https://forms.gle/H6GQ2g5hQXxGUg699">
                                 <LinkBlack color="inherit" style={{ marginRight: "0.2rem" }} />
                                 시험기간 급식 번호 기록
                             </SidebarButton>
-                        )}
+                        )} */}
                     </SidebarCategory>
                     <SidebarCategory title="기타">
                         <SidebarButton to="/todo" onClick={clickAway}>

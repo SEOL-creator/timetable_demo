@@ -18,6 +18,7 @@ export default function Input({
     error,
     className,
     disabled = false,
+    list,
     ...props
 }) {
     return (
@@ -42,6 +43,7 @@ export default function Input({
                 value={value}
                 onChange={onChange}
                 disabled={disabled}
+                list={list}
             />
         </label>
     );
