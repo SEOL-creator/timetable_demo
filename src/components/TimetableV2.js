@@ -47,9 +47,9 @@ function RenderTimetableItems({ timetable, onSetFlexClassClick }) {
                         render.push(
                             <>
                                 <button
-                                    key={String(i + 1) + "_" + String(row + 1)}
+                                    key={String(i + 1) + "_" + String(lesson.time)}
                                     onClick={() => {
-                                        onSetFlexClassClick(i, row);
+                                        onSetFlexClassClick(i, lesson.time);
                                     }}
                                     className={cx("timetable__item", "timetable__item--flexible-not-chosen")}
                                     style={{ backgroundColor: defaultLessonColor }}
