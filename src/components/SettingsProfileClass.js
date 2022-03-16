@@ -31,7 +31,6 @@ export default function SettingsProfileClass() {
         async function fetchTimeClassList() {
             try {
                 const response = await axiosInstance.get("/apis/v2/timetablev2/timeclasses/");
-                console.log(response.data);
                 setTimeClassList(response.data.list);
                 setSelectedTimeClasses(response.data.user_selected);
             } catch (e) {
@@ -46,8 +45,6 @@ export default function SettingsProfileClass() {
     useEffect(() => {
         setSelectedClassroom(user?.classroom?.id);
     }, [user, user.classroom, classroomList]);
-
-    console.log(timeClassList);
 
     return (
         <SettingBlock className={cx("classSetting")}>
@@ -64,6 +61,7 @@ export default function SettingsProfileClass() {
                                 const response = await axiosInstance.post("/apis/v2/timetablev2/classroom/", {
                                     classroom_id: e.target.value,
                                 });
+                                window.location.reload();
                             } catch (e) {
                                 console.error(e);
                             }

@@ -43,7 +43,6 @@ export default function SmallTimetabbleV2() {
         async function fetchTimetable() {
             try {
                 const response = await axiosInstance.get("/apis/v2/timetablev2/");
-                console.log(response.data);
                 setTimetable(response.data);
             } catch (e) {
                 console.error(e);
@@ -75,7 +74,7 @@ export default function SmallTimetabbleV2() {
         else setWeek(0);
     };
 
-    if (!user?.classroom) return <div>설정에서 학년반을 설정해주세요.</div>
+    if (!user?.classroom) return <div>설정에서 학년반을 설정해주세요.</div>;
 
     return (
         <Box className={styles.timetable}>
@@ -135,7 +134,6 @@ export default function SmallTimetabbleV2() {
                                         if (!classTimeNameRegex.test(_class.name)) return null;
                                         if (!_class.class) return null;
                                         if (_class.class.type !== "static" && _class.class.type !== "flexible" && _class.class.type !== "time") return null;
-                                        console.log(_class.class);
                                         return (
                                             <SmallClass key={String(dayIndex) + "_" + _class.name} classObj={_class.class} isRemote={false} startTime={_class.start_time} endTime={_class.end_time} />
                                         );

@@ -20,14 +20,11 @@ function RenderTimetableItems({ timetable, onSetFlexClassClick }) {
     const maxRepeat = timetable.days.reduce((acc, cur) => acc + cur.length, 0);
     const renderArray = [];
 
-    console.log(timetable.days.map((times) => times.length));
-
     for (let row = 0; row * 5 < maxRepeat; row++) {
         const render = [];
         for (let i = 0; i < 5; i++) {
             const lesson = timetable.days[i][row];
             if (!timeRegex.test(lesson.name)) continue;
-            console.log(lesson);
             if (lesson.class) {
                 switch (lesson.class.type) {
                     case "static": {
@@ -136,7 +133,6 @@ export default function Timetable() {
         async function fetchTimetable() {
             try {
                 const response = await axiosInstance.get("/apis/v2/timetablev2/");
-                console.log(response.data);
                 setTimetable(response.data);
             } catch (e) {
                 console.error(e);
@@ -150,7 +146,6 @@ export default function Timetable() {
             try {
                 const response = await axiosInstance.get(`/apis/v2/timetablev2/flexclasses/?day=${selectFlexClassInfo.day}&time=${selectFlexClassInfo.time}`);
                 setFlexClassList(response.data);
-                console.log(response.data);
             } catch (e) {
                 console.log(e);
             }
