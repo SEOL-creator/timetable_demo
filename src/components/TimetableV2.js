@@ -24,6 +24,7 @@ function RenderTimetableItems({ timetable, onSetFlexClassClick }) {
         const render = [];
         for (let i = 0; i < 5; i++) {
             const lesson = timetable.days[i][row];
+            if (row >= timetable.days[i].length) continue;
             if (!timeRegex.test(lesson.name)) continue;
             if (lesson.class) {
                 switch (lesson.class.type) {
