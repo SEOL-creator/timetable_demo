@@ -7,14 +7,14 @@ import styles from "./HeaderTitle.module.css";
 import formatDateTime from "../utils/formatDateTime";
 
 const strings = {
-    saturday: ["즐거운 토요일"],
-    sunday: ["내일은 월요일 :)"],
-    morning: ["자가진단"],
-    beforeGoingToSchool: ["지각하지 않기!"],
+    saturday: ["토요일 :)"],
+    sunday: ["월요일좋아"],
+    morning: ["오늘의 건강상태 자가진단에 참여하여 주시기 바랍니다."],
+    beforeGoingToSchool: [""],
     beforeLaunch: ["오늘의 점심은?"],
     duringLaunch: ["오늘의 점심은?"],
     duringBreak: ["쉬는시간"],
-    afterSchool: ["학교 끝!"],
+    afterSchool: ["학교 끝, 야자 시작"],
     afternoon: [],
 };
 
@@ -39,9 +39,9 @@ function diffTimeString(a, b) {
     }
 }
 
-function getCurrentState(timetable, today) {
+function getCurrentContext(timetable, datetime) {
     if (!timetable) return null;
-    const currentTimeString = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+    const currentTimeString = `${datetime.getHours()}:${datetime.getMinutes()}:${datetime.getSeconds()}`;
     if (diffTimeString(currentTimeString, timetable[0].start) > 0) {
         const prev = null;
         const current = null;
@@ -89,7 +89,7 @@ export default function HeaderTitle() {
             setIsLoading(false);
             return;
         }
-        const state = getCurrentState(todayTimetable.timetable, today);
+        const state = getCurrentContext(todayTimetable.timetable, today);
         if (!state) {
             setIsLoading(true);
             return;

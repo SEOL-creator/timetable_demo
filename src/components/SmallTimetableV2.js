@@ -133,7 +133,7 @@ export default function SmallTimetabbleV2() {
                                     {classes.map((_class, classIndex) => {
                                         if (!classTimeNameRegex.test(_class.name)) return null;
                                         if (!_class.class) return null;
-                                        if (_class.class.type !== "static" && _class.class.type !== "flexible" && _class.class.type !== "time") return null;
+                                        if (_class.class.type !== "static" && _class.class.type !== "flexible" && _class.class.type !== "time" && _class.class.type !== "temp") return null;
                                         return (
                                             <SmallClass key={String(dayIndex) + "_" + _class.name} classObj={_class.class} isRemote={false} startTime={_class.start_time} endTime={_class.end_time} />
                                         );

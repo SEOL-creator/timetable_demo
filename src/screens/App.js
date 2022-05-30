@@ -26,6 +26,7 @@ import Information from "./Information";
 import ReleaseNotes from "./ReleaseNotes";
 import BoardListContext from "../contexts/boardListContext";
 import Job from "./Job";
+import SATCounter from "./SATCounter";
 
 function getLocalStorage(key, defaultValue) {
     if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
@@ -119,8 +120,11 @@ export default function App() {
         if (isLogin) {
             async function getTodayTimetable() {
                 try {
-                    const response = await axiosInstance.get(`/apis/v2/timetable/improvedtimetable/${classroom.grade}/${classroom.room}/today/`);
-                    setTodayTimetable(response.data);
+                    const response = await axiosInstance.get("/apis/v2/timetablev2/");
+                    let day = new Date().getDay();
+                    if (day > 6) day = 0;
+                    else day = day - 1;
+                    setTodayTimetable(response.data[day]);
                 } catch (error) {
                     console.error(error);
                 }
@@ -194,6 +198,7 @@ export default function App() {
                                     <Route path="/boards/article/:articleId" element={<BoardArticleView />} />
                                     <Route path="/boards/:boardCode" element={<BoardArticleList />} />
                                     <Route path="/job" element={<Job />} />
+                                    <Route path="/satcounter" element={<SATCounter />} />
                                     <Route path="*" element={<Error404 />} />
                                 </Route>
                             </Routes>

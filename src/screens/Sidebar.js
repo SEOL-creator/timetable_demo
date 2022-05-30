@@ -69,6 +69,9 @@ export default function Sidebar({ display, mobile, clickAway = () => {}, appVers
                                 시험기간 급식 번호 기록
                             </SidebarButton>
                         )} */}
+                        <SidebarButton to="/satcounter" onClick={clickAway}>
+                            정시파이터 전용 화면보호기
+                        </SidebarButton>
                     </SidebarCategory>
                     <SidebarCategory title="기타">
                         <SidebarButton to="/todo" onClick={clickAway}>
