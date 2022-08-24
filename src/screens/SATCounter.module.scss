@@ -30,7 +30,7 @@
         background-color: white;
     }
     
-    & > div:first-of-type {
+    & > div:last-of-type {
         padding-bottom: env(safe-area-inset-bottom);
         box-sizing: border-box;
     }
