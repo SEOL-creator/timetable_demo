@@ -29,6 +29,11 @@
         flex: 1;
         background-color: white;
     }
+    
+    & > div:first-of-type {
+        padding-bottom: env(safe-area-inset-bottom);
+        box-sizing: border-box;
+    }
 
     & > div:first-of-type {
         border-bottom: 1px solid #ddd;
