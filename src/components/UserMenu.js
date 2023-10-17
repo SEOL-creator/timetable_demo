@@ -15,8 +15,7 @@ export default function UserMenu({ display, handleClose, ref }) {
             <button
                 className={cx("menu__item")}
                 onClick={() => {
-                    setUser({ isLogin: false, user: { email: "", nickname: "" }, token: "" });
-                    navigate("/");
+                    alert("You cannot log out from the demo");
                 }}
             >
                 로그아웃

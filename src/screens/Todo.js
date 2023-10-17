@@ -38,8 +38,52 @@ export default function Todo() {
 
     useEffect(() => {
         async function fetchTodoItems() {
-            const response = await axiosInstance.get("/apis/todolist/");
-            setTodoItems(response.data);
+            setTodoItems([
+                {
+                    id: 2,
+                    title: "제목",
+                    description: "내용..",
+                    created_at: "2023-10-15T21:24:35.057109+09:00",
+                    completed: false,
+                    author: {
+                        id: 1,
+                        email: "sbseol@icloud.com",
+                        nickname: "sb",
+                        profilepic: {
+                            "512px": "",
+                            "50px": "",
+                            "256px": "",
+                        },
+                        classroom: {
+                            id: 1,
+                            grade: 3,
+                            room: 1,
+                        },
+                    },
+                },
+                {
+                    id: 1,
+                    title: "제안사항 제목",
+                    description: "내용\n...",
+                    created_at: "2023-10-15T21:24:22.101974+09:00",
+                    completed: false,
+                    author: {
+                        id: 1,
+                        email: "sbseol@icloud.com",
+                        nickname: "sb",
+                        profilepic: {
+                            "512px": "",
+                            "50px": "",
+                            "256px": "",
+                        },
+                        classroom: {
+                            id: 1,
+                            grade: 3,
+                            room: 1,
+                        },
+                    },
+                },
+            ]);
         }
 
         fetchTodoItems();
@@ -197,28 +241,6 @@ export default function Todo() {
             <Modal
                 open={isEditTodoModalOpen}
                 onClose={(e, reason) => {
-                    if (reason === "submitButtonClick") {
-                        axiosInstance
-                            .patch(`/apis/todolist/${editToDoId}/`, { title: editToDoTitle, description: editToDoDescription })
-                            .then((response) => {
-                                if (response.status === 200) {
-                                    const newItem = response.data;
-                                    for (let i = 0; i < todoItems.length; i++) {
-                                        if (todoItems[i].id === newItem.id) {
-                                            setTodoItems([...todoItems.slice(0, i), newItem, ...todoItems.slice(i + 1)]);
-                                        }
-                                    }
-                                    setEditToDoTitle("");
-                                    setEditToDoDescription("");
-                                } else {
-                                    console.log(response.status);
-                                    console.log(response.data);
-                                }
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            });
-                    }
                     setIsEditTodoModalOpen(false);
                 }}
                 type="confirm"
@@ -245,21 +267,8 @@ export default function Todo() {
                 open={isNewTodoModalOpen}
                 onClose={(e, reason) => {
                     if (reason === "submitButtonClick") {
-                        axiosInstance
-                            .post("/apis/todolist/", { title: newToDoTitle, description: newToDoDescription })
-                            .then((response) => {
-                                if (response.status === 201) {
-                                    setRefetchTodoItems(new Date().getTime());
-                                    setNewToDoTitle("");
-                                    setNewToDoDescription("");
-                                } else {
-                                    console.log(response.status);
-                                    console.log(response.data);
-                                }
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            });
+                        setNewToDoTitle("");
+                        setNewToDoDescription("");
                     }
                     setIsNewTodoModalOpen(false);
                 }}

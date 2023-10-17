@@ -12,12 +12,18 @@ export default function ReleaseNotes() {
 
     useEffect(() => {
         async function getNotes() {
-            try {
-                const response = await axiosInstance.get(`/apis/v2/version/releases/`);
-                setNotes(response.data);
-            } catch (error) {
-                console.error(error);
-            }
+            // try {
+            //     const response = await axiosInstance.get(`/apis/v2/version/releases/`);
+            //     setNotes(response.data);
+            // } catch (error) {
+            //     console.error(error);
+            // }
+            setNotes([
+                {
+                    version: "1.0.0",
+                    note: "Demo release working without server",
+                },
+            ]);
         }
         getNotes();
     }, []);

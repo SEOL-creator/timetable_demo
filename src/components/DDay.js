@@ -24,24 +24,20 @@ function calcDDay(date) {
 }
 
 export default function DDay({ direction = "column" }) {
-    const [dDayList, setDDayList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [dDayList, setDDayList] = useState([
+        {
+            id: 1,
+            name: "대학수학능력시험",
+            description: "",
+            start_date: "2023-11-14",
+            end_date: "2023-11-14",
+            time: "09:00:00",
+            is_registered_dday: true,
+        },
+    ]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const isMaxWidth320 = useMediaQuery({ maxWidth: 320 });
-
-    useEffect(() => {
-        async function fetchDDay() {
-            try {
-                const response = await axiosInstance.get("/apis/v2/calendar/dday/");
-                setDDayList(response.data);
-                setIsLoading(false);
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        fetchDDay();
-    }, []);
 
     return (
         <Box half={isMaxWidth320 ? false : true} className={cx("box", { [`box--${direction}`]: true })}>

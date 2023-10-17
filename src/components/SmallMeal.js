@@ -52,8 +52,81 @@ export default function SmallMeal() {
         async function fetchMeal() {
             if (!targetDay) return;
             try {
-                const response = await axiosInstance.get(`/apis/v2/meal/${targetDay.getFullYear()}/${targetDay.getMonth() + 1}/${targetDay.getDate()}/`);
-                response.data?.forEach((meal) => {
+                const response = [
+                    {
+                        date: "2023-10-17",
+                        type: 2,
+                        number_of_people: 1053,
+                        calories: 924,
+                        meal_item: [
+                            {
+                                name: "찰흑미밥",
+                                allergy_codes: "",
+                            },
+                            {
+                                name: "한우곰탕(소머리,양지)",
+                                allergy_codes: "6 13 16",
+                            },
+                            {
+                                name: "양파고추간장초절임",
+                                allergy_codes: "5 6",
+                            },
+                            {
+                                name: "매콤메추리알어묵볶음",
+                                allergy_codes: "1 2 5 6 12 16 18",
+                            },
+                            {
+                                name: "깍두기",
+                                allergy_codes: "9 13",
+                            },
+                            {
+                                name: "젤리블리",
+                                allergy_codes: "2 11",
+                            },
+                            {
+                                name: "모듬전",
+                                allergy_codes: "1 2 5 6 9 10 15 16 18",
+                            },
+                        ],
+                    },
+                    {
+                        date: "2023-10-17",
+                        type: 3,
+                        number_of_people: 730,
+                        calories: 677,
+                        meal_item: [
+                            {
+                                name: "추가밥(선택)",
+                                allergy_codes: "",
+                            },
+                            {
+                                name: "쌀국수",
+                                allergy_codes: "5 9 16",
+                            },
+                            {
+                                name: "단무지무침",
+                                allergy_codes: "13",
+                            },
+                            {
+                                name: "알감자버터구이",
+                                allergy_codes: "5 13",
+                            },
+                            {
+                                name: "배추겉절이",
+                                allergy_codes: "9 13",
+                            },
+                            {
+                                name: "쿨피스(파인)",
+                                allergy_codes: "2 5",
+                            },
+                            {
+                                name: "빼빼롱치즈핫도그",
+                                allergy_codes: "1 2 5 6 10 12 13 16",
+                            },
+                        ],
+                    },
+                ];
+                response.forEach((meal) => {
                     if (meal.type === 2) {
                         setLunch(meal);
                     } else {

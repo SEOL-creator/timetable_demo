@@ -28,8 +28,18 @@ export default function SATCounter() {
     useEffect(() => {
         async function fetchDDay() {
             try {
-                const response = await axiosInstance.get("/apis/v2/calendar/dday/");
-                setSAT(response.data.find((dDay) => dDay.id === 1));
+                const response = [
+                    {
+                        id: 1,
+                        name: "대학수학능력시험",
+                        description: "",
+                        start_date: "2023-11-14",
+                        end_date: "2023-11-14",
+                        time: "09:00:00",
+                        is_registered_dday: true,
+                    },
+                ];
+                setSAT(response.find((dDay) => dDay.id === 1));
             } catch (e) {
                 console.error(e);
             }

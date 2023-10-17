@@ -35,12 +35,11 @@ function getLocalStorage(key, defaultValue) {
 }
 
 async function checkVersion() {
-    const storageVersion = localStorage.getItem("version");
+    const storageVersion = sessionStorage.getItem("version");
     const currentVersion = process.env.REACT_APP_VERSION;
     try {
-        const response = await axiosInstance.get(`/apis/v2/version/`);
-        const latestVersion = response.data.version;
-        localStorage.setItem("version", currentVersion);
+        const latestVersion = "1.0.0";
+        sessionStorage.setItem("version", currentVersion);
         if (!storageVersion) {
             return { current: currentVersion, latest: latestVersion, isLatest: currentVersion === latestVersion, detail: "firstLaunch" };
         }
@@ -51,6 +50,7 @@ async function checkVersion() {
     } catch (error) {
         console.error(error);
     }
+    return { current: "1.0.0", latest: "1.0.0", isLatest: true, detail: "updated" };
 }
 
 export default function App() {
@@ -61,11 +61,18 @@ export default function App() {
     const isFirstLaunch = useRef(true);
     const [version, setVersion] = useState({ current: "", latest: "", isLatest: false, detail: "" });
 
-    const [isLogin, setIsLogin] = useState(getLocalStorage("isLogin", false));
-    const [user, setUser] = useState(getLocalStorage("user", { id: -1, email: "", nickname: "", profilePic: {}, is_staff: false }));
-    const [token, setToken] = useState(getLocalStorage("token", ""));
+    const [isLogin, setIsLogin] = useState(true);
+    const [user, setUser] = useState({
+        id: 2,
+        nickname: "사용자",
+        email: "test@test.com",
+        profilepic: { "512px": "", "50px": "", "256px": "" },
+        is_staff: false,
+        classroom: { id: 1, grade: 3, room: 1 },
+    });
+    const [token, setToken] = useState("ad58b8807ee96ba04aed9a54e55c9e5337f77fc5");
 
-    const [classroom, setClassroom] = useState(getLocalStorage("classroom", { grade: 2, room: 1 }));
+    const [classroom, setClassroom] = useState({ grade: 3, room: 1 });
 
     const setClassroomStorage = (classroom) => {
         localStorage.setItem("classroom", JSON.stringify(classroom));
@@ -78,7 +85,7 @@ export default function App() {
 
     const [highlightedMeal, setHighlightedMeal] = useState(getLocalStorage("highlightedMeal", {}));
 
-    const [boardList, setBoardList] = useState([]);
+    const [boardList, setBoardList] = useState([{ title: "자유게시판", code: "board", type: "ALL" }]);
 
     useEffect(() => {
         checkVersion().then((result) => {
@@ -90,22 +97,14 @@ export default function App() {
     }, []);
 
     const validateToken = useCallback(async () => {
-        try {
-            const response = await axiosInstance.post("/apis/v2/accounts/validatetoken/", { token: token });
-            if (response.data.valid) {
-                setUser(response.data.user);
-                localStorage.setItem("user", JSON.stringify(response.data.user));
-            } else {
-                setIsLogin(false);
-                setUser({ email: "", nickname: "" });
-                setToken("");
-                localStorage.setItem("isLogin", JSON.stringify(false));
-                localStorage.setItem("user", JSON.stringify({ email: "", nickname: "" }));
-                localStorage.setItem("token", "");
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        setUser({
+            id: 2,
+            nickname: "사용자",
+            email: "test@test.com",
+            profilepic: { "512px": "", "50px": "", "256px": "" },
+            is_staff: false,
+            classroom: { id: 1, grade: 3, room: 1 },
+        });
     }, [token]);
     useEffect(() => {
         if (isFirstLaunch.current) {
@@ -120,7 +119,991 @@ export default function App() {
         if (isLogin) {
             async function getTodayTimetable() {
                 try {
-                    const response = await axiosInstance.get("/apis/v2/timetablev2/");
+                    const response = {
+                        data: {
+                            classroom: "3학년 1반",
+                            days: [
+                                [
+                                    {
+                                        name: "조회",
+                                        start_time: "08:50:00",
+                                        end_time: "09:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "1교시",
+                                        start_time: "09:10:00",
+                                        end_time: "09:55:00",
+                                        time: 1,
+                                        class: {
+                                            type: "time",
+                                            name: "세계사",
+                                            short_name: "세계사",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 3반",
+                                            color: "#fcb345",
+                                            replaced: false,
+                                            time: "A",
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "09:55:00",
+                                        end_time: "10:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "2교시",
+                                        start_time: "10:05:00",
+                                        end_time: "10:50:00",
+                                        time: 2,
+                                        class: {
+                                            type: "time",
+                                            name: "데이터",
+                                            short_name: "데이터",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 3반",
+                                            color: "#8dde4f",
+                                            replaced: false,
+                                            time: "B",
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "10:50:00",
+                                        end_time: "11:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "3교시",
+                                        start_time: "11:00:00",
+                                        end_time: "11:45:00",
+                                        time: 3,
+                                        class: {
+                                            type: "static",
+                                            name: "심화영어I A",
+                                            short_name: "심영IA",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#c83a3a",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "점심",
+                                        start_time: "11:45:00",
+                                        end_time: "13:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "4교시",
+                                        start_time: "13:05:00",
+                                        end_time: "13:50:00",
+                                        time: 4,
+                                        class: {
+                                            type: "static",
+                                            name: "화학Ⅱ",
+                                            short_name: "화Ⅱ",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#d964a4",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "13:50:00",
+                                        end_time: "14:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "5교시",
+                                        start_time: "14:00:00",
+                                        end_time: "14:45:00",
+                                        time: 5,
+                                        class: {
+                                            type: "static",
+                                            name: "심화영어I B",
+                                            short_name: "심영IB",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#a91a27",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "14:45:00",
+                                        end_time: "14:55:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "6교시",
+                                        start_time: "14:55:00",
+                                        end_time: "15:40:00",
+                                        time: 6,
+                                        class: {
+                                            type: "static",
+                                            name: "확률과 통계",
+                                            short_name: "확통",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#e8554f",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "15:40:00",
+                                        end_time: "15:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "7교시",
+                                        start_time: "15:50:00",
+                                        end_time: "16:35:00",
+                                        time: 7,
+                                        class: {
+                                            type: "static",
+                                            name: "자율",
+                                            short_name: "자율",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#777777",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "청소 및 종례",
+                                        start_time: "16:35:00",
+                                        end_time: "16:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "석식",
+                                        start_time: "16:50:00",
+                                        end_time: "17:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 1교시",
+                                        start_time: "17:50:00",
+                                        end_time: "19:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 2교시",
+                                        start_time: "20:00:00",
+                                        end_time: "21:30:00",
+                                        class: null,
+                                    },
+                                ],
+                                [
+                                    {
+                                        name: "조회",
+                                        start_time: "08:50:00",
+                                        end_time: "09:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "1교시",
+                                        start_time: "09:10:00",
+                                        end_time: "09:55:00",
+                                        time: 1,
+                                        class: {
+                                            type: "static",
+                                            name: "화학Ⅱ",
+                                            short_name: "화Ⅱ",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#d964a4",
+                                            replaced: true,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "09:55:00",
+                                        end_time: "10:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "2교시",
+                                        start_time: "10:05:00",
+                                        end_time: "10:50:00",
+                                        time: 2,
+                                        class: {
+                                            type: "flexible",
+                                            name: "미적분",
+                                            short_name: "미적",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 2반",
+                                            color: "#e8554f",
+                                            replaced: true,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "10:50:00",
+                                        end_time: "11:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "3교시",
+                                        start_time: "11:00:00",
+                                        end_time: "11:45:00",
+                                        time: 3,
+                                        class: {
+                                            type: "static",
+                                            name: "심화국어 B",
+                                            short_name: "심국B",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#db7f28",
+                                            replaced: true,
+                                        },
+                                    },
+                                    {
+                                        name: "점심",
+                                        start_time: "11:45:00",
+                                        end_time: "13:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "4교시",
+                                        start_time: "13:05:00",
+                                        end_time: "13:50:00",
+                                        time: 4,
+                                        class: {
+                                            type: "time",
+                                            name: "세계사",
+                                            short_name: "세계사",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 3반",
+                                            color: "#fcb345",
+                                            replaced: true,
+                                            time: "A",
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "13:50:00",
+                                        end_time: "14:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "5교시",
+                                        start_time: "14:00:00",
+                                        end_time: "14:45:00",
+                                        time: 5,
+                                        class: {
+                                            type: "static",
+                                            name: "진로",
+                                            short_name: "진로",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#5f5f5f",
+                                            replaced: true,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "14:45:00",
+                                        end_time: "14:55:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "6교시",
+                                        start_time: "14:55:00",
+                                        end_time: "15:40:00",
+                                        time: 6,
+                                        class: {
+                                            type: "static",
+                                            name: "운동과 건강",
+                                            short_name: "운동",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#4972db",
+                                            replaced: true,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "15:40:00",
+                                        end_time: "15:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "7교시",
+                                        start_time: "15:50:00",
+                                        end_time: "16:35:00",
+                                        time: 7,
+                                        class: {
+                                            type: "static",
+                                            name: "심화국어 A",
+                                            short_name: "심국A",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#fcb345",
+                                            replaced: true,
+                                        },
+                                    },
+                                    {
+                                        name: "청소 및 종례",
+                                        start_time: "16:35:00",
+                                        end_time: "16:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "석식",
+                                        start_time: "16:50:00",
+                                        end_time: "17:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 1교시",
+                                        start_time: "17:50:00",
+                                        end_time: "19:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 2교시",
+                                        start_time: "20:00:00",
+                                        end_time: "21:30:00",
+                                        class: null,
+                                    },
+                                ],
+                                [
+                                    {
+                                        name: "조회",
+                                        start_time: "08:50:00",
+                                        end_time: "09:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "1교시",
+                                        start_time: "09:10:00",
+                                        end_time: "09:55:00",
+                                        time: 1,
+                                        class: {
+                                            type: "time",
+                                            name: "지구과학II",
+                                            short_name: "지구II",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 3반",
+                                            color: "#fccb4a",
+                                            replaced: false,
+                                            time: "D",
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "09:55:00",
+                                        end_time: "10:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "2교시",
+                                        start_time: "10:05:00",
+                                        end_time: "10:50:00",
+                                        time: 2,
+                                        class: {
+                                            type: "static",
+                                            name: "물리학 Ⅱ",
+                                            short_name: "물II",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#8e49c0",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "10:50:00",
+                                        end_time: "11:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "3교시",
+                                        start_time: "11:00:00",
+                                        end_time: "11:45:00",
+                                        time: 3,
+                                        class: {
+                                            type: "time",
+                                            name: "사회문화탐구",
+                                            short_name: "사문탐",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 3반",
+                                            color: "#aa61de",
+                                            replaced: false,
+                                            time: "C",
+                                        },
+                                    },
+                                    {
+                                        name: "점심",
+                                        start_time: "11:45:00",
+                                        end_time: "13:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "4교시",
+                                        start_time: "13:05:00",
+                                        end_time: "13:50:00",
+                                        time: 4,
+                                        class: {
+                                            type: "static",
+                                            name: "화학Ⅱ",
+                                            short_name: "화Ⅱ",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#d964a4",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "13:50:00",
+                                        end_time: "14:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "5교시",
+                                        start_time: "14:00:00",
+                                        end_time: "14:45:00",
+                                        time: 5,
+                                        class: {
+                                            type: "static",
+                                            name: "동아리",
+                                            short_name: "동아리",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#909090",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "14:45:00",
+                                        end_time: "14:55:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "6교시",
+                                        start_time: "14:55:00",
+                                        end_time: "15:40:00",
+                                        time: 6,
+                                        class: {
+                                            type: "static",
+                                            name: "동아리",
+                                            short_name: "동아리",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#909090",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "15:40:00",
+                                        end_time: "15:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "7교시",
+                                        start_time: "15:50:00",
+                                        end_time: "16:35:00",
+                                        time: 7,
+                                        class: {
+                                            type: "",
+                                            name: "",
+                                            short_name: "",
+                                            teacher: {
+                                                id: "",
+                                                name: "",
+                                            },
+                                            location: "",
+                                            color: "",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "청소 및 종례",
+                                        start_time: "16:35:00",
+                                        end_time: "16:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "석식",
+                                        start_time: "16:50:00",
+                                        end_time: "17:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 1교시",
+                                        start_time: "17:50:00",
+                                        end_time: "19:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 2교시",
+                                        start_time: "20:00:00",
+                                        end_time: "21:30:00",
+                                        class: null,
+                                    },
+                                ],
+                                [
+                                    {
+                                        name: "조회",
+                                        start_time: "08:50:00",
+                                        end_time: "09:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "1교시",
+                                        start_time: "09:10:00",
+                                        end_time: "09:55:00",
+                                        time: 1,
+                                        class: {
+                                            type: "static",
+                                            name: "화학Ⅱ",
+                                            short_name: "화Ⅱ",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#d964a4",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "09:55:00",
+                                        end_time: "10:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "2교시",
+                                        start_time: "10:05:00",
+                                        end_time: "10:50:00",
+                                        time: 2,
+                                        class: {
+                                            type: "flexible",
+                                            name: "미적분",
+                                            short_name: "미적",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 2반",
+                                            color: "#e8554f",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "10:50:00",
+                                        end_time: "11:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "3교시",
+                                        start_time: "11:00:00",
+                                        end_time: "11:45:00",
+                                        time: 3,
+                                        class: {
+                                            type: "static",
+                                            name: "심화국어 B",
+                                            short_name: "심국B",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#db7f28",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "점심",
+                                        start_time: "11:45:00",
+                                        end_time: "13:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "4교시",
+                                        start_time: "13:05:00",
+                                        end_time: "13:50:00",
+                                        time: 4,
+                                        class: {
+                                            type: "time",
+                                            name: "세계사",
+                                            short_name: "세계사",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 3반",
+                                            color: "#fcb345",
+                                            replaced: false,
+                                            time: "A",
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "13:50:00",
+                                        end_time: "14:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "5교시",
+                                        start_time: "14:00:00",
+                                        end_time: "14:45:00",
+                                        time: 5,
+                                        class: {
+                                            type: "static",
+                                            name: "진로",
+                                            short_name: "진로",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#5f5f5f",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "14:45:00",
+                                        end_time: "14:55:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "6교시",
+                                        start_time: "14:55:00",
+                                        end_time: "15:40:00",
+                                        time: 6,
+                                        class: {
+                                            type: "static",
+                                            name: "운동과 건강",
+                                            short_name: "운동",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#4972db",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "15:40:00",
+                                        end_time: "15:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "7교시",
+                                        start_time: "15:50:00",
+                                        end_time: "16:35:00",
+                                        time: 7,
+                                        class: {
+                                            type: "static",
+                                            name: "심화국어 A",
+                                            short_name: "심국A",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#fcb345",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "청소 및 종례",
+                                        start_time: "16:35:00",
+                                        end_time: "16:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "석식",
+                                        start_time: "16:50:00",
+                                        end_time: "17:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 1교시",
+                                        start_time: "17:50:00",
+                                        end_time: "19:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 2교시",
+                                        start_time: "20:00:00",
+                                        end_time: "21:30:00",
+                                        class: null,
+                                    },
+                                ],
+                                [
+                                    {
+                                        name: "조회",
+                                        start_time: "08:50:00",
+                                        end_time: "09:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "1교시",
+                                        start_time: "09:10:00",
+                                        end_time: "09:55:00",
+                                        time: 1,
+                                        class: {
+                                            type: "time",
+                                            name: "지구과학II",
+                                            short_name: "지구II",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 3반",
+                                            color: "#fccb4a",
+                                            replaced: false,
+                                            time: "D",
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "09:55:00",
+                                        end_time: "10:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "2교시",
+                                        start_time: "10:05:00",
+                                        end_time: "10:50:00",
+                                        time: 2,
+                                        class: {
+                                            type: "static",
+                                            name: "확률과 통계",
+                                            short_name: "확통",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#e8554f",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "10:50:00",
+                                        end_time: "11:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "3교시",
+                                        start_time: "11:00:00",
+                                        end_time: "11:45:00",
+                                        time: 3,
+                                        class: {
+                                            type: "flexible",
+                                            name: "미적분",
+                                            short_name: "미적",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 2반",
+                                            color: "#e8554f",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "점심",
+                                        start_time: "11:45:00",
+                                        end_time: "13:05:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "4교시",
+                                        start_time: "13:05:00",
+                                        end_time: "13:50:00",
+                                        time: 4,
+                                        class: {
+                                            type: "static",
+                                            name: "심화영어I A",
+                                            short_name: "심영IA",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#c83a3a",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "13:50:00",
+                                        end_time: "14:00:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "5교시",
+                                        start_time: "14:00:00",
+                                        end_time: "14:45:00",
+                                        time: 5,
+                                        class: {
+                                            type: "time",
+                                            name: "데이터",
+                                            short_name: "데이터",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 3반",
+                                            color: "#8dde4f",
+                                            replaced: false,
+                                            time: "B",
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "14:45:00",
+                                        end_time: "14:55:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "6교시",
+                                        start_time: "14:55:00",
+                                        end_time: "15:40:00",
+                                        time: 6,
+                                        class: {
+                                            type: "static",
+                                            name: "물리학 Ⅱ",
+                                            short_name: "물II",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#8e49c0",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "쉬는시간",
+                                        start_time: "15:40:00",
+                                        end_time: "15:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "7교시",
+                                        start_time: "15:50:00",
+                                        end_time: "16:35:00",
+                                        time: 7,
+                                        class: {
+                                            type: "static",
+                                            name: "운동과 건강",
+                                            short_name: "운동",
+                                            teacher: {
+                                                id: 1,
+                                                name: "교사명",
+                                            },
+                                            location: "3학년 1반",
+                                            color: "#4972db",
+                                            replaced: false,
+                                        },
+                                    },
+                                    {
+                                        name: "청소 및 종례",
+                                        start_time: "16:35:00",
+                                        end_time: "16:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "석식",
+                                        start_time: "16:50:00",
+                                        end_time: "17:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 1교시",
+                                        start_time: "17:50:00",
+                                        end_time: "19:50:00",
+                                        class: null,
+                                    },
+                                    {
+                                        name: "야자 2교시",
+                                        start_time: "20:00:00",
+                                        end_time: "21:30:00",
+                                        class: null,
+                                    },
+                                ],
+                            ],
+                        },
+                    };
                     let day = new Date().getDay();
                     if (day > 6) day = 0;
                     else day = day - 1;
@@ -133,38 +1116,14 @@ export default function App() {
         }
     }, [dateUpdate, classroom, isLogin]);
 
-    useEffect(() => {
-        async function getBoardList() {
-            try {
-                const response = await axiosInstance.get("/apis/v2/boards/");
-                setBoardList(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        if (isLogin) {
-            getBoardList();
-        }
-    }, [isLogin]);
-
     return (
         <UserContext.Provider
             value={{
                 isLogin: isLogin,
                 user: user,
                 token: token,
-                setUser: (obj) => {
-                    setToken(obj.token);
-                    setUser(obj.user);
-                    setIsLogin(obj.isLogin);
-                    localStorage.setItem("token", JSON.stringify(obj.token));
-                    localStorage.setItem("user", JSON.stringify(obj.user));
-                    localStorage.setItem("isLogin", JSON.stringify(obj.isLogin));
-                },
-                setUserInfo: (obj) => {
-                    setUser(obj);
-                    localStorage.setItem("user", JSON.stringify(obj));
-                },
+                setUser: (obj) => {},
+                setUserInfo: (obj) => {},
             }}
         >
             <ClassroomContext.Provider value={{ classroom: classroom, setClassroom: setClassroomStorage }}>

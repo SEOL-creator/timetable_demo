@@ -21,7 +21,156 @@ export default function BoardArticleList() {
     const [refetchArticle, setRefetchArticle] = useState(new Date());
 
     const [currentBoard, setCurrentBoard] = useState({});
-    const [articleList, setArticleList] = useState([]);
+    const [articleList, setArticleList] = useState([
+        {
+            id: 3,
+            board: {
+                title: "자유게시판",
+                code: "board",
+                type: "ALL",
+            },
+            title: "Asdf",
+            content: "Ghjkl",
+            author: {
+                id: 1,
+                email: "sbseol@icloud.com",
+                nickname: "sb",
+                profilepic: {
+                    "512px": "",
+                    "50px": "",
+                    "256px": "",
+                },
+                classroom: {
+                    id: 1,
+                    grade: 3,
+                    room: 1,
+                },
+            },
+            created_at: "2023-10-16T18:51:05.617985+09:00",
+            is_updated: false,
+            is_liked: false,
+            like_count: 0,
+            comment_count: 1,
+            is_anonymous: false,
+            am_i_author: false,
+            vote: {
+                vote_count: 2,
+                votes: [
+                    {
+                        title: "A",
+                        count: 1,
+                        voted: true,
+                    },
+                    {
+                        title: "B",
+                        count: 0,
+                        voted: false,
+                    },
+                    {
+                        title: "C",
+                        count: 1,
+                        voted: false,
+                    },
+                ],
+            },
+            photos: [],
+        },
+        {
+            id: 2,
+            board: {
+                title: "자유게시판",
+                code: "board",
+                type: "ALL",
+            },
+            title: "게시글 제목",
+            content: "게시글 내용",
+            author: {
+                id: 1,
+                email: "sbseol@icloud.com",
+                nickname: "sb",
+                profilepic: {
+                    "512px": "",
+                    "50px": "",
+                    "256px": "",
+                },
+                classroom: {
+                    id: 1,
+                    grade: 3,
+                    room: 1,
+                },
+            },
+            created_at: "2023-10-14T17:20:19.925791+09:00",
+            is_updated: false,
+            is_liked: false,
+            like_count: 0,
+            comment_count: 0,
+            is_anonymous: false,
+            am_i_author: false,
+            vote: null,
+            photos: [
+                {
+                    photo: "http://localhost:8000/media/article_photos/2/fb8cb7a7-2a8e-4a71-9c84-a4e8594e2808.jpg",
+                    photo_square: "http://localhost:8000/media/article_photos/2/fb8cb7a7-2a8e-4a71-9c84-a4e8594e2808_square.jpg",
+                    width: 336,
+                    height: 237,
+                    orientation: "HORIZONTAL",
+                },
+            ],
+        },
+        {
+            id: 1,
+            board: {
+                title: "자유게시판",
+                code: "board",
+                type: "ALL",
+            },
+            title: "게시글 제목",
+            content: "게시글 내용",
+            author: {
+                id: 1,
+                email: "sbseol@icloud.com",
+                nickname: "sb",
+                profilepic: {
+                    "512px": "",
+                    "50px": "",
+                    "256px": "",
+                },
+                classroom: {
+                    id: 1,
+                    grade: 3,
+                    room: 1,
+                },
+            },
+            created_at: "2023-10-14T17:20:03.168940+09:00",
+            is_updated: false,
+            is_liked: false,
+            like_count: 0,
+            comment_count: 0,
+            is_anonymous: false,
+            am_i_author: false,
+            vote: {
+                vote_count: 2,
+                votes: [
+                    {
+                        title: "투표 1",
+                        count: 2,
+                        voted: true,
+                    },
+                    {
+                        title: "투표 2",
+                        count: 0,
+                        voted: false,
+                    },
+                    {
+                        title: "투표 3",
+                        count: 0,
+                        voted: false,
+                    },
+                ],
+            },
+            photos: [],
+        },
+    ]);
 
     const [isNewArticleModalOpen, setIsNewArticleModalOpen] = useState(false);
 
@@ -33,22 +182,6 @@ export default function BoardArticleList() {
             navigate("/login");
         }
     }, [isLogin]);
-
-    useEffect(() => {
-        async function getArticleList() {
-            try {
-                const response = await axiosInstance.get(`/apis/v2/boards/${boardCode}/`);
-                setArticleList(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        if (isLogin) {
-            setArticleList([]);
-            getArticleList();
-        }
-    }, [isLogin, boardCode, refetchArticle]);
 
     useEffect(() => {
         const board = boardList.find((board) => board.code === boardCode);
@@ -88,56 +221,13 @@ export default function BoardArticleList() {
                         </div>
                     </div>
                     {articleList.map((article, index) => {
-                        return (
-                            <BoardArticle
-                                article={article}
-                                key={article.id}
-                                onDeleteClick={() => {
-                                    setDeleteArticleId(article.id);
-                                    setIsDeleteConfirmModalOpen(true);
-                                }}
-                                onLikeClick={() => {
-                                    axiosInstance.post(`/apis/v2/boards/article/${article.id}/like/`).then((res) => {
-                                        if (res.status === 200) {
-                                            setArticleList((prev) => {
-                                                const newArticleList = [...prev];
-                                                newArticleList[index].like_count = res.data.like_count;
-                                                newArticleList[index].is_liked = res.data.is_liked;
-                                                return newArticleList;
-                                            });
-                                        }
-                                    });
-                                }}
-                            />
-                        );
+                        return <BoardArticle article={article} key={article.id} onDeleteClick={() => {}} onLikeClick={() => {}} />;
                     })}
                 </div>
             </div>
             <BoardArticleWriteModal
                 open={isNewArticleModalOpen}
                 handleClose={(e, reason, data) => {
-                    if (reason === "submitButtonClick") {
-                        const formData = new FormData();
-                        formData.append("title", data.title);
-                        formData.append("content", data.content);
-                        formData.append("is_anonymous", data.isAnonChecked);
-                        data.image.forEach((image) => {
-                            formData.append("photos", image);
-                        });
-                        data.vote?.forEach((vote) => {
-                            formData.append("vote", vote.title);
-                        });
-                        const response = axiosInstance.post(`/apis/v2/boards/${boardCode}/`, formData, {
-                            headers: {
-                                "Content-Type": "multipart/form-data",
-                            },
-                        });
-                        response.then((res) => {
-                            if (res.status === 201) {
-                                setRefetchArticle(new Date());
-                            }
-                        });
-                    }
                     setIsNewArticleModalOpen(false);
                 }}
                 board={currentBoard}

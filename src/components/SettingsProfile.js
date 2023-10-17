@@ -39,25 +39,6 @@ export default function SettingsProfile() {
 
     const handleUpload = (e, reason) => {
         if (reason === "submitButtonClick") {
-            if (!profilePicInputRef.current.files[0]) return;
-            const formData = new FormData();
-            formData.append("image", profilePicInputRef.current.files[0]);
-            axiosInstance
-                .post("/apis/v2/accounts/users/uploadprofilepic/", formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                })
-                .then((res) => {
-                    setUserInfo(res.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .finally(() => {
-                    setDisplayProfileUploadModal(false);
-                });
-        } else {
             profilePicInputRef.current.files = null;
             setDisplayProfileUploadModal(false);
         }
@@ -97,24 +78,7 @@ export default function SettingsProfile() {
                         />
                     </div>
                     <div>
-                        <Button
-                            disabled={nickname === user.nickname}
-                            className={cx({ "nicknameButton--disabled": nickname === user.nickname })}
-                            onClick={() => {
-                                axiosInstance
-                                    .patch(`/apis/v2/accounts/users/${user.id}/`, { nickname })
-                                    .then((response) => {
-                                        if (response.status === 200) {
-                                            setUserInfo(response.data);
-                                        } else {
-                                            console.log(response);
-                                        }
-                                    })
-                                    .catch((err) => {
-                                        console.log(err);
-                                    });
-                            }}
-                        >
+                        <Button disabled={nickname === user.nickname} className={cx({ "nicknameButton--disabled": nickname === user.nickname })} onClick={() => {}}>
                             적용
                         </Button>
                     </div>
